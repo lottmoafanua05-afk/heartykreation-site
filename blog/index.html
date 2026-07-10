@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Hearty Kreation</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0d0c;
+    --panel: #0f1413;
+    --signal: #f2b84b;
+    --signal-dim: #f2b84b33;
+    --amber: #f2b84b;
+    --line: #1c2422;
+  }
+  body {
+    background: var(--ink);
+    font-family: 'Inter', sans-serif;
+  }
+  .font-display { font-family: 'Space Grotesk', sans-serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+  .glow-text {
+    text-shadow: 0 0 24px var(--signal-dim);
+  }
+
+  .circuit-divider {
+    position: relative;
+    height: 1px;
+    background: var(--line);
+  }
+  .circuit-divider::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -2px;
+    width: 6px;
+    height: 5px;
+    background: var(--signal);
+    box-shadow: 0 0 12px var(--signal);
+    transform: translateX(-50%);
+  }
+
+  .sys-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .sys-card:hover {
+    border-color: var(--signal);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 40px -12px var(--signal-dim);
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--signal);
+    border: 1px solid var(--signal-dim);
+    background: rgba(242,184,75,0.06);
+  }
+
+  .btn-signal {
+    background: var(--signal);
+    color: #04140d;
+  }
+  .btn-signal:hover {
+    box-shadow: 0 0 30px var(--signal-dim);
+  }
+  .btn-outline {
+    border: 1px solid var(--line);
+    color: #e4e4e7;
+  }
+  .btn-outline:hover {
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(242,184,75,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(242,184,75,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+</style>
+</head>
+<body class="text-zinc-100">
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur bg-black/60 border-b border-[var(--line)]">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="font-display font-bold text-lg tracking-tight">
+      HEARTY<span style="color:var(--signal)">KREATION</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm text-zinc-400">
+      <a href="/#what-you-get" class="hover:text-white transition">What You Get</a>
+      <a href="/#how-it-works" class="hover:text-white transition">How It Works</a>
+      <a href="/#builds" class="hover:text-white transition">Recent Builds</a>
+      <a href="/blog/" class="text-white transition">Blog</a>
+    </div>
+    <a href="/#start" class="btn-signal font-display font-semibold text-sm px-4 py-2 rounded-md">Get Started</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<section class="grid-bg pt-40 pb-20 px-6 relative overflow-hidden">
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+    <div class="tag inline-block px-3 py-1 rounded-full mb-6">[ BLOG ]</div>
+    <h1 class="font-display font-bold text-5xl md:text-6xl leading-tight mb-6">
+      Notes from the <span class="glow-text" style="color:var(--signal)">build</span>.
+    </h1>
+    <p class="text-zinc-400 text-lg max-w-2xl mx-auto">
+      Thoughts on websites, workflows, and systems for small businesses that want to run without depending on chaos.
+    </p>
+  </div>
+</section>
+
+<div class="circuit-divider max-w-6xl mx-auto"></div>
+
+<!-- POST LIST -->
+<section class="py-20 px-6">
+  <div class="max-w-4xl mx-auto space-y-6">
+
+    <a href="/blog/welcome-to-the-blog.html" class="sys-card rounded-xl p-8 block">
+      <div class="tag inline-block px-2 py-1 rounded mb-4 font-mono">JULY 2026</div>
+      <h2 class="font-display font-semibold text-2xl mb-2">Welcome to the Hearty Kreation blog</h2>
+      <p class="text-zinc-400 text-sm leading-relaxed">
+        Why we're writing this, and what to expect: notes on systems, workflows, and building things that last.
+      </p>
+    </a>
+
+    <!-- Add new posts above this line. Copy blog/welcome-to-the-blog.html as a template for each new post,
+         then add a matching card here. -->
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-[var(--line)] py-10 px-6">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+    <span class="font-mono">© 2026 Hearty Kreation. All rights reserved.</span>
+    <div class="flex gap-6">
+      <a href="https://tally.so/r/Gxy8Ek" class="hover:text-zinc-300">Privacy Policy</a>
+      <a href="https://tally.so/r/9q5b0V" class="hover:text-zinc-300">Terms</a>
+      <a href="mailto:info@heartykreation.com" class="hover:text-zinc-300">info@heartykreation.com</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

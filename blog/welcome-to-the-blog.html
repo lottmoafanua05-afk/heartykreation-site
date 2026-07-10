@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to the Hearty Kreation blog</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0d0c;
+    --panel: #0f1413;
+    --signal: #f2b84b;
+    --signal-dim: #f2b84b33;
+    --amber: #f2b84b;
+    --line: #1c2422;
+  }
+  body {
+    background: var(--ink);
+    font-family: 'Inter', sans-serif;
+  }
+  .font-display { font-family: 'Space Grotesk', sans-serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+  .circuit-divider {
+    position: relative;
+    height: 1px;
+    background: var(--line);
+  }
+  .circuit-divider::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -2px;
+    width: 6px;
+    height: 5px;
+    background: var(--signal);
+    box-shadow: 0 0 12px var(--signal);
+    transform: translateX(-50%);
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--signal);
+    border: 1px solid var(--signal-dim);
+    background: rgba(242,184,75,0.06);
+  }
+
+  .btn-signal {
+    background: var(--signal);
+    color: #04140d;
+  }
+  .btn-signal:hover {
+    box-shadow: 0 0 30px var(--signal-dim);
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(242,184,75,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(242,184,75,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .prose-post p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: #d4d4d8;
+  }
+  .prose-post h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: #f4f4f5;
+  }
+  .prose-post a {
+    color: var(--signal);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>
+</head>
+<body class="text-zinc-100">
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur bg-black/60 border-b border-[var(--line)]">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="font-display font-bold text-lg tracking-tight">
+      HEARTY<span style="color:var(--signal)">KREATION</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm text-zinc-400">
+      <a href="/#what-you-get" class="hover:text-white transition">What You Get</a>
+      <a href="/#how-it-works" class="hover:text-white transition">How It Works</a>
+      <a href="/#builds" class="hover:text-white transition">Recent Builds</a>
+      <a href="/blog/" class="text-white transition">Blog</a>
+    </div>
+    <a href="/#start" class="btn-signal font-display font-semibold text-sm px-4 py-2 rounded-md">Get Started</a>
+  </div>
+</nav>
+
+<!-- POST -->
+<article class="grid-bg pt-40 pb-24 px-6">
+  <div class="max-w-2xl mx-auto">
+    <a href="/blog/" class="font-mono text-xs text-zinc-500 hover:text-zinc-300 transition">← Back to Blog</a>
+
+    <div class="tag inline-block px-3 py-1 rounded-full mt-6 mb-6">JULY 2026</div>
+    <h1 class="font-display font-bold text-4xl md:text-5xl leading-tight mb-8">
+      Welcome to the Hearty Kreation blog
+    </h1>
+
+    <div class="prose-post">
+      <p>
+        This is where we'll write about the systems we build, the problems small businesses actually run into,
+        and what we're learning along the way. No filler, no generic marketing advice, just notes from real work.
+      </p>
+      <h2>What to expect</h2>
+      <p>
+        Posts on website systems, workflow design, and client delivery, drawn from the projects we're actually
+        doing. When something's worth sharing, it goes here.
+      </p>
+      <p>
+        Have a question or a topic you'd like us to cover? <a href="mailto:info@heartykreation.com">Get in touch</a>.
+      </p>
+    </div>
+  </div>
+</article>
+
+<!-- FOOTER -->
+<footer class="border-t border-[var(--line)] py-10 px-6">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+    <span class="font-mono">© 2026 Hearty Kreation. All rights reserved.</span>
+    <div class="flex gap-6">
+      <a href="https://tally.so/r/Gxy8Ek" class="hover:text-zinc-300">Privacy Policy</a>
+      <a href="https://tally.so/r/9q5b0V" class="hover:text-zinc-300">Terms</a>
+      <a href="mailto:info@heartykreation.com" class="hover:text-zinc-300">info@heartykreation.com</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
