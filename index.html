@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hearty Kreation — Systems for Businesses That Want to Grow</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0d0c;
+    --panel: #0f1413;
+    --signal: #f2b84b;
+    --signal-dim: #f2b84b33;
+    --amber: #f2b84b;
+    --line: #1c2422;
+  }
+  body {
+    background: var(--ink);
+    font-family: 'Inter', sans-serif;
+  }
+  .font-display { font-family: 'Space Grotesk', sans-serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+  .glow-text {
+    text-shadow: 0 0 24px var(--signal-dim);
+  }
+
+  .circuit-divider {
+    position: relative;
+    height: 1px;
+    background: var(--line);
+  }
+  .circuit-divider::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -2px;
+    width: 6px;
+    height: 5px;
+    background: var(--signal);
+    box-shadow: 0 0 12px var(--signal);
+    transform: translateX(-50%);
+  }
+
+  .sys-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .sys-card:hover {
+    border-color: var(--signal);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 40px -12px var(--signal-dim);
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--signal);
+    border: 1px solid var(--signal-dim);
+    background: rgba(242,184,75,0.06);
+  }
+
+  .btn-signal {
+    background: var(--signal);
+    color: #04140d;
+  }
+  .btn-signal:hover {
+    box-shadow: 0 0 30px var(--signal-dim);
+  }
+  .btn-outline {
+    border: 1px solid var(--line);
+    color: #e4e4e7;
+  }
+  .btn-outline:hover {
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(242,184,75,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(242,184,75,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .chevron { transform: rotate(45deg); }
+  .chevron { transition: transform 0.2s ease; }
+</style>
+</head>
+<body class="text-zinc-100">
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur bg-black/60 border-b border-[var(--line)]">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="font-display font-bold text-lg tracking-tight">
+      HEARTY<span style="color:var(--signal)">KREATION</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm text-zinc-400">
+      <a href="#what-you-get" class="hover:text-white transition">What You Get</a>
+      <a href="#how-it-works" class="hover:text-white transition">How It Works</a>
+      <a href="#builds" class="hover:text-white transition">Recent Builds</a>
+      <a href="#faq" class="hover:text-white transition">FAQ</a>
+    </div>
+    <a href="#start" class="btn-signal font-display font-semibold text-sm px-4 py-2 rounded-md">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="grid-bg pt-40 pb-28 px-6 relative overflow-hidden">
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+    <div class="tag inline-block px-3 py-1 rounded-full mb-6">SYSTEM STATUS: ONLINE</div>
+    <h1 class="font-display font-bold text-5xl md:text-6xl leading-tight mb-6">
+      Your business isn't missing effort.<br>
+      It's missing a <span class="glow-text" style="color:var(--signal)">system</span>.
+    </h1>
+    <p class="text-zinc-400 text-lg max-w-2xl mx-auto mb-10">
+      Hearty Kreation builds the website, workflow, and client delivery systems
+      that let a small business run without depending on chaos, or on you doing everything yourself.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#start" class="btn-signal font-display font-semibold px-8 py-3 rounded-md">Start a Project</a>
+      <a href="#what-you-get" class="btn-outline font-display font-semibold px-8 py-3 rounded-md">See What You Get</a>
+    </div>
+  </div>
+</section>
+
+<div class="circuit-divider max-w-6xl mx-auto"></div>
+
+<!-- WHAT YOU GET -->
+<section id="what-you-get" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-14 text-center">
+      <div class="tag inline-block px-3 py-1 rounded-full mb-4">[ WHAT YOU GET ]</div>
+      <h2 class="font-display font-bold text-4xl">Three systems. One business that runs itself.</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="sys-card rounded-xl p-8">
+        <div class="tag inline-block px-2 py-1 rounded mb-5">SYS-01</div>
+        <h3 class="font-display font-semibold text-xl mb-3">Website System</h3>
+        <p class="text-zinc-400 text-sm leading-relaxed">
+          A site built to bring clients in and convert them, not just sit there looking nice.
+          Fast, simple to update, built to grow with you.
+        </p>
+      </div>
+      <div class="sys-card rounded-xl p-8">
+        <div class="tag inline-block px-2 py-1 rounded mb-5">SYS-02</div>
+        <h3 class="font-display font-semibold text-xl mb-3">Workflow System</h3>
+        <p class="text-zinc-400 text-sm leading-relaxed">
+          The messy, undocumented process running your business today, turned into a
+          simple, repeatable system your team can actually follow.
+        </p>
+      </div>
+      <div class="sys-card rounded-xl p-8">
+        <div class="tag inline-block px-2 py-1 rounded mb-5">SYS-03</div>
+        <h3 class="font-display font-semibold text-xl mb-3">Client Delivery System</h3>
+        <p class="text-zinc-400 text-sm leading-relaxed">
+          Onboarding, communication, and delivery, streamlined so every client gets a
+          consistent experience without it depending on memory.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="circuit-divider max-w-6xl mx-auto"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" class="py-24 px-6" style="background: var(--panel)">
+  <div class="max-w-5xl mx-auto">
+    <div class="mb-14 text-center">
+      <div class="tag inline-block px-3 py-1 rounded-full mb-4">[ HOW IT WORKS ]</div>
+      <h2 class="font-display font-bold text-4xl">Three steps. No guesswork.</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-10">
+      <div>
+        <div class="font-display font-bold text-5xl mb-4" style="color:var(--signal)">01</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Audit</h3>
+        <p class="text-zinc-400 text-sm leading-relaxed">
+          We look at what's actually happening in your business today, no assumptions, just the real picture.
+        </p>
+      </div>
+      <div>
+        <div class="font-display font-bold text-5xl mb-4" style="color:var(--signal)">02</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Build</h3>
+        <p class="text-zinc-400 text-sm leading-relaxed">
+          We build the specific system you need, website, workflow, or delivery, matched to how your business actually runs.
+        </p>
+      </div>
+      <div>
+        <div class="font-display font-bold text-5xl mb-4" style="color:var(--signal)">03</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Hand Off</h3>
+        <p class="text-zinc-400 text-sm leading-relaxed">
+          You own what we build. We stay available if you want ongoing support, but nothing is locked behind us.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="circuit-divider max-w-6xl mx-auto"></div>
+
+<!-- RECENT BUILDS -->
+<section id="builds" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-14 text-center">
+      <div class="tag inline-block px-3 py-1 rounded-full mb-4">[ RECENT BUILDS ]</div>
+      <h2 class="font-display font-bold text-4xl">Real businesses, real systems.</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="sys-card rounded-xl overflow-hidden">
+        <div class="h-40 grid-bg flex items-center justify-center border-b border-[var(--line)]">
+          <span class="font-mono text-xs text-zinc-500">[ IMAGE PLACEHOLDER ]</span>
+        </div>
+        <div class="p-6">
+          <h3 class="font-display font-semibold mb-1">Blees Precision</h3>
+          <p class="text-zinc-400 text-sm">Self-defense studio, website and client onboarding system.</p>
+        </div>
+      </div>
+      <div class="sys-card rounded-xl overflow-hidden">
+        <div class="h-40 grid-bg flex items-center justify-center border-b border-[var(--line)]">
+          <span class="font-mono text-xs text-zinc-500">[ IMAGE PLACEHOLDER ]</span>
+        </div>
+        <div class="p-6">
+          <h3 class="font-display font-semibold mb-1">FOU Movement</h3>
+          <p class="text-zinc-400 text-sm">Brand site and content workflow system.</p>
+        </div>
+      </div>
+      <div class="sys-card rounded-xl overflow-hidden">
+        <div class="h-40 grid-bg flex items-center justify-center border-b border-[var(--line)]">
+          <span class="font-mono text-xs text-zinc-500">[ IMAGE PLACEHOLDER ]</span>
+        </div>
+        <div class="p-6">
+          <h3 class="font-display font-semibold mb-1">JT</h3>
+          <p class="text-zinc-400 text-sm">Website rebuild and delivery workflow.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="circuit-divider max-w-6xl mx-auto"></div>
+
+<!-- FAQ -->
+<section id="faq" class="py-24 px-6" style="background: var(--panel)">
+  <div class="max-w-3xl mx-auto">
+    <div class="mb-12 text-center">
+      <div class="tag inline-block px-3 py-1 rounded-full mb-4">[ FAQ ]</div>
+      <h2 class="font-display font-bold text-4xl">Questions, answered</h2>
+    </div>
+
+    <div class="space-y-4">
+      <details class="sys-card rounded-lg p-5">
+        <summary class="flex items-center justify-between font-display font-semibold">
+          Who owns the website or system once it's built?
+          <span class="chevron font-mono text-xl" style="color:var(--signal)">+</span>
+        </summary>
+        <p class="text-zinc-400 text-sm mt-3 leading-relaxed">
+          You do. Your domain, your data, your brand. Hearty Kreation builds it, you own it outright.
+        </p>
+      </details>
+      <details class="sys-card rounded-lg p-5">
+        <summary class="flex items-center justify-between font-display font-semibold">
+          How long does a typical build take?
+          <span class="chevron font-mono text-xl" style="color:var(--signal)">+</span>
+        </summary>
+        <p class="text-zinc-400 text-sm mt-3 leading-relaxed">
+          Depends on scope. A website system usually moves faster than a full workflow rebuild. We'll give you a real timeline after the audit, not a generic estimate.
+        </p>
+      </details>
+      <details class="sys-card rounded-lg p-5">
+        <summary class="flex items-center justify-between font-display font-semibold">
+          Do I need all three systems, or can I start with one?
+          <span class="chevron font-mono text-xl" style="color:var(--signal)">+</span>
+        </summary>
+        <p class="text-zinc-400 text-sm mt-3 leading-relaxed">
+          Start with whichever one is actually hurting the most. Most clients start with one system and add the others once they see it working.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / START -->
+<section id="start" class="py-28 px-6 grid-bg">
+  <div class="max-w-2xl mx-auto text-center">
+    <h2 class="font-display font-bold text-4xl mb-4">Let's look at what's actually happening in your business.</h2>
+    <p class="text-zinc-400 mb-10">Pick the intake that fits what you need, and we'll take it from there.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <!-- Replace with your real Tally form links -->
+      <a href="https://tally.so/r/REPLACE-WEBSITE-INTAKE" target="_blank" rel="noopener" class="btn-signal font-display font-semibold px-8 py-3 rounded-md">Website Intake</a>
+      <a href="https://tally.so/r/REPLACE-SYSTEMS-INTAKE" target="_blank" rel="noopener" class="btn-outline font-display font-semibold px-8 py-3 rounded-md">Systems Intake</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-[var(--line)] py-10 px-6">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+    <span class="font-mono">© 2026 HEARTY KREATION. ALL SYSTEMS OWNED BY YOU.</span>
+    <div class="flex gap-6">
+      <a href="https://tally.so/r/REPLACE-PRIVACY" class="hover:text-zinc-300">Privacy Policy</a>
+      <a href="https://tally.so/r/REPLACE-TERMS" class="hover:text-zinc-300">Terms</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
