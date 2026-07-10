@@ -1,0 +1,44 @@
+name: Daily Blog Post
+
+on:
+  schedule:
+    # 8am PT = 4pm UTC (verify against current PT/UTC offset if timing drifts with DST)
+    - cron: '0 16 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  generate-draft:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout drafts branch
+        uses: actions/checkout@v4
+        with:
+          ref: drafts
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate post and send approval SMS
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_FROM_NUMBER: ${{ secrets.TWILIO_FROM_NUMBER }}
+          TWILIO_TO_NUMBER: ${{ secrets.TWILIO_TO_NUMBER }}
+          CLAUDE_MODEL: claude-sonnet-5
+        run: node .github/scripts/generate-post.mjs
+
+      - name: Commit draft to drafts branch
+        run: |
+          git config user.name "Hearty Kreation Bot"
+          git config user.email "bot@heartykreation.com"
+          git add drafts/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Draft: $(date -u +%Y-%m-%d) blog post"
+          git push origin drafts

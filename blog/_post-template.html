@@ -1,9 +1,18 @@
+<!--
+  Template used by the automated daily blog pipeline (.github/scripts/generate-post.mjs
+  and api/approve.js). Placeholder tokens TITLE, DATE_TAG, BODY_HTML, CTA_URL, and
+  CTA_TEXT (each wrapped in double curly braces in the markup below) are replaced at
+  publish time. This file is not served directly.
+
+  If you redesign the blog post layout, update this file AND blog/welcome-to-the-blog.html
+  together so manual and automated posts stay visually consistent.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog — Hearty Kreation</title>
+<title>{{TITLE}} — Hearty Kreation</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -23,10 +32,6 @@
   .font-display { font-family: 'Space Grotesk', sans-serif; }
   .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-  .glow-text {
-    text-shadow: 0 0 24px var(--signal-dim);
-  }
-
   .circuit-divider {
     position: relative;
     height: 1px;
@@ -42,17 +47,6 @@
     background: var(--signal);
     box-shadow: 0 0 12px var(--signal);
     transform: translateX(-50%);
-  }
-
-  .sys-card {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  }
-  .sys-card:hover {
-    border-color: var(--signal);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 40px -12px var(--signal-dim);
   }
 
   .tag {
@@ -71,20 +65,35 @@
   .btn-signal:hover {
     box-shadow: 0 0 30px var(--signal-dim);
   }
-  .btn-outline {
-    border: 1px solid var(--line);
-    color: #e4e4e7;
-  }
-  .btn-outline:hover {
-    border-color: var(--signal);
-    color: var(--signal);
-  }
 
   .grid-bg {
     background-image:
       linear-gradient(rgba(242,184,75,0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(242,184,75,0.05) 1px, transparent 1px);
     background-size: 48px 48px;
+  }
+
+  .prose-post p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: #d4d4d8;
+  }
+  .prose-post h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: #f4f4f5;
+  }
+  .prose-post a {
+    color: var(--signal);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .prose-post strong {
+    color: #f4f4f5;
+    font-weight: 600;
   }
 </style>
 </head>
@@ -106,37 +115,25 @@
   </div>
 </nav>
 
-<!-- HEADER -->
-<section class="grid-bg pt-40 pb-20 px-6 relative overflow-hidden">
-  <div class="max-w-4xl mx-auto text-center relative z-10">
-    <div class="tag inline-block px-3 py-1 rounded-full mb-6">[ BLOG ]</div>
-    <h1 class="font-display font-bold text-5xl md:text-6xl leading-tight mb-6">
-      Notes from the <span class="glow-text" style="color:var(--signal)">build</span>.
+<!-- POST -->
+<article class="grid-bg pt-40 pb-24 px-6">
+  <div class="max-w-2xl mx-auto">
+    <a href="/blog/" class="font-mono text-xs text-zinc-500 hover:text-zinc-300 transition">← Back to Blog</a>
+
+    <div class="tag inline-block px-3 py-1 rounded-full mt-6 mb-6">{{DATE_TAG}}</div>
+    <h1 class="font-display font-bold text-4xl md:text-5xl leading-tight mb-8">
+      {{TITLE}}
     </h1>
-    <p class="text-zinc-400 text-lg max-w-2xl mx-auto">
-      Thoughts on websites, workflows, and systems for small businesses that want to run without depending on chaos.
-    </p>
+
+    <div class="prose-post">
+{{BODY_HTML}}
+    </div>
+
+    <div class="mt-10">
+      <a href="{{CTA_URL}}" target="_blank" rel="noopener" class="btn-signal font-display font-semibold px-6 py-3 rounded-md inline-block">{{CTA_TEXT}}</a>
+    </div>
   </div>
-</section>
-
-<div class="circuit-divider max-w-6xl mx-auto"></div>
-
-<!-- POST LIST -->
-<section class="py-20 px-6">
-  <div class="max-w-4xl mx-auto space-y-6">
-
-    <!-- NEW-POSTS-INSERT-HERE: automated and manual posts both go directly below this line, newest first -->
-
-    <a href="/blog/welcome-to-the-blog.html" class="sys-card rounded-xl p-8 block">
-      <div class="tag inline-block px-2 py-1 rounded mb-4 font-mono">JULY 2026</div>
-      <h2 class="font-display font-semibold text-2xl mb-2">Welcome to the Hearty Kreation blog</h2>
-      <p class="text-zinc-400 text-sm leading-relaxed">
-        Why we're writing this, and what to expect: notes on systems, workflows, and building things that last.
-      </p>
-    </a>
-
-  </div>
-</section>
+</article>
 
 <!-- FOOTER -->
 <footer class="border-t border-[var(--line)] py-10 px-6">
