@@ -3,313 +3,353 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hearty Kreation — Systems for Businesses That Want to Grow</title>
+<title>Hearty Kreation — Professional Digital Presence for Businesses, Organizations & Individuals</title>
+<meta name="description" content="Hearty Kreation creates professional digital presences through custom website design, development, and digital presence solutions for businesses, organizations, and individuals.">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0a0d0c;
-    --panel: #0f1413;
-    --signal: #f2b84b;
-    --signal-dim: #f2b84b33;
-    --amber: #f2b84b;
-    --line: #1c2422;
+    --ink: #241C15;
+    --canvas: #F8F3E9;
+    --panel: #F0E7D6;
+    --line: #E1D5BE;
+    --ocean: #2E5A5B;
+    --ocean-dark: #223F40;
+    --clay: #B0603C;
+    --muted: #6E6255;
   }
   body {
-    background: var(--ink);
+    background: var(--canvas);
+    color: var(--ink);
     font-family: 'Inter', sans-serif;
   }
-  .font-display { font-family: 'Space Grotesk', sans-serif; }
-  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  .font-display { font-family: 'Fraunces', serif; }
 
-  .glow-text {
-    text-shadow: 0 0 24px var(--signal-dim);
+  .eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--clay);
+    font-weight: 600;
   }
 
-  .circuit-divider {
-    position: relative;
-    height: 1px;
-    background: var(--line);
-  }
-  .circuit-divider::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: -2px;
-    width: 6px;
-    height: 5px;
-    background: var(--signal);
-    box-shadow: 0 0 12px var(--signal);
-    transform: translateX(-50%);
-  }
+  .panel-alt { background: var(--panel); }
 
-  .sys-card {
-    background: var(--panel);
+  .card {
+    background: #FFFFFF;
     border: 1px solid var(--line);
     transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   }
-  .sys-card:hover {
-    border-color: var(--signal);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 40px -12px var(--signal-dim);
+  .card:hover {
+    border-color: var(--ocean);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px -18px rgba(46,90,91,0.35);
   }
 
-  .tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    color: var(--signal);
-    border: 1px solid var(--signal-dim);
-    background: rgba(242,184,75,0.06);
+  .btn-primary {
+    background: var(--ocean);
+    color: #FBF7EE;
   }
+  .btn-primary:hover { background: var(--ocean-dark); }
 
-  .btn-signal {
-    background: var(--signal);
-    color: #04140d;
-  }
-  .btn-signal:hover {
-    box-shadow: 0 0 30px var(--signal-dim);
-  }
   .btn-outline {
-    border: 1px solid var(--line);
-    color: #e4e4e7;
+    border: 1px solid var(--ink);
+    color: var(--ink);
   }
   .btn-outline:hover {
-    border-color: var(--signal);
-    color: var(--signal);
+    border-color: var(--ocean);
+    color: var(--ocean);
   }
 
-  .grid-bg {
-    background-image:
-      linear-gradient(rgba(242,184,75,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(242,184,75,0.05) 1px, transparent 1px);
-    background-size: 48px 48px;
+  .divider { height: 1px; background: var(--line); }
+
+  .wave-bg {
+    background-image: radial-gradient(circle at 15% 20%, rgba(46,90,91,0.06), transparent 45%),
+                       radial-gradient(circle at 85% 80%, rgba(176,96,60,0.07), transparent 45%);
+  }
+
+  .process-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--ocean);
   }
 
   details > summary { list-style: none; cursor: pointer; }
   details > summary::-webkit-details-marker { display: none; }
-  details[open] .chevron { transform: rotate(45deg); }
-  .chevron { transition: transform 0.2s ease; }
 </style>
 </head>
-<body class="text-zinc-100">
+<body>
 
 <!-- NAV -->
-<nav class="fixed top-0 w-full z-50 backdrop-blur bg-black/60 border-b border-[var(--line)]">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="#" class="font-display font-bold text-lg tracking-tight">
-      HEARTY<span style="color:var(--signal)">KREATION</span>
+<nav class="fixed top-0 w-full z-50 backdrop-blur bg-[#F8F3E9]/90 border-b border-[var(--line)]">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+    <a href="/" class="font-display font-semibold text-base sm:text-lg tracking-tight whitespace-nowrap" style="color:var(--ink)">
+      HEARTY KREATION
     </a>
-    <div class="hidden md:flex items-center gap-8 text-sm text-zinc-400">
-      <a href="#what-you-get" class="hover:text-white transition">What You Get</a>
-      <a href="#how-it-works" class="hover:text-white transition">How It Works</a>
-      <a href="#builds" class="hover:text-white transition">Recent Builds</a>
-      <a href="#faq" class="hover:text-white transition">FAQ</a>
-      <a href="/blog/" class="hover:text-white transition">Blog</a>
+    <div class="hidden md:flex items-center gap-8 text-sm" style="color:var(--muted)">
+      <a href="/" class="hover:text-[var(--ink)] transition">Home</a>
+      <a href="#services" class="hover:text-[var(--ink)] transition">Services</a>
+      <a href="#builds" class="hover:text-[var(--ink)] transition">Recent Builds</a>
+      <a href="/blog/" class="hover:text-[var(--ink)] transition">Knowledge Center</a>
+      <a href="#about" class="hover:text-[var(--ink)] transition">About</a>
     </div>
-    <a href="#start" class="btn-signal font-display font-semibold text-sm px-4 py-2 rounded-md">Get Started</a>
+    <a href="#start" class="btn-primary font-display font-semibold text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-md whitespace-nowrap">Start Your Project</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="grid-bg pt-40 pb-28 px-6 relative overflow-hidden">
+<!-- SECTION 1: HERO -->
+<section class="wave-bg pt-40 pb-28 px-6 relative overflow-hidden">
   <div class="max-w-4xl mx-auto text-center relative z-10">
-    <div class="tag inline-block px-3 py-1 rounded-full mb-6">SYSTEM STATUS: ONLINE</div>
-    <h1 class="font-display font-bold text-5xl md:text-6xl leading-tight mb-6">
-      Your business isn't missing effort.<br>
-      It's missing a <span class="glow-text" style="color:var(--signal)">system</span>.
+    <div class="eyebrow mb-6">Hearty Kreation</div>
+    <h1 class="font-display font-semibold text-5xl md:text-6xl leading-tight mb-6" style="color:var(--ink)">
+      Build Your Professional<br>Digital Presence
     </h1>
-    <p class="text-zinc-400 text-lg max-w-2xl mx-auto mb-10">
-      Hearty Kreation builds the website, workflow, and client delivery systems
-      that let a small business run without depending on chaos, or on you doing everything yourself.
+    <p class="text-lg max-w-2xl mx-auto mb-10" style="color:var(--muted)">
+      Custom websites designed around your identity, audience, and goals.
     </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="#start" class="btn-signal font-display font-semibold px-8 py-3 rounded-md">Start a Project</a>
-      <a href="#what-you-get" class="btn-outline font-display font-semibold px-8 py-3 rounded-md">See What You Get</a>
+      <a href="#start" class="btn-primary font-display font-semibold px-8 py-3 rounded-md">Start Your Project</a>
+      <a href="#builds" class="btn-outline font-display font-semibold px-8 py-3 rounded-md">View Recent Builds</a>
     </div>
   </div>
 </section>
 
-<div class="circuit-divider max-w-6xl mx-auto"></div>
+<div class="divider max-w-6xl mx-auto"></div>
 
-<!-- WHAT YOU GET -->
-<section id="what-you-get" class="py-24 px-6">
+<!-- SECTION 2: WHO WE HELP -->
+<section class="py-24 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="mb-14 text-center">
-      <div class="tag inline-block px-3 py-1 rounded-full mb-4">[ WHAT YOU GET ]</div>
-      <h2 class="font-display font-bold text-4xl">Three systems. One business that runs itself.</h2>
+      <div class="eyebrow mb-4">Who We Help</div>
+      <h2 class="font-display font-semibold text-4xl" style="color:var(--ink)">Built for whoever needs a real digital presence.</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card rounded-xl p-8">
+        <h3 class="font-display font-semibold text-xl mb-3" style="color:var(--ink)">Businesses</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">
+          A site that presents your business the way it deserves to be seen, and makes it easy for the right customers to find and trust you.
+        </p>
+      </div>
+      <div class="card rounded-xl p-8">
+        <h3 class="font-display font-semibold text-xl mb-3" style="color:var(--ink)">Organizations</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">
+          A clear, credible presence for the people and causes you represent, built to communicate what you do and why it matters.
+        </p>
+      </div>
+      <div class="card rounded-xl p-8">
+        <h3 class="font-display font-semibold text-xl mb-3" style="color:var(--ink)">Individuals</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">
+          A personal or professional presence built around who you are, whether that's a portfolio, a personal brand, or something in between.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider max-w-6xl mx-auto"></div>
+
+<!-- SECTION 3: SERVICES -->
+<section id="services" class="panel-alt py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-14 text-center">
+      <div class="eyebrow mb-4">Services</div>
+      <h2 class="font-display font-semibold text-4xl" style="color:var(--ink)">Everything your digital presence needs.</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card rounded-xl p-8">
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Website Design</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">Thoughtful, custom design built around your identity, not a template.</p>
+      </div>
+      <div class="card rounded-xl p-8">
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Website Development</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">Fast, reliable builds that work the way they're supposed to, on every device.</p>
+      </div>
+      <div class="card rounded-xl p-8">
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">E-Commerce</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">Online stores built to make it simple for customers to find and buy.</p>
+      </div>
+      <div class="card rounded-xl p-8">
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Branding</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">Visual identity that carries through your site, socials, and everything else.</p>
+      </div>
+      <div class="card rounded-xl p-8">
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">SEO &amp; Marketing</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">Built so the right people can actually find you when they search.</p>
+      </div>
+      <div class="card rounded-xl p-8">
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Website Maintenance</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">Ongoing support so your site stays current, secure, and working.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider max-w-6xl mx-auto"></div>
+
+<!-- SECTION 4: WHY HEARTY KREATION -->
+<section id="about" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-14 text-center">
+      <div class="eyebrow mb-4">Why Hearty Kreation</div>
+      <h2 class="font-display font-semibold text-4xl" style="color:var(--ink)">A partner, not just a vendor.</h2>
+    </div>
+    <div class="grid md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Strategy</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">We start with what your site actually needs to do, not just how it should look.</p>
+      </div>
+      <div>
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Design Quality</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">Every build is custom, considered, and built to feel premium, not templated.</p>
+      </div>
+      <div>
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Personal Partnership</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">You work directly with the person building your site, not a rotating account team.</p>
+      </div>
+      <div>
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Long-Term Support</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">We're here after launch, not just until the invoice is paid.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider max-w-6xl mx-auto"></div>
+
+<!-- SECTION 5: RECENT BUILDS -->
+<section id="builds" class="panel-alt py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-14 text-center">
+      <div class="eyebrow mb-4">Recent Builds</div>
+      <h2 class="font-display font-semibold text-4xl" style="color:var(--ink)">Real clients, real digital presences.</h2>
     </div>
 
     <div class="grid md:grid-cols-3 gap-6">
-      <div class="sys-card rounded-xl p-8">
-        <div class="tag inline-block px-2 py-1 rounded mb-5">SYS-01</div>
-        <h3 class="font-display font-semibold text-xl mb-3">Website System</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed">
-          A site built to bring clients in and convert them, not just sit there looking nice.
-          Fast, simple to update, built to grow with you.
-        </p>
+      <div class="card rounded-xl overflow-hidden">
+        <div class="h-36 bg-white flex items-center justify-center border-b border-[var(--line)]">
+          <img src="images/blees-precision-logo.avif" alt="Blees Precision logo" class="max-h-20 max-w-[70%] object-contain">
+        </div>
+        <div class="p-6">
+          <h3 class="font-display font-semibold mb-3" style="color:var(--ink)">Blees Precision</h3>
+          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Challenge</p>
+          <p class="text-sm mb-3" style="color:var(--muted)">A self-defense studio needed a professional online presence and a simpler way to onboard new clients.</p>
+          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Solution</p>
+          <p class="text-sm mb-3" style="color:var(--muted)">A custom website paired with a streamlined client onboarding system.</p>
+          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Outcome</p>
+          <p class="text-sm" style="color:var(--muted)">A live, professional presence with onboarding that no longer depends on manual back-and-forth.</p>
+        </div>
       </div>
-      <div class="sys-card rounded-xl p-8">
-        <div class="tag inline-block px-2 py-1 rounded mb-5">SYS-02</div>
-        <h3 class="font-display font-semibold text-xl mb-3">Workflow System</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed">
-          The messy, undocumented process running your business today, turned into a
-          simple, repeatable system your team can actually follow.
-        </p>
+
+      <div class="card rounded-xl overflow-hidden">
+        <div class="h-36 bg-white flex items-center justify-center border-b border-[var(--line)]">
+          <img src="images/fou-movement-logo.avif" alt="FOU Movement logo" class="max-h-20 max-w-[70%] object-contain">
+        </div>
+        <div class="p-6">
+          <h3 class="font-display font-semibold mb-3" style="color:var(--ink)">FOU Movement</h3>
+          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Challenge</p>
+          <p class="text-sm mb-3" style="color:var(--muted)">Needed a brand site that matched the energy of the brand, plus a repeatable way to manage content.</p>
+          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Solution</p>
+          <p class="text-sm mb-3" style="color:var(--muted)">A custom brand site paired with a content workflow system.</p>
+          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Outcome</p>
+          <p class="text-sm" style="color:var(--muted)">A cohesive brand presence with content that goes out on a consistent rhythm.</p>
+        </div>
       </div>
-      <div class="sys-card rounded-xl p-8">
-        <div class="tag inline-block px-2 py-1 rounded mb-5">SYS-03</div>
-        <h3 class="font-display font-semibold text-xl mb-3">Client Delivery System</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed">
-          Onboarding, communication, and delivery, streamlined so every client gets a
-          consistent experience without it depending on memory.
-        </p>
+
+      <div class="card rounded-xl overflow-hidden">
+        <div class="h-36 bg-white flex items-center justify-center border-b border-[var(--line)]">
+          <img src="images/paradise-valley-north-logo.png" alt="Paradise Valley North Productions logo" class="max-h-20 max-w-[70%] object-contain">
+        </div>
+        <div class="p-6">
+          <h3 class="font-display font-semibold mb-3" style="color:var(--ink)">Paradise Valley North Productions</h3>
+          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Challenge</p>
+          <p class="text-sm mb-3" style="color:var(--muted)">An existing website no longer reflected the business and needed a full rebuild.</p>
+          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Solution</p>
+          <p class="text-sm mb-3" style="color:var(--muted)">A ground-up website rebuild paired with a clearer delivery workflow.</p>
+          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Outcome</p>
+          <p class="text-sm" style="color:var(--muted)">A modern, working site backed by a delivery process that's easy to repeat.</p>
+        </div>
       </div>
     </div>
+
+    <p class="text-xs text-center mt-8" style="color:var(--muted)">
+      Case study summaries above are drafted from project descriptions on file — pending confirmation from each client before final publish.
+    </p>
   </div>
 </section>
 
-<div class="circuit-divider max-w-6xl mx-auto"></div>
+<div class="divider max-w-6xl mx-auto"></div>
 
-<!-- HOW IT WORKS -->
-<section id="how-it-works" class="py-24 px-6" style="background: var(--panel)">
+<!-- SECTION 6: PROCESS -->
+<section class="py-24 px-6">
   <div class="max-w-5xl mx-auto">
     <div class="mb-14 text-center">
-      <div class="tag inline-block px-3 py-1 rounded-full mb-4">[ HOW IT WORKS ]</div>
-      <h2 class="font-display font-bold text-4xl">Three steps. No guesswork.</h2>
+      <div class="eyebrow mb-4">Process</div>
+      <h2 class="font-display font-semibold text-4xl" style="color:var(--ink)">A clear path from first conversation to launch.</h2>
     </div>
-
-    <div class="grid md:grid-cols-3 gap-10">
+    <div class="grid md:grid-cols-4 gap-8 text-center">
       <div>
-        <div class="font-display font-bold text-5xl mb-4" style="color:var(--signal)">01</div>
-        <h3 class="font-display font-semibold text-lg mb-2">Audit</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed">
-          We look at what's actually happening in your business today, no assumptions, just the real picture.
-        </p>
+        <div class="process-num text-4xl mb-3">01</div>
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Discover</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">We learn who you are, who you're speaking to, and what the site needs to accomplish.</p>
       </div>
       <div>
-        <div class="font-display font-bold text-5xl mb-4" style="color:var(--signal)">02</div>
-        <h3 class="font-display font-semibold text-lg mb-2">Build</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed">
-          We build the specific system you need, website, workflow, or delivery, matched to how your business actually runs.
-        </p>
+        <div class="process-num text-4xl mb-3">02</div>
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Design</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">A custom design direction built around your identity and goals, not a generic template.</p>
       </div>
       <div>
-        <div class="font-display font-bold text-5xl mb-4" style="color:var(--signal)">03</div>
-        <h3 class="font-display font-semibold text-lg mb-2">Hand Off</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed">
-          You own what we build. We stay available if you want ongoing support, but nothing is locked behind us.
-        </p>
+        <div class="process-num text-4xl mb-3">03</div>
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Build</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">Development, content, and testing, so everything works the way it's supposed to.</p>
+      </div>
+      <div>
+        <div class="process-num text-4xl mb-3">04</div>
+        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Launch</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">Your site goes live, and you own it outright, with support available afterward.</p>
       </div>
     </div>
   </div>
 </section>
 
-<div class="circuit-divider max-w-6xl mx-auto"></div>
+<div class="divider max-w-6xl mx-auto"></div>
 
-<!-- RECENT BUILDS -->
-<section id="builds" class="py-24 px-6">
-  <div class="max-w-6xl mx-auto">
-    <div class="mb-14 text-center">
-      <div class="tag inline-block px-3 py-1 rounded-full mb-4">[ RECENT BUILDS ]</div>
-      <h2 class="font-display font-bold text-4xl">Real businesses, real systems.</h2>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="sys-card rounded-xl overflow-hidden">
-        <div class="h-40 grid-bg flex items-center justify-center border-b border-[var(--line)]">
-          <img src="images/blees-precision-logo.avif" alt="Blees Precision logo" class="max-h-24 max-w-[70%] object-contain">
-        </div>
-        <div class="p-6">
-          <h3 class="font-display font-semibold mb-1">Blees Precision</h3>
-          <p class="text-zinc-400 text-sm">Self-defense studio, website and client onboarding system.</p>
-        </div>
-      </div>
-      <div class="sys-card rounded-xl overflow-hidden">
-        <div class="h-40 grid-bg flex items-center justify-center border-b border-[var(--line)]">
-          <img src="images/fou-movement-logo.avif" alt="FOU Movement logo" class="max-h-24 max-w-[70%] object-contain">
-        </div>
-        <div class="p-6">
-          <h3 class="font-display font-semibold mb-1">FOU Movement</h3>
-          <p class="text-zinc-400 text-sm">Brand site and content workflow system.</p>
-        </div>
-      </div>
-      <div class="sys-card rounded-xl overflow-hidden">
-        <div class="h-40 grid-bg flex items-center justify-center border-b border-[var(--line)]">
-          <img src="images/paradise-valley-north-logo.png" alt="Paradise Valley North Productions logo" class="max-h-24 max-w-[70%] object-contain">
-        </div>
-        <div class="p-6">
-          <h3 class="font-display font-semibold mb-1">Paradise Valley North Productions</h3>
-          <p class="text-zinc-400 text-sm">Website rebuild and delivery workflow.</p>
-        </div>
-      </div>
-    </div>
+<!-- SECTION 7: KNOWLEDGE CENTER -->
+<section class="panel-alt py-24 px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    <div class="eyebrow mb-4">Knowledge Center</div>
+    <h2 class="font-display font-semibold text-4xl mb-6" style="color:var(--ink)">Notes on building a digital presence that works.</h2>
+    <p class="text-lg mb-10" style="color:var(--muted)">
+      Straightforward thinking on websites, design, and digital presence, for businesses, organizations, and individuals figuring out what they actually need.
+    </p>
+    <a href="/blog/" class="btn-outline font-display font-semibold px-8 py-3 rounded-md inline-block">Visit the Knowledge Center</a>
   </div>
 </section>
 
-<div class="circuit-divider max-w-6xl mx-auto"></div>
+<div class="divider max-w-6xl mx-auto"></div>
 
-<!-- FAQ -->
-<section id="faq" class="py-24 px-6" style="background: var(--panel)">
-  <div class="max-w-3xl mx-auto">
-    <div class="mb-12 text-center">
-      <div class="tag inline-block px-3 py-1 rounded-full mb-4">[ FAQ ]</div>
-      <h2 class="font-display font-bold text-4xl">Questions, answered</h2>
-    </div>
-
-    <div class="space-y-4">
-      <details class="sys-card rounded-lg p-5">
-        <summary class="flex items-center justify-between font-display font-semibold">
-          Who owns the website or system once it's built?
-          <span class="chevron font-mono text-xl" style="color:var(--signal)">+</span>
-        </summary>
-        <p class="text-zinc-400 text-sm mt-3 leading-relaxed">
-          You do. Your domain, your data, your brand. Hearty Kreation builds it, you own it outright.
-        </p>
-      </details>
-      <details class="sys-card rounded-lg p-5">
-        <summary class="flex items-center justify-between font-display font-semibold">
-          How long does a typical build take?
-          <span class="chevron font-mono text-xl" style="color:var(--signal)">+</span>
-        </summary>
-        <p class="text-zinc-400 text-sm mt-3 leading-relaxed">
-          Depends on scope. A website system usually moves faster than a full workflow rebuild. We'll give you a real timeline after the audit, not a generic estimate.
-        </p>
-      </details>
-      <details class="sys-card rounded-lg p-5">
-        <summary class="flex items-center justify-between font-display font-semibold">
-          Do I need all three systems, or can I start with one?
-          <span class="chevron font-mono text-xl" style="color:var(--signal)">+</span>
-        </summary>
-        <p class="text-zinc-400 text-sm mt-3 leading-relaxed">
-          Start with whichever one is actually hurting the most. Most clients start with one system and add the others once they see it working.
-        </p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- CTA / START -->
-<section id="start" class="py-28 px-6 grid-bg">
+<!-- SECTION 8: FINAL CTA -->
+<section id="start" class="wave-bg py-28 px-6">
   <div class="max-w-2xl mx-auto text-center">
-    <h2 class="font-display font-bold text-4xl mb-4">Let's look at what's actually happening in your business.</h2>
-    <p class="text-zinc-400 mb-10">Pick the intake that fits what you need, and we'll take it from there.</p>
+    <h2 class="font-display font-semibold text-4xl mb-4" style="color:var(--ink)">Ready to build your digital presence?</h2>
+    <p class="mb-10" style="color:var(--muted)">Tell us about your project, and we'll take it from there.</p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="https://tally.so/r/gDrKVD" target="_blank" rel="noopener" class="btn-signal font-display font-semibold px-8 py-3 rounded-md">Website Intake</a>
-      <a href="https://tally.so/r/KYyd4X" target="_blank" rel="noopener" class="btn-outline font-display font-semibold px-8 py-3 rounded-md">Systems Intake</a>
+      <a href="https://tally.so/r/gDrKVD" target="_blank" rel="noopener" class="btn-primary font-display font-semibold px-8 py-3 rounded-md">Start Your Project</a>
     </div>
+    <p class="text-xs mt-8" style="color:var(--muted)">
+      Already discussed a workflow/systems project with us? <a href="https://tally.so/r/KYyd4X" target="_blank" rel="noopener" class="underline hover:no-underline" style="color:var(--ocean)">Continue that intake here</a>.
+    </p>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="border-t border-[var(--line)] py-10 px-6">
-  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
-    <span class="font-mono">© 2026 Hearty Kreation. All rights reserved.</span>
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style="color:var(--muted)">
+    <span>© 2026 Hearty Kreation. All rights reserved.</span>
     <div class="flex gap-6">
-      <a href="https://tally.so/r/Gxy8Ek" class="hover:text-zinc-300">Privacy Policy</a>
-      <a href="https://tally.so/r/9q5b0V" class="hover:text-zinc-300">Terms</a>
-      <a href="mailto:info@heartykreation.com" class="hover:text-zinc-300">info@heartykreation.com</a>
+      <a href="https://tally.so/r/Gxy8Ek" class="hover:text-[var(--ink)]">Privacy Policy</a>
+      <a href="https://tally.so/r/9q5b0V" class="hover:text-[var(--ink)]">Terms</a>
+      <a href="mailto:info@heartykreation.com" class="hover:text-[var(--ink)]">info@heartykreation.com</a>
     </div>
   </div>
 </footer>
