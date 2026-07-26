@@ -91,10 +91,11 @@
       <a href="/" class="hover:text-[var(--ink)] transition">Home</a>
       <a href="#services" class="hover:text-[var(--ink)] transition">Services</a>
       <a href="#builds" class="hover:text-[var(--ink)] transition">Recent Builds</a>
-      <a href="/blog/" class="hover:text-[var(--ink)] transition">Knowledge Center</a>
       <a href="#about" class="hover:text-[var(--ink)] transition">About</a>
+      <a href="/blog/" class="hover:text-[var(--ink)] transition">Knowledge Center</a>
+      <a href="#contact" class="hover:text-[var(--ink)] transition">Contact</a>
     </div>
-    <a href="#start" class="btn-primary font-display font-semibold text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-md whitespace-nowrap">Start Your Project</a>
+    <a href="#contact" class="btn-primary font-display font-semibold text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-md whitespace-nowrap">Start Your Project</a>
   </div>
 </nav>
 
@@ -109,7 +110,7 @@
       Custom websites designed around your identity, audience, and goals.
     </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="#start" class="btn-primary font-display font-semibold px-8 py-3 rounded-md">Start Your Project</a>
+      <a href="#contact" class="btn-primary font-display font-semibold px-8 py-3 rounded-md">Start Your Project</a>
       <a href="#builds" class="btn-outline font-display font-semibold px-8 py-3 rounded-md">View Recent Builds</a>
     </div>
   </div>
@@ -328,17 +329,69 @@
 
 <div class="divider max-w-6xl mx-auto"></div>
 
-<!-- SECTION 8: FINAL CTA -->
-<section id="start" class="wave-bg py-28 px-6">
-  <div class="max-w-2xl mx-auto text-center">
-    <h2 class="font-display font-semibold text-4xl mb-4" style="color:var(--ink)">Ready to build your digital presence?</h2>
-    <p class="mb-10" style="color:var(--muted)">Tell us about your project, and we'll take it from there.</p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="https://tally.so/r/gDrKVD" target="_blank" rel="noopener" class="btn-primary font-display font-semibold px-8 py-3 rounded-md">Start Your Project</a>
+<!-- SECTION 8: CONTACT -->
+<section id="contact" class="wave-bg py-28 px-6">
+  <div class="max-w-2xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="eyebrow mb-4">Contact</div>
+      <h2 class="font-display font-semibold text-4xl mb-4" style="color:var(--ink)">Ready to build your digital presence?</h2>
+      <p style="color:var(--muted)">Tell us about your project, and we'll take it from there.</p>
     </div>
-    <p class="text-xs mt-8" style="color:var(--muted)">
-      Already discussed a workflow/systems project with us? <a href="https://tally.so/r/KYyd4X" target="_blank" rel="noopener" class="underline hover:no-underline" style="color:var(--ocean)">Continue that intake here</a>.
-    </p>
+
+    <form id="contact-form" class="card rounded-xl p-8 sm:p-10 text-left" novalidate>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label for="cf-name" class="block text-sm font-semibold mb-1" style="color:var(--ink)">Name <span style="color:var(--clay)">*</span></label>
+          <input id="cf-name" name="name" type="text" required maxlength="200"
+            class="w-full rounded-md border px-3 py-2 text-sm" style="border-color:var(--line); background:#FFFFFF">
+        </div>
+        <div>
+          <label for="cf-email" class="block text-sm font-semibold mb-1" style="color:var(--ink)">Email <span style="color:var(--clay)">*</span></label>
+          <input id="cf-email" name="email" type="email" required maxlength="320"
+            class="w-full rounded-md border px-3 py-2 text-sm" style="border-color:var(--line); background:#FFFFFF">
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-5 mt-5">
+        <div>
+          <label for="cf-org" class="block text-sm font-semibold mb-1" style="color:var(--ink)">Organization</label>
+          <input id="cf-org" name="organization" type="text" maxlength="200"
+            class="w-full rounded-md border px-3 py-2 text-sm" style="border-color:var(--line); background:#FFFFFF">
+        </div>
+        <div>
+          <label for="cf-project-type" class="block text-sm font-semibold mb-1" style="color:var(--ink)">Project Type <span style="color:var(--clay)">*</span></label>
+          <select id="cf-project-type" name="projectType" required
+            class="w-full rounded-md border px-3 py-2 text-sm" style="border-color:var(--line); background:#FFFFFF">
+            <option value="" disabled selected>Select one</option>
+            <option>Website Design</option>
+            <option>Website Development</option>
+            <option>E-Commerce</option>
+            <option>Branding</option>
+            <option>SEO & Marketing</option>
+            <option>Website Maintenance</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <label for="cf-message" class="block text-sm font-semibold mb-1" style="color:var(--ink)">Message <span style="color:var(--clay)">*</span></label>
+        <textarea id="cf-message" name="message" rows="5" required minlength="10" maxlength="5000"
+          class="w-full rounded-md border px-3 py-2 text-sm" style="border-color:var(--line); background:#FFFFFF"></textarea>
+      </div>
+
+      <!-- Honeypot: hidden from real visitors, left blank by them; bots that autofill it get silently rejected. -->
+      <div style="position:absolute; left:-9999px" aria-hidden="true">
+        <label for="cf-website">Website</label>
+        <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div id="cf-status" class="mt-5 text-sm hidden" role="status"></div>
+
+      <button type="submit" id="cf-submit" class="btn-primary font-display font-semibold px-8 py-3 rounded-md mt-6 w-full sm:w-auto">
+        Send Message
+      </button>
+    </form>
   </div>
 </section>
 
@@ -347,12 +400,74 @@
   <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style="color:var(--muted)">
     <span>© 2026 Hearty Kreation. All rights reserved.</span>
     <div class="flex gap-6">
-      <a href="https://tally.so/r/Gxy8Ek" class="hover:text-[var(--ink)]">Privacy Policy</a>
-      <a href="https://tally.so/r/9q5b0V" class="hover:text-[var(--ink)]">Terms</a>
+      <a href="/privacy.html" class="hover:text-[var(--ink)]">Privacy Policy</a>
+      <a href="/terms.html" class="hover:text-[var(--ink)]">Terms</a>
       <a href="mailto:info@heartykreation.com" class="hover:text-[var(--ink)]">info@heartykreation.com</a>
     </div>
   </div>
 </footer>
+
+<script>
+(function () {
+  var form = document.getElementById('contact-form');
+  var status = document.getElementById('cf-status');
+  var submitBtn = document.getElementById('cf-submit');
+
+  function showStatus(message, isError) {
+    status.textContent = message;
+    status.classList.remove('hidden');
+    status.style.color = isError ? 'var(--clay)' : 'var(--ocean)';
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    status.classList.add('hidden');
+
+    var data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      organization: form.organization.value.trim(),
+      projectType: form.projectType.value,
+      message: form.message.value.trim(),
+      website: form.website.value,
+    };
+
+    if (!data.name || !data.email || !data.projectType || data.message.length < 10) {
+      showStatus('Please fill in all required fields (message must be at least 10 characters).', true);
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then(function (res) {
+        return res.json().then(function (body) {
+          return { ok: res.ok, body: body };
+        });
+      })
+      .then(function (result) {
+        if (result.ok && result.body.ok) {
+          form.reset();
+          showStatus("Thanks — your message is on its way. We'll be in touch soon.", false);
+        } else {
+          showStatus((result.body && result.body.error) || 'Something went wrong. Please try again.', true);
+        }
+      })
+      .catch(function () {
+        showStatus('Network error — please try again in a moment.', true);
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      });
+  });
+})();
+</script>
 
 </body>
 </html>
