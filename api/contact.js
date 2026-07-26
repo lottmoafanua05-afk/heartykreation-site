@@ -5,9 +5,9 @@
 // Required env vars (set in Vercel project settings):
 //   RESEND_API_KEY   - secret API key from the Resend dashboard
 //   CONTACT_TO_EMAIL - inbox that should receive submissions (defaults to info@heartykreation.com)
-//   CONTACT_FROM_EMAIL - verified sending address in Resend (defaults to the Resend
-//                        sandbox address, which only delivers to the account owner
-//                        until a sending domain is verified)
+//   CONTACT_FROM_EMAIL - verified sending address in Resend (defaults to
+//                        info@heartykreation.com, which requires the
+//                        heartykreation.com domain to be verified in Resend)
 
 const PROJECT_TYPES = [
   'Website Design',
@@ -106,7 +106,7 @@ module.exports = async (req, res) => {
   }
 
   const toEmail = process.env.CONTACT_TO_EMAIL || 'info@heartykreation.com';
-  const fromEmail = process.env.CONTACT_FROM_EMAIL || 'Hearty Kreation Website <onboarding@resend.dev>';
+  const fromEmail = process.env.CONTACT_FROM_EMAIL || 'Hearty Kreation Website <info@heartykreation.com>';
 
   const html = `
     <h2>New project inquiry from heartykreation.com</h2>
