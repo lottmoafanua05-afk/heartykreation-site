@@ -4,89 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog — Hearty Kreation</title>
-<script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #0a0d0c;
-    --panel: #0f1413;
-    --signal: #f2b84b;
-    --signal-dim: #f2b84b33;
-    --amber: #f2b84b;
-    --line: #1c2422;
-  }
-  body {
-    background: var(--ink);
-    font-family: 'Inter', sans-serif;
-  }
-  .font-display { font-family: 'Space Grotesk', sans-serif; }
-  .font-mono { font-family: 'JetBrains Mono', monospace; }
-
-  .glow-text {
-    text-shadow: 0 0 24px var(--signal-dim);
-  }
-
-  .circuit-divider {
-    position: relative;
-    height: 1px;
-    background: var(--line);
-  }
-  .circuit-divider::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: -2px;
-    width: 6px;
-    height: 5px;
-    background: var(--signal);
-    box-shadow: 0 0 12px var(--signal);
-    transform: translateX(-50%);
-  }
-
-  .sys-card {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  }
-  .sys-card:hover {
-    border-color: var(--signal);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 40px -12px var(--signal-dim);
-  }
-
-  .tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    color: var(--signal);
-    border: 1px solid var(--signal-dim);
-    background: rgba(242,184,75,0.06);
-  }
-
-  .btn-signal {
-    background: var(--signal);
-    color: #04140d;
-  }
-  .btn-signal:hover {
-    box-shadow: 0 0 30px var(--signal-dim);
-  }
-  .btn-outline {
-    border: 1px solid var(--line);
-    color: #e4e4e7;
-  }
-  .btn-outline:hover {
-    border-color: var(--signal);
-    color: var(--signal);
-  }
-
-  .grid-bg {
-    background-image:
-      linear-gradient(rgba(242,184,75,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(242,184,75,0.05) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-</style>
+<link rel="stylesheet" href="/dist/blog.css">
 </head>
 <body class="text-zinc-100">
 

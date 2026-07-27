@@ -1,0 +1,21 @@
+{
+  "name": "heartykreation-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static site for heartykreation.com. Tailwind CSS is compiled at build time; there is no application framework.",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "build:site": "tailwindcss --input ./src/input.css --output ./dist/site.css --minify",
+    "build:blog": "tailwindcss --input ./src/blog.css --output ./dist/blog.css --minify",
+    "verify:build": "node ./scripts/check-build.mjs",
+    "build": "npm run build:site && npm run build:blog && npm run verify:build",
+    "watch": "tailwindcss --input ./src/input.css --output ./dist/site.css --watch",
+    "watch:blog": "tailwindcss --input ./src/blog.css --output ./dist/blog.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}

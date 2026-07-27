@@ -1,0 +1,163 @@
+/*
+  Blog stylesheet — compiled to dist/blog.css.
+  Used by blog/index.html, blog/*.html posts, and blog/_post-template.html.
+
+  Kept separate from src/input.css on purpose: the blog reuses the custom-property
+  names --ink, --panel and --line with completely different values (near-black vs
+  cream) and maps .font-display to Space Grotesk rather than Fraunces. Merging the
+  two into one :root would break one theme or the other.
+
+  This file is the union of the three blog <style> blocks, which were identical
+  apart from which subset of rules each page carried.
+*/
+@import "tailwindcss" source(none);
+
+@source "../blog/**/*.html";
+/* approve.js writes post-card markup into blog/index.html at publish time. */
+@source "../api/approve.js";
+
+/*
+  v3 parity, part 1 — restore preflight rules v4 dropped.
+*/
+@layer base {
+  button, [role="button"] { cursor: pointer; }
+}
+
+/*
+  v3 parity, part 3 — pin the zinc shades this page uses to their v3 hex values.
+  v4 reissued the default palette in OKLCH, which moved zinc-400 by 2/255 and
+  zinc-500 by 1/255 against the v3 CDN. Imperceptible, but pinning them makes the
+  migration a byte-for-byte colour match. Only the four shades in use are listed.
+*/
+@theme {
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa; /* pinned to the v3 hex: v4's OKLCH palette shifts this by 2/255 */
+  --color-zinc-500: #71717a; /* pinned to the v3 hex: v4's OKLCH palette shifts this by 1/255 */
+}
+
+/*
+  Everything below is the former inline <style> blocks, moved verbatim.
+
+  It lives in @layer components on purpose. The Play CDN appended its generated
+  stylesheet AFTER these blocks, so on equal specificity a Tailwind utility beat
+  a custom class — which is why `.tag`/`.font-mono` elements actually rendered in
+  Tailwind's ui-monospace stack, not JetBrains Mono, on the live site. Leaving
+  this unlayered would invert that and silently change the blog's type.
+*/
+
+:root {
+  --ink: #0a0d0c;
+  --panel: #0f1413;
+  --signal: #f2b84b;
+  --signal-dim: #f2b84b33;
+  --amber: #f2b84b;
+  --line: #1c2422;
+}
+@layer components {
+  body {
+    background: var(--ink);
+    font-family: 'Inter', sans-serif;
+  }
+  .font-display { font-family: 'Space Grotesk', sans-serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+  .glow-text {
+    text-shadow: 0 0 24px var(--signal-dim);
+  }
+
+  .circuit-divider {
+    position: relative;
+    height: 1px;
+    background: var(--line);
+  }
+  .circuit-divider::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -2px;
+    width: 6px;
+    height: 5px;
+    background: var(--signal);
+    box-shadow: 0 0 12px var(--signal);
+    transform: translateX(-50%);
+  }
+
+  .sys-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .sys-card:hover {
+    border-color: var(--signal);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 40px -12px var(--signal-dim);
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--signal);
+    border: 1px solid var(--signal-dim);
+    background: rgba(242,184,75,0.06);
+  }
+
+  .btn-signal {
+    background: var(--signal);
+    color: #04140d;
+  }
+  .btn-signal:hover {
+    box-shadow: 0 0 30px var(--signal-dim);
+  }
+  .btn-outline {
+    border: 1px solid var(--line);
+    color: #e4e4e7;
+  }
+  .btn-outline:hover {
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(242,184,75,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(242,184,75,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .prose-post p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: #d4d4d8;
+  }
+  .prose-post h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: #f4f4f5;
+  }
+  .prose-post a {
+    color: var(--signal);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .prose-post strong {
+    color: #f4f4f5;
+    font-weight: 600;
+  }
+}
+
+
+/*
+  v3 parity, part 2 — responsive font-size / line-height pairing.
+  Restores v3's behaviour where md:text-5xl / md:text-6xl re-declared their
+  paired line-height over an earlier leading-tight. Affects the blog index h1
+  and the h1 in each post.
+*/
+@media (width >= 48rem) {
+  .md\:text-5xl { --tw-leading: var(--text-5xl--line-height); line-height: var(--text-5xl--line-height); }
+  .md\:text-6xl { --tw-leading: var(--text-6xl--line-height); line-height: var(--text-6xl--line-height); }
+}

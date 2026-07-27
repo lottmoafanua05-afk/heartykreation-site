@@ -1,0 +1,129 @@
+/*
+  Main site stylesheet — compiled to dist/site.css.
+  Used by index.html, privacy.html and terms.html.
+
+  The blog is a separate design system with its own palette and fonts that reuses
+  the same custom-property names (--ink, --panel, --line) with different values.
+  It is therefore built from src/blog.css into dist/blog.css. Do not merge the two.
+
+  source(none) disables Tailwind v4's automatic source detection so the scanned
+  files are explicit and deterministic; every file that can emit a utility class
+  for these three pages is listed below.
+*/
+@import "tailwindcss" source(none);
+
+@source "../index.html";
+@source "../privacy.html";
+@source "../terms.html";
+
+/*
+  v3 parity, part 1 — restore preflight rules v4 dropped.
+  Tailwind v3's preflight set a pointer cursor on buttons; v4 defers to the UA
+  default. Without this the "Send Message" submit button loses its hand cursor.
+*/
+@layer base {
+  button, [role="button"] { cursor: pointer; }
+}
+
+/*
+  Everything below is the former inline <style> block, moved verbatim.
+
+  It lives in @layer components on purpose. The Play CDN appended its generated
+  stylesheet to the end of <head>, i.e. AFTER this block, so on equal specificity
+  a Tailwind utility beat a custom class. Two elements depend on that:
+    - the privacy/terms eyebrow is `eyebrow ... text-xs`, where text-xs won
+    - the blog's `.font-mono`/`.tag` lost to Tailwind's own font-mono utility
+  Leaving this unlayered would invert that cascade and change both. The
+  components layer ranks below utilities and reproduces the CDN result exactly.
+*/
+
+:root {
+  --ink: #241C15;
+  --canvas: #F8F3E9;
+  --panel: #F0E7D6;
+  --line: #E1D5BE;
+  --ocean: #2E5A5B;
+  --ocean-dark: #223F40;
+  --clay: #B0603C;
+  --muted: #6E6255;
+}
+@layer components {
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+  }
+  .font-display { font-family: 'Fraunces', serif; }
+
+  .eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--clay);
+    font-weight: 600;
+  }
+
+  .panel-alt { background: var(--panel); }
+
+  .card {
+    background: #FFFFFF;
+    border: 1px solid var(--line);
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card:hover {
+    border-color: var(--ocean);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px -18px rgba(46,90,91,0.35);
+  }
+
+  .btn-primary {
+    background: var(--ocean);
+    color: #FBF7EE;
+  }
+  .btn-primary:hover { background: var(--ocean-dark); }
+
+  .btn-outline {
+    border: 1px solid var(--ink);
+    color: var(--ink);
+  }
+  .btn-outline:hover {
+    border-color: var(--ocean);
+    color: var(--ocean);
+  }
+
+  .divider { height: 1px; background: var(--line); }
+
+  .wave-bg {
+    background-image: radial-gradient(circle at 15% 20%, rgba(46,90,91,0.06), transparent 45%),
+                       radial-gradient(circle at 85% 80%, rgba(176,96,60,0.07), transparent 45%);
+  }
+
+  .process-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--ocean);
+  }
+
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+
+  /* From privacy.html / terms.html — the legal page body copy. */
+  .legal h2 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.35rem; color: var(--ink); margin-top: 2.5rem; margin-bottom: 0.75rem; }
+  .legal p, .legal li { color: var(--muted); line-height: 1.7; margin-bottom: 0.9rem; }
+  .legal ul { list-style: disc; padding-left: 1.5rem; }
+  .legal a { color: var(--ocean); text-decoration: underline; }
+}
+
+
+/*
+  v3 parity, part 2 — responsive font-size / line-height pairing.
+  In v3 a `md:text-6xl` utility re-declared its paired line-height inside the
+  media query, overriding the earlier `leading-tight`. v4 routes line-height
+  through the sticky --tw-leading variable, so `leading-tight` now wins at every
+  breakpoint and the hero headings render 15-30px taller. Restore v3's result.
+  Affects: index.html h1, blog/index.html h1, and the two blog post headings.
+*/
+@media (width >= 48rem) {
+  .md\:text-5xl { --tw-leading: var(--text-5xl--line-height); line-height: var(--text-5xl--line-height); }
+  .md\:text-6xl { --tw-leading: var(--text-6xl--line-height); line-height: var(--text-6xl--line-height); }
+}

@@ -1,3 +1,18 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": ".",
+  "redirects": [
+    { "source": "/drafts", "destination": "/", "permanent": false },
+    { "source": "/drafts/:path*", "destination": "/", "permanent": false },
+    { "source": "/.github/:path*", "destination": "/", "permanent": false },
+    { "source": "/src/:path*", "destination": "/", "permanent": false },
+    { "source": "/scripts/:path*", "destination": "/", "permanent": false },
+    { "source": "/README.md", "destination": "/", "permanent": false },
+    { "source": "/vercel.json", "destination": "/", "permanent": false },
+    { "source": "/.gitignore", "destination": "/", "permanent": false },
+    { "source": "/.nvmrc", "destination": "/", "permanent": false },
+    { "source": "/.vercelignore", "destination": "/", "permanent": false }
+  ]
 }

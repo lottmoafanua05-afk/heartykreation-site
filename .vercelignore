@@ -1,0 +1,12 @@
+# vercel.json sets outputDirectory to ".", so the whole project directory becomes the
+# static output. Deploys triggered from git only ever contain committed files, and
+# .claude/worktrees is gitignored, so production is unaffected — this file covers the
+# local `vercel deploy` path, which uploads the working directory as-is and would
+# otherwise publish a stale duplicate of the site from an agent worktree.
+#
+# Note: this does NOT filter `vercel build --prebuilt` output, which copies the working
+# directory after the build. Run local Vercel builds from a clean checkout.
+#
+# Do NOT add src/, scripts/, package.json or api/ here: the build reads the first three
+# and api/ is what Vercel compiles into the serverless functions.
+.claude
