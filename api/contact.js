@@ -1,6 +1,6 @@
 // Native contact form endpoint: POST /api/contact
 // Validates the submission server-side, then sends a notification email via
-// the Resend API (https://resend.com). No npm dependencies — built-in fetch only.
+// the Resend API (https://resend.com). No npm dependencies, built-in fetch only.
 //
 // Required env vars (set in Vercel project settings):
 //   RESEND_API_KEY   - secret API key from the Resend dashboard
@@ -16,6 +16,7 @@ const PROJECT_TYPES = [
   'Branding',
   'SEO & Marketing',
   'Website Maintenance',
+  'Custom Web App / Platform',
   'Other',
 ];
 
@@ -58,6 +59,7 @@ function validate(fields) {
   const organization = String(fields.organization || '').trim();
   const projectType = String(fields.projectType || '').trim();
   const message = String(fields.message || '').trim();
+  const source = String(fields.source || '').trim().slice(0, 100);
 
   if (!name || name.length > 200) errors.name = 'Enter your name.';
   if (!email || email.length > 320 || !EMAIL_RE.test(email)) errors.email = 'Enter a valid email address.';
@@ -67,7 +69,7 @@ function validate(fields) {
     errors.message = 'Message must be between 10 and 5000 characters.';
   }
 
-  return { errors, values: { name, email, organization, projectType, message } };
+  return { errors, values: { name, email, organization, projectType, message, source } };
 }
 
 module.exports = async (req, res) => {
@@ -114,6 +116,7 @@ module.exports = async (req, res) => {
     <p><strong>Email:</strong> ${escapeHtml(values.email)}</p>
     <p><strong>Organization:</strong> ${escapeHtml(values.organization) || '(not provided)'}</p>
     <p><strong>Project type:</strong> ${escapeHtml(values.projectType)}</p>
+    ${values.source ? `<p><strong>Source:</strong> ${escapeHtml(values.source)}</p>` : ''}
     <p><strong>Message:</strong></p>
     <p>${escapeHtml(values.message).replace(/\n/g, '<br>')}</p>
   `;
@@ -129,7 +132,7 @@ module.exports = async (req, res) => {
         from: fromEmail,
         to: [toEmail],
         reply_to: values.email,
-        subject: `New inquiry: ${values.projectType} — ${values.name}`,
+        subject: `${values.source ? 'New lead via ' + values.source : 'New inquiry'}: ${values.projectType}, ${values.name}`,
         html,
       }),
     });
