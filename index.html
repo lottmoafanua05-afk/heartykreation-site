@@ -4,142 +4,507 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1767049912760143" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hearty Kreation — Professional Digital Presence for Businesses, Organizations & Individuals</title>
-<meta name="description" content="Hearty Kreation creates professional digital presences through custom website design, development, and digital presence solutions for businesses, organizations, and individuals.">
+<title>Hearty Kreation: Professional Digital Presence for Businesses, Organizations & Individuals</title>
+<meta name="description" content="Hearty Kreation creates professional digital presences through custom website design, development, custom web applications, and digital presence solutions for businesses, organizations, and individuals.">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #241C15;
-    --canvas: #F8F3E9;
-    --panel: #F0E7D6;
-    --line: #E1D5BE;
-    --ocean: #2E5A5B;
-    --ocean-dark: #223F40;
-    --clay: #B0603C;
-    --muted: #6E6255;
+    --ink: #F4F1EA;
+    --bg: #0B0B0C;
+    --panel: #131315;
+    --panel-2: #17171A;
+    --line: #26262A;
+    --acid: #D8FF3E;
+    --clay: #FF6A3D;
+    --muted: #9A968E;
+    --muted-2: #6B6862;
   }
+  * { box-sizing: border-box; }
   body {
-    background: var(--canvas);
+    background: var(--bg);
     color: var(--ink);
     font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
   .font-display { font-family: 'Fraunces', serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
 
   .eyebrow {
-    font-size: 0.78rem;
-    letter-spacing: 0.18em;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--clay);
-    font-weight: 600;
+    color: var(--acid);
+    font-weight: 500;
   }
 
-  .panel-alt { background: var(--panel); }
+  .noise {
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(216,255,62,0.07), transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(255,106,61,0.08), transparent 40%);
+  }
+
+  .hairline { height: 1px; background: var(--line); }
 
   .card {
-    background: #FFFFFF;
+    background: var(--panel);
     border: 1px solid var(--line);
-    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
   }
   .card:hover {
-    border-color: var(--ocean);
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px -18px rgba(46,90,91,0.35);
+    border-color: var(--acid);
+    transform: translateY(-4px);
+    background: var(--panel-2);
   }
 
   .btn-primary {
-    background: var(--ocean);
-    color: #FBF7EE;
+    background: var(--acid);
+    color: #0B0B0C;
+    font-weight: 700;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
-  .btn-primary:hover { background: var(--ocean-dark); }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -10px rgba(216,255,62,0.4);
+  }
+  .btn-primary:active { transform: translateY(0) scale(0.97); }
+  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
 
   .btn-outline {
-    border: 1px solid var(--ink);
+    border: 1px solid var(--line);
     color: var(--ink);
+    transition: border-color 0.2s ease, color 0.2s ease;
   }
   .btn-outline:hover {
-    border-color: var(--ocean);
-    color: var(--ocean);
+    border-color: var(--acid);
+    color: var(--acid);
   }
 
-  .divider { height: 1px; background: var(--line); }
-
-  .wave-bg {
-    background-image: radial-gradient(circle at 15% 20%, rgba(46,90,91,0.06), transparent 45%),
-                       radial-gradient(circle at 85% 80%, rgba(176,96,60,0.07), transparent 45%);
+  .stroke-text {
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(100deg, var(--acid) 0%, #EFFFA8 35%, var(--acid) 55%, var(--clay) 100%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 1.5px transparent;
+    filter: drop-shadow(0 0 24px rgba(216,255,62,0.45)) drop-shadow(0 0 60px rgba(216,255,62,0.2));
+    animation: stroke-shimmer 5s ease-in-out infinite;
+  }
+  @keyframes stroke-shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 
-  .process-num {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    color: var(--ocean);
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
   }
 
-  details > summary { list-style: none; cursor: pointer; }
-  details > summary::-webkit-details-marker { display: none; }
+  .num-tag {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted-2);
+    font-size: 0.78rem;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 22s linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .service-row {
+    border-bottom: 1px solid var(--line);
+    transition: background 0.2s ease, padding-left 0.2s ease;
+  }
+  .service-row:hover {
+    background: var(--panel);
+    padding-left: 1rem;
+  }
+  .service-row:hover .service-arrow { opacity: 1; transform: translateX(0); }
+  .service-arrow { opacity: 0; transform: translateX(-8px); transition: all 0.2s ease; }
+
+  input, textarea, select {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--acid);
+    box-shadow: 0 0 0 4px rgba(216,255,62,0.12);
+  }
+  input::placeholder, textarea::placeholder { color: var(--muted-2); }
+
+  /* HERO MOTION FX */
+  .hero-fx {
+    background:
+      radial-gradient(circle at 20% 10%, rgba(216,255,62,0.08), transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(255,106,61,0.09), transparent 40%);
+  }
+
+  .hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.55;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: -20% -10%;
+    z-index: 0;
+    background-image:
+      linear-gradient(rgba(216,255,62,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(216,255,62,0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 75%);
+    animation: grid-drift 24s linear infinite;
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    will-change: transform;
+  }
+  @keyframes grid-drift {
+    from { background-position: 0 0, 0 0; }
+    to { background-position: 48px 96px, 48px 96px; }
+  }
+
+  .hero-orb {
+    position: absolute;
+    z-index: 0;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.5;
+    pointer-events: none;
+    --px: 0px;
+    --py: 0px;
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .hero-orb-a {
+    width: 420px;
+    height: 420px;
+    top: -120px;
+    right: 5%;
+    background: radial-gradient(circle, rgba(216,255,62,0.35), transparent 70%);
+    animation: orb-float-a 14s ease-in-out infinite;
+  }
+  .hero-orb-b {
+    width: 320px;
+    height: 320px;
+    bottom: -140px;
+    left: 8%;
+    background: radial-gradient(circle, rgba(255,106,61,0.3), transparent 70%);
+    animation: orb-float-b 18s ease-in-out infinite;
+  }
+  @keyframes orb-float-a {
+    0%, 100% { transform: translate(var(--px), var(--py)) scale(1); }
+    50% { transform: translate(calc(var(--px) - 40px), calc(var(--py) + 30px)) scale(1.08); }
+  }
+  @keyframes orb-float-b {
+    0%, 100% { transform: translate(var(--px), var(--py)) scale(1); }
+    50% { transform: translate(calc(var(--px) + 30px), calc(var(--py) - 25px)) scale(1.05); }
+  }
+
+  .hero-cursor-glow {
+    position: absolute;
+    z-index: 0;
+    width: 480px;
+    height: 480px;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(216,255,62,0.16), rgba(255,106,61,0.06) 45%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    will-change: transform;
+  }
+  .hero-cursor-glow.is-active { opacity: 1; }
+
+  .reveal {
+    opacity: 0;
+    animation: reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes reveal-up {
+    from { opacity: 0; transform: translateY(22px); filter: blur(6px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+
+  /* SCROLL-REVEAL SYSTEM */
+  .sr {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    transition-delay: var(--sr-delay, 0s);
+  }
+  .sr.sr-in { opacity: 1; transform: translateY(0); }
+
+  .sr-scale {
+    opacity: 0;
+    transform: scale(0.94) translateY(16px);
+    transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    transition-delay: var(--sr-delay, 0s);
+  }
+  .sr-scale.sr-in { opacity: 1; transform: scale(1) translateY(0); }
+
+  .sr-left {
+    opacity: 0;
+    transform: translateX(-24px);
+    transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    transition-delay: var(--sr-delay, 0s);
+  }
+  .sr-left.sr-in { opacity: 1; transform: translateX(0); }
+
+  /* subtle continuous drift on section eyebrows for a "live system" feel */
+  .eyebrow-pulse::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--acid);
+    margin-right: 8px;
+    vertical-align: middle;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(216,255,62,0.5); }
+    50% { opacity: 0.5; box-shadow: 0 0 0 6px rgba(216,255,62,0); }
+  }
+
+  /* process step top-rule grows in on reveal */
+  .process-step {
+    position: relative;
+  }
+  .process-step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--acid);
+    transition: width 0.8s cubic-bezier(0.16,1,0.3,1);
+    transition-delay: calc(var(--sr-delay, 0s) + 0.15s);
+  }
+  .sr-in.process-step::before { width: 100%; }
+
+  /* footer text-link underline sweep */
+  footer .footer-links a {
+    position: relative;
+  }
+  footer .footer-links a::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 100%;
+    bottom: -2px;
+    height: 1px;
+    background: var(--acid);
+    transition: right 0.25s ease;
+  }
+  footer .footer-links a:hover::after { right: 0; }
+
+  /* footer social icons */
+  .social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    background: var(--panel);
+    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+  }
+  a.social-icon:hover {
+    color: var(--acid);
+    border-color: var(--acid);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -10px rgba(216,255,62,0.5);
+  }
+  a.social-icon:active { transform: translateY(0) scale(0.95); }
+
+  .social-icon-disabled {
+    cursor: default;
+    opacity: 0.45;
+  }
+  .social-icon-badge {
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    white-space: nowrap;
+  }
+
+  /* CUSTOM WEB APPS section */
+  .webapp-glow {
+    position: absolute;
+    z-index: 0;
+    width: 700px;
+    height: 700px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(216,255,62,0.1), rgba(255,106,61,0.05) 45%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: webapp-pulse 8s ease-in-out infinite;
+  }
+  @keyframes webapp-pulse {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+  }
+
+  .webapp-panel {
+    background: linear-gradient(160deg, var(--panel) 0%, var(--panel-2) 100%);
+    border: 1px solid var(--line);
+    position: relative;
+  }
+  .webapp-panel::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(216,255,62,0.5), transparent 40%, transparent 60%, rgba(255,106,61,0.4));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .webapp-feature {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .webapp-feature:hover {
+    border-color: var(--acid);
+    transform: translateX(4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stroke-text { animation: none; }
+    .webapp-glow { animation: none !important; }
+    .hero-grid, .hero-orb, .reveal, .eyebrow-pulse::before { animation: none !important; }
+    .reveal { opacity: 1; filter: none; transform: none; }
+    .hero-cursor-glow { display: none !important; }
+    .sr, .sr-scale, .sr-left { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
 </style>
 </head>
 <body>
 
+<div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-[var(--acid)] z-[70]" style="width:0%"></div>
+
 <!-- NAV -->
-<nav class="fixed top-0 w-full z-50 backdrop-blur bg-[#F8F3E9]/90 border-b border-[var(--line)]">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
-    <a href="/" class="font-display font-semibold text-base sm:text-lg tracking-tight whitespace-nowrap" style="color:var(--ink)">
+<nav class="fixed top-0 w-full z-50 backdrop-blur bg-[#0B0B0C]/85 border-b border-[var(--line)]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+    <a href="/" class="font-display font-semibold text-base sm:text-lg tracking-tight whitespace-nowrap flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-[var(--acid)]"></span>
       HEARTY KREATION
     </a>
-    <div class="hidden md:flex items-center gap-8 text-sm" style="color:var(--muted)">
-      <a href="/" class="hover:text-[var(--ink)] transition">Home</a>
-      <a href="#services" class="hover:text-[var(--ink)] transition">Services</a>
-      <a href="#builds" class="hover:text-[var(--ink)] transition">Recent Builds</a>
-      <a href="#about" class="hover:text-[var(--ink)] transition">About</a>
-      <a href="#contact" class="hover:text-[var(--ink)] transition">Contact</a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-mono" style="color:var(--muted)">
+      <a href="/" class="hover:text-[var(--acid)] transition">Home</a>
+      <a href="#services" class="hover:text-[var(--acid)] transition">Services</a>
+      <a href="#web-apps" class="hover:text-[var(--acid)] transition">Web Apps</a>
+      <a href="#builds" class="hover:text-[var(--acid)] transition">Builds</a>
+      <a href="#about" class="hover:text-[var(--acid)] transition">About</a>
+      <a href="#contact" class="hover:text-[var(--acid)] transition">Contact</a>
     </div>
-    <a href="#contact" class="btn-primary font-display font-semibold text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-md whitespace-nowrap">Start Your Project</a>
+    <a href="#contact" class="btn-primary font-mono font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 rounded-full whitespace-nowrap">Start a Project &rarr;</a>
   </div>
 </nav>
 
-<!-- SECTION 1: HERO -->
-<section class="wave-bg pt-40 pb-28 px-6 relative overflow-hidden">
-  <div class="max-w-4xl mx-auto text-center relative z-10">
-    <div class="eyebrow mb-6">Hearty Kreation</div>
-    <h1 class="font-display font-semibold text-5xl md:text-6xl leading-tight mb-6" style="color:var(--ink)">
-      Build Your Professional<br>Digital Presence
+<!-- HERO -->
+<section id="hero" class="hero-fx pt-40 pb-20 px-6 relative overflow-hidden border-b border-[var(--line)]">
+  <div class="hero-cursor-glow" id="hero-cursor-glow" aria-hidden="true"></div>
+  <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-grid" id="hero-grid" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-a" id="hero-orb-a" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-b" id="hero-orb-b" aria-hidden="true"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="eyebrow mb-6 reveal" style="animation-delay:0.05s">// Digital Presence Studio</div>
+    <h1 class="font-display font-semibold hero-title mb-8">
+      <span class="reveal block" style="animation-delay:0.15s">Build a</span>
+      <span class="reveal block" style="animation-delay:0.28s"><span class="italic">presence</span> that</span>
+      <span class="reveal block" style="animation-delay:0.41s"><span class="stroke-text">doesn&#8217;t blend in.</span></span>
     </h1>
-    <p class="text-lg max-w-2xl mx-auto mb-10" style="color:var(--muted)">
-      Custom websites designed around your identity, audience, and goals.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="#contact" class="btn-primary font-display font-semibold px-8 py-3 rounded-md">Start Your Project</a>
-      <a href="#builds" class="btn-outline font-display font-semibold px-8 py-3 rounded-md">View Recent Builds</a>
+    <div class="grid md:grid-cols-2 gap-8 items-end reveal" style="animation-delay:0.56s">
+      <p class="text-lg max-w-md" style="color:var(--muted)">
+        Custom websites designed around your identity, audience, and goals, built to be seen, not scrolled past.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 md:justify-end">
+        <a href="#contact" class="btn-primary font-mono font-semibold px-8 py-4 rounded-full text-center">Start Your Project</a>
+        <a href="#builds" class="btn-outline font-mono font-semibold px-8 py-4 rounded-full text-center">View Recent Builds</a>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="divider max-w-6xl mx-auto"></div>
+<!-- MARQUEE -->
+<div class="border-b border-[var(--line)] py-4 overflow-hidden bg-[var(--panel)]">
+  <div class="marquee-track font-mono text-sm" style="color:var(--muted-2)">
+    <span class="px-6">CUSTOM WEBSITES</span><span class="px-6 text-[var(--acid)]">&#9670;</span>
+    <span class="px-6">CUSTOM WEB APPS</span><span class="px-6 text-[var(--acid)]">&#9670;</span>
+    <span class="px-6">BRAND IDENTITY</span><span class="px-6 text-[var(--acid)]">&#9670;</span>
+    <span class="px-6">E-COMMERCE</span><span class="px-6 text-[var(--acid)]">&#9670;</span>
+    <span class="px-6">SEO &amp; MARKETING</span><span class="px-6 text-[var(--acid)]">&#9670;</span>
+    <span class="px-6">LONG-TERM SUPPORT</span><span class="px-6 text-[var(--acid)]">&#9670;</span>
+    <span class="px-6">CUSTOM WEBSITES</span><span class="px-6 text-[var(--acid)]">&#9670;</span>
+    <span class="px-6">CUSTOM WEB APPS</span><span class="px-6 text-[var(--acid)]">&#9670;</span>
+    <span class="px-6">BRAND IDENTITY</span><span class="px-6 text-[var(--acid)]">&#9670;</span>
+    <span class="px-6">E-COMMERCE</span><span class="px-6 text-[var(--acid)]">&#9670;</span>
+    <span class="px-6">SEO &amp; MARKETING</span><span class="px-6 text-[var(--acid)]">&#9670;</span>
+    <span class="px-6">LONG-TERM SUPPORT</span><span class="px-6 text-[var(--acid)]">&#9670;</span>
+  </div>
+</div>
 
-<!-- SECTION 2: WHO WE HELP -->
-<section class="py-24 px-6">
-  <div class="max-w-6xl mx-auto">
-    <div class="mb-14 text-center">
-      <div class="eyebrow mb-4">Who We Help</div>
-      <h2 class="font-display font-semibold text-4xl" style="color:var(--ink)">Built for whoever needs a real digital presence.</h2>
+<!-- WHO WE HELP -->
+<section class="py-24 px-6 border-b border-[var(--line)]">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-end justify-between mb-14 flex-wrap gap-4">
+      <div class="sr">
+        <div class="eyebrow eyebrow-pulse mb-4">01 / Who We Help</div>
+        <h2 class="font-display font-semibold text-4xl md:text-5xl">Built for whoever needs<br>a real digital presence.</h2>
+      </div>
     </div>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="card rounded-xl p-8">
-        <h3 class="font-display font-semibold text-xl mb-3" style="color:var(--ink)">Businesses</h3>
+    <div class="grid md:grid-cols-3 gap-px bg-[var(--line)] border border-[var(--line)]">
+      <div class="card p-8 bg-[var(--bg)] sr-scale" style="--sr-delay:0s">
+        <div class="num-tag mb-6">A</div>
+        <h3 class="font-display font-semibold text-xl mb-3">Businesses</h3>
         <p class="text-sm leading-relaxed" style="color:var(--muted)">
           A site that presents your business the way it deserves to be seen, and makes it easy for the right customers to find and trust you.
         </p>
       </div>
-      <div class="card rounded-xl p-8">
-        <h3 class="font-display font-semibold text-xl mb-3" style="color:var(--ink)">Organizations</h3>
+      <div class="card p-8 bg-[var(--bg)] sr-scale" style="--sr-delay:0.12s">
+        <div class="num-tag mb-6">B</div>
+        <h3 class="font-display font-semibold text-xl mb-3">Organizations</h3>
         <p class="text-sm leading-relaxed" style="color:var(--muted)">
           A clear, credible presence for the people and causes you represent, built to communicate what you do and why it matters.
         </p>
       </div>
-      <div class="card rounded-xl p-8">
-        <h3 class="font-display font-semibold text-xl mb-3" style="color:var(--ink)">Individuals</h3>
+      <div class="card p-8 bg-[var(--bg)] sr-scale" style="--sr-delay:0.24s">
+        <div class="num-tag mb-6">C</div>
+        <h3 class="font-display font-semibold text-xl mb-3">Individuals</h3>
         <p class="text-sm leading-relaxed" style="color:var(--muted)">
           A personal or professional presence built around who you are, whether that's a portfolio, a personal brand, or something in between.
         </p>
@@ -148,219 +513,247 @@
   </div>
 </section>
 
-<div class="divider max-w-6xl mx-auto"></div>
+<!-- SERVICES -->
+<section id="services" class="py-24 px-6 border-b border-[var(--line)]">
+  <div class="max-w-7xl mx-auto">
+    <div class="eyebrow eyebrow-pulse mb-4 sr">02 / Services</div>
+    <h2 class="font-display font-semibold text-4xl md:text-5xl mb-14 sr" style="--sr-delay:0.08s">Everything your digital<br>presence needs.</h2>
 
-<!-- SECTION 3: SERVICES -->
-<section id="services" class="panel-alt py-24 px-6">
-  <div class="max-w-6xl mx-auto">
-    <div class="mb-14 text-center">
-      <div class="eyebrow mb-4">Services</div>
-      <h2 class="font-display font-semibold text-4xl" style="color:var(--ink)">Everything your digital presence needs.</h2>
-    </div>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="card rounded-xl p-8">
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Website Design</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--muted)">Thoughtful, custom design built around your identity, not a template.</p>
+    <div class="border-t border-[var(--line)]">
+      <div class="service-row grid md:grid-cols-12 gap-4 py-6 items-center sr-left" style="--sr-delay:0s">
+        <div class="md:col-span-1 num-tag">01</div>
+        <div class="md:col-span-3 font-display font-semibold text-xl">Website Design</div>
+        <div class="md:col-span-7 text-sm" style="color:var(--muted)">Thoughtful, custom design built around your identity, not a template.</div>
+        <div class="md:col-span-1 text-right service-arrow text-[var(--acid)] text-xl">&rarr;</div>
       </div>
-      <div class="card rounded-xl p-8">
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Website Development</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--muted)">Fast, reliable builds that work the way they're supposed to, on every device.</p>
+      <div class="service-row grid md:grid-cols-12 gap-4 py-6 items-center sr-left" style="--sr-delay:0.06s">
+        <div class="md:col-span-1 num-tag">02</div>
+        <div class="md:col-span-3 font-display font-semibold text-xl">Website Development</div>
+        <div class="md:col-span-7 text-sm" style="color:var(--muted)">Fast, reliable builds that work the way they're supposed to, on every device.</div>
+        <div class="md:col-span-1 text-right service-arrow text-[var(--acid)] text-xl">&rarr;</div>
       </div>
-      <div class="card rounded-xl p-8">
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">E-Commerce</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--muted)">Online stores built to make it simple for customers to find and buy.</p>
+      <div class="service-row grid md:grid-cols-12 gap-4 py-6 items-center sr-left" style="--sr-delay:0.12s">
+        <div class="md:col-span-1 num-tag">03</div>
+        <div class="md:col-span-3 font-display font-semibold text-xl">E-Commerce</div>
+        <div class="md:col-span-7 text-sm" style="color:var(--muted)">Online stores built to make it simple for customers to find and buy.</div>
+        <div class="md:col-span-1 text-right service-arrow text-[var(--acid)] text-xl">&rarr;</div>
       </div>
-      <div class="card rounded-xl p-8">
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Branding</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--muted)">Visual identity that carries through your site, socials, and everything else.</p>
+      <div class="service-row grid md:grid-cols-12 gap-4 py-6 items-center sr-left" style="--sr-delay:0.18s">
+        <div class="md:col-span-1 num-tag">04</div>
+        <div class="md:col-span-3 font-display font-semibold text-xl">Branding</div>
+        <div class="md:col-span-7 text-sm" style="color:var(--muted)">Visual identity that carries through your site, socials, and everything else.</div>
+        <div class="md:col-span-1 text-right service-arrow text-[var(--acid)] text-xl">&rarr;</div>
       </div>
-      <div class="card rounded-xl p-8">
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">SEO &amp; Marketing</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--muted)">Built so the right people can actually find you when they search.</p>
+      <div class="service-row grid md:grid-cols-12 gap-4 py-6 items-center sr-left" style="--sr-delay:0.24s">
+        <div class="md:col-span-1 num-tag">05</div>
+        <div class="md:col-span-3 font-display font-semibold text-xl">SEO &amp; Marketing</div>
+        <div class="md:col-span-7 text-sm" style="color:var(--muted)">Built so the right people can actually find you when they search.</div>
+        <div class="md:col-span-1 text-right service-arrow text-[var(--acid)] text-xl">&rarr;</div>
       </div>
-      <div class="card rounded-xl p-8">
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Website Maintenance</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--muted)">Ongoing support so your site stays current, secure, and working.</p>
+      <div class="service-row grid md:grid-cols-12 gap-4 py-6 items-center sr-left" style="--sr-delay:0.3s">
+        <div class="md:col-span-1 num-tag">06</div>
+        <div class="md:col-span-3 font-display font-semibold text-xl">Website Maintenance</div>
+        <div class="md:col-span-7 text-sm" style="color:var(--muted)">Ongoing support so your site stays current, secure, and working.</div>
+        <div class="md:col-span-1 text-right service-arrow text-[var(--acid)] text-xl">&rarr;</div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider max-w-6xl mx-auto"></div>
-
-<!-- SECTION 4: WHY HEARTY KREATION -->
-<section id="about" class="py-24 px-6">
-  <div class="max-w-6xl mx-auto">
-    <div class="mb-14 text-center">
-      <div class="eyebrow mb-4">Why Hearty Kreation</div>
-      <h2 class="font-display font-semibold text-4xl" style="color:var(--ink)">A partner, not just a vendor.</h2>
+<!-- CUSTOM WEB APPS -->
+<section id="web-apps" class="py-24 px-6 border-b border-[var(--line)] relative overflow-hidden">
+  <div class="webapp-glow" aria-hidden="true"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="webapp-panel rounded-2xl p-8 sm:p-14">
+      <div class="grid md:grid-cols-12 gap-10 items-start">
+        <div class="md:col-span-7 sr">
+          <div class="eyebrow eyebrow-pulse mb-4">New / Custom Web Apps</div>
+          <h2 class="font-display font-semibold text-4xl md:text-5xl mb-6 leading-tight">Beyond a website.<br>A system built around you.</h2>
+          <p class="text-base leading-relaxed max-w-xl" style="color:var(--muted)">
+            For clients who need more than a page, we design and build custom web applications, personal operating systems shaped around how you actually work: your workflows, your data, your customers. Think client portals, internal dashboards, booking and management tools, or a fully custom platform built for one specific way of doing business.
+          </p>
+          <a href="#contact" class="btn-primary font-mono font-semibold px-8 py-4 rounded-full inline-block mt-8">Start a Web App Project &rarr;</a>
+        </div>
+        <div class="md:col-span-5 grid gap-4 sr-scale" style="--sr-delay:0.12s">
+          <div class="webapp-feature p-6 rounded-xl">
+            <div class="font-mono text-xs uppercase tracking-wider mb-2 text-[var(--acid)]">01</div>
+            <h3 class="font-display font-semibold text-lg mb-1">Tailored to your workflow</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--muted)">Built around how you already work, not the other way around.</p>
+          </div>
+          <div class="webapp-feature p-6 rounded-xl">
+            <div class="font-mono text-xs uppercase tracking-wider mb-2 text-[var(--acid)]">02</div>
+            <h3 class="font-display font-semibold text-lg mb-1">Your data, your rules</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--muted)">Full ownership of your platform and everything it holds.</p>
+          </div>
+          <div class="webapp-feature p-6 rounded-xl">
+            <div class="font-mono text-xs uppercase tracking-wider mb-2 text-[var(--acid)]">03</div>
+            <h3 class="font-display font-semibold text-lg mb-1">Built to grow with you</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--muted)">A foundation that scales as your business and needs evolve.</p>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="about" class="py-24 px-6 border-b border-[var(--line)] bg-[var(--panel)]">
+  <div class="max-w-7xl mx-auto">
+    <div class="eyebrow eyebrow-pulse mb-4 sr">03 / Why Hearty Kreation</div>
+    <h2 class="font-display font-semibold text-4xl md:text-5xl mb-14 sr" style="--sr-delay:0.08s">A partner,<br>not just a vendor.</h2>
     <div class="grid md:grid-cols-4 gap-8">
-      <div>
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Strategy</h3>
+      <div class="sr" style="--sr-delay:0s">
+        <div class="text-3xl mb-4 text-[var(--acid)] font-display">01</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Strategy</h3>
         <p class="text-sm leading-relaxed" style="color:var(--muted)">We start with what your site actually needs to do, not just how it should look.</p>
       </div>
-      <div>
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Design Quality</h3>
+      <div class="sr" style="--sr-delay:0.1s">
+        <div class="text-3xl mb-4 text-[var(--acid)] font-display">02</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Design Quality</h3>
         <p class="text-sm leading-relaxed" style="color:var(--muted)">Every build is custom, considered, and built to feel premium, not templated.</p>
       </div>
-      <div>
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Personal Partnership</h3>
+      <div class="sr" style="--sr-delay:0.2s">
+        <div class="text-3xl mb-4 text-[var(--acid)] font-display">03</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Personal Partnership</h3>
         <p class="text-sm leading-relaxed" style="color:var(--muted)">You work directly with the person building your site, not a rotating account team.</p>
       </div>
-      <div>
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Long-Term Support</h3>
+      <div class="sr" style="--sr-delay:0.3s">
+        <div class="text-3xl mb-4 text-[var(--acid)] font-display">04</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Long-Term Support</h3>
         <p class="text-sm leading-relaxed" style="color:var(--muted)">We're here after launch, not just until the invoice is paid.</p>
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider max-w-6xl mx-auto"></div>
-
-<!-- SECTION 5: RECENT BUILDS -->
-<section id="builds" class="panel-alt py-24 px-6">
-  <div class="max-w-6xl mx-auto">
-    <div class="mb-14 text-center">
-      <div class="eyebrow mb-4">Recent Builds</div>
-      <h2 class="font-display font-semibold text-4xl" style="color:var(--ink)">Real clients, real digital presences.</h2>
-    </div>
+<!-- RECENT BUILDS -->
+<section id="builds" class="py-24 px-6 border-b border-[var(--line)]">
+  <div class="max-w-7xl mx-auto">
+    <div class="eyebrow eyebrow-pulse mb-4 sr">04 / Recent Builds</div>
+    <h2 class="font-display font-semibold text-4xl md:text-5xl mb-14 sr" style="--sr-delay:0.08s">Real clients,<br>real digital presences.</h2>
 
     <div class="grid md:grid-cols-3 gap-6">
-      <div class="card rounded-xl overflow-hidden">
+      <div class="card rounded-2xl overflow-hidden sr-scale" style="--sr-delay:0s">
         <div class="h-36 bg-white flex items-center justify-center border-b border-[var(--line)]">
           <img src="images/blees-precision-logo.avif" alt="Blees Precision logo" class="max-h-20 max-w-[70%] object-contain">
         </div>
         <div class="p-6">
-          <h3 class="font-display font-semibold mb-3" style="color:var(--ink)">Blees Precision</h3>
-          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Challenge</p>
+          <h3 class="font-display font-semibold mb-4 text-lg">Blees Precision</h3>
+          <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Challenge</p>
           <p class="text-sm mb-3" style="color:var(--muted)">A self-defense studio needed a professional online presence and a simpler way to onboard new clients.</p>
-          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Solution</p>
+          <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Solution</p>
           <p class="text-sm mb-3" style="color:var(--muted)">A custom website paired with a streamlined client onboarding system.</p>
-          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Outcome</p>
+          <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Outcome</p>
           <p class="text-sm" style="color:var(--muted)">A live, professional presence with onboarding that no longer depends on manual back-and-forth.</p>
         </div>
       </div>
 
-      <div class="card rounded-xl overflow-hidden">
+      <div class="card rounded-2xl overflow-hidden sr-scale" style="--sr-delay:0.12s">
         <div class="h-36 bg-white flex items-center justify-center border-b border-[var(--line)]">
           <img src="images/fou-movement-logo.avif" alt="FOU Movement logo" class="max-h-20 max-w-[70%] object-contain">
         </div>
         <div class="p-6">
-          <h3 class="font-display font-semibold mb-3" style="color:var(--ink)">FOU Movement</h3>
-          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Challenge</p>
+          <h3 class="font-display font-semibold mb-4 text-lg">FOU Movement</h3>
+          <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Challenge</p>
           <p class="text-sm mb-3" style="color:var(--muted)">Needed a brand site that matched the energy of the brand, plus a repeatable way to manage content.</p>
-          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Solution</p>
+          <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Solution</p>
           <p class="text-sm mb-3" style="color:var(--muted)">A custom brand site paired with a content workflow system.</p>
-          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Outcome</p>
+          <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Outcome</p>
           <p class="text-sm" style="color:var(--muted)">A cohesive brand presence with content that goes out on a consistent rhythm.</p>
         </div>
       </div>
 
-      <div class="card rounded-xl overflow-hidden">
+      <div class="card rounded-2xl overflow-hidden sr-scale" style="--sr-delay:0.24s">
         <div class="h-36 bg-white flex items-center justify-center border-b border-[var(--line)]">
           <img src="images/paradise-valley-north-logo.png" alt="Paradise Valley North Productions logo" class="max-h-20 max-w-[70%] object-contain">
         </div>
         <div class="p-6">
-          <h3 class="font-display font-semibold mb-3" style="color:var(--ink)">Paradise Valley North Productions</h3>
-          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Challenge</p>
+          <h3 class="font-display font-semibold mb-4 text-lg">Paradise Valley North Productions</h3>
+          <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Challenge</p>
           <p class="text-sm mb-3" style="color:var(--muted)">An existing website no longer reflected the business and needed a full rebuild.</p>
-          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Solution</p>
+          <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Solution</p>
           <p class="text-sm mb-3" style="color:var(--muted)">A ground-up website rebuild paired with a clearer delivery workflow.</p>
-          <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--clay)">Outcome</p>
+          <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Outcome</p>
           <p class="text-sm" style="color:var(--muted)">A modern, working site backed by a delivery process that's easy to repeat.</p>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
-<div class="divider max-w-6xl mx-auto"></div>
-
-<!-- SECTION 6: PROCESS -->
-<section class="py-24 px-6">
-  <div class="max-w-5xl mx-auto">
-    <div class="mb-14 text-center">
-      <div class="eyebrow mb-4">Process</div>
-      <h2 class="font-display font-semibold text-4xl" style="color:var(--ink)">A clear path from first conversation to launch.</h2>
-    </div>
-    <div class="grid md:grid-cols-4 gap-8 text-center">
-      <div>
-        <div class="process-num text-4xl mb-3">01</div>
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Discover</h3>
+<!-- PROCESS -->
+<section class="py-24 px-6 border-b border-[var(--line)] bg-[var(--panel)]">
+  <div class="max-w-7xl mx-auto">
+    <div class="eyebrow eyebrow-pulse mb-4 sr">05 / Process</div>
+    <h2 class="font-display font-semibold text-4xl md:text-5xl mb-14 sr" style="--sr-delay:0.08s">A clear path from first<br>conversation to launch.</h2>
+    <div class="grid md:grid-cols-4 gap-8">
+      <div class="process-step pt-6 sr" style="--sr-delay:0s">
+        <div class="font-display font-semibold text-5xl mb-4">01</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Discover</h3>
         <p class="text-sm leading-relaxed" style="color:var(--muted)">We learn who you are, who you're speaking to, and what the site needs to accomplish.</p>
       </div>
-      <div>
-        <div class="process-num text-4xl mb-3">02</div>
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Design</h3>
+      <div class="process-step pt-6 sr" style="--sr-delay:0.12s">
+        <div class="font-display font-semibold text-5xl mb-4">02</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Design</h3>
         <p class="text-sm leading-relaxed" style="color:var(--muted)">A custom design direction built around your identity and goals, not a generic template.</p>
       </div>
-      <div>
-        <div class="process-num text-4xl mb-3">03</div>
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Build</h3>
+      <div class="process-step pt-6 sr" style="--sr-delay:0.24s">
+        <div class="font-display font-semibold text-5xl mb-4">03</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Build</h3>
         <p class="text-sm leading-relaxed" style="color:var(--muted)">Development, content, and testing, so everything works the way it's supposed to.</p>
       </div>
-      <div>
-        <div class="process-num text-4xl mb-3">04</div>
-        <h3 class="font-display font-semibold text-lg mb-2" style="color:var(--ink)">Launch</h3>
+      <div class="process-step pt-6 sr" style="--sr-delay:0.36s">
+        <div class="font-display font-semibold text-5xl mb-4">04</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Launch</h3>
         <p class="text-sm leading-relaxed" style="color:var(--muted)">Your site goes live, and you own it outright, with support available afterward.</p>
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider max-w-6xl mx-auto"></div>
-
-<!-- SECTION 8: CONTACT -->
-<section id="contact" class="wave-bg py-28 px-6">
+<!-- CONTACT -->
+<section id="contact" class="noise py-28 px-6">
   <div class="max-w-2xl mx-auto">
-    <div class="text-center mb-12">
-      <div class="eyebrow mb-4">Contact</div>
-      <h2 class="font-display font-semibold text-4xl mb-4" style="color:var(--ink)">Ready to build your digital presence?</h2>
+    <div class="text-center mb-12 sr">
+      <div class="eyebrow eyebrow-pulse mb-4">06 / Contact</div>
+      <h2 class="font-display font-semibold text-4xl md:text-5xl mb-4">Ready to build your<br>digital presence?</h2>
       <p style="color:var(--muted)">Tell us about your project, and we'll take it from there.</p>
     </div>
 
-    <form id="contact-form" class="card rounded-xl p-8 sm:p-10 text-left" novalidate>
+    <form id="contact-form" class="card rounded-2xl p-8 sm:p-10 text-left sr-scale" style="--sr-delay:0.1s" novalidate>
       <div class="grid sm:grid-cols-2 gap-5">
         <div>
-          <label for="cf-name" class="block text-sm font-semibold mb-1" style="color:var(--ink)">Name <span style="color:var(--clay)">*</span></label>
-          <input id="cf-name" name="name" type="text" required maxlength="200"
-            class="w-full rounded-md border px-3 py-2 text-sm" style="border-color:var(--line); background:#FFFFFF">
+          <label for="cf-name" class="block text-sm font-semibold mb-1">Name <span style="color:var(--clay)">*</span></label>
+          <input id="cf-name" name="name" type="text" required maxlength="200" class="w-full rounded-lg px-3 py-2.5 text-sm">
         </div>
         <div>
-          <label for="cf-email" class="block text-sm font-semibold mb-1" style="color:var(--ink)">Email <span style="color:var(--clay)">*</span></label>
-          <input id="cf-email" name="email" type="email" required maxlength="320"
-            class="w-full rounded-md border px-3 py-2 text-sm" style="border-color:var(--line); background:#FFFFFF">
+          <label for="cf-email" class="block text-sm font-semibold mb-1">Email <span style="color:var(--clay)">*</span></label>
+          <input id="cf-email" name="email" type="email" required maxlength="320" class="w-full rounded-lg px-3 py-2.5 text-sm">
         </div>
       </div>
-
       <div class="grid sm:grid-cols-2 gap-5 mt-5">
         <div>
-          <label for="cf-org" class="block text-sm font-semibold mb-1" style="color:var(--ink)">Organization</label>
-          <input id="cf-org" name="organization" type="text" maxlength="200"
-            class="w-full rounded-md border px-3 py-2 text-sm" style="border-color:var(--line); background:#FFFFFF">
+          <label for="cf-org" class="block text-sm font-semibold mb-1">Organization</label>
+          <input id="cf-org" name="organization" type="text" maxlength="200" class="w-full rounded-lg px-3 py-2.5 text-sm">
         </div>
         <div>
-          <label for="cf-project-type" class="block text-sm font-semibold mb-1" style="color:var(--ink)">Project Type <span style="color:var(--clay)">*</span></label>
-          <select id="cf-project-type" name="projectType" required
-            class="w-full rounded-md border px-3 py-2 text-sm" style="border-color:var(--line); background:#FFFFFF">
+          <label for="cf-project-type" class="block text-sm font-semibold mb-1">Project Type <span style="color:var(--clay)">*</span></label>
+          <select id="cf-project-type" name="projectType" required class="w-full rounded-lg px-3 py-2.5 text-sm">
             <option value="" disabled selected>Select one</option>
             <option>Website Design</option>
             <option>Website Development</option>
             <option>E-Commerce</option>
             <option>Branding</option>
-            <option>SEO & Marketing</option>
+            <option>SEO &amp; Marketing</option>
             <option>Website Maintenance</option>
+            <option>Custom Web App / Platform</option>
             <option>Other</option>
           </select>
         </div>
       </div>
-
       <div class="mt-5">
-        <label for="cf-message" class="block text-sm font-semibold mb-1" style="color:var(--ink)">Message <span style="color:var(--clay)">*</span></label>
-        <textarea id="cf-message" name="message" rows="5" required minlength="10" maxlength="5000"
-          class="w-full rounded-md border px-3 py-2 text-sm" style="border-color:var(--line); background:#FFFFFF"></textarea>
+        <label for="cf-message" class="block text-sm font-semibold mb-1">Message <span style="color:var(--clay)">*</span></label>
+        <textarea id="cf-message" name="message" rows="5" required minlength="10" maxlength="5000" class="w-full rounded-lg px-3 py-2.5 text-sm"></textarea>
       </div>
 
       <!-- Honeypot: hidden from real visitors, left blank by them; bots that autofill it get silently rejected. -->
@@ -371,35 +764,233 @@
 
       <div id="cf-status" class="mt-5 text-sm hidden" role="status"></div>
 
-      <button type="submit" id="cf-submit" class="btn-primary font-display font-semibold px-8 py-3 rounded-md mt-6 w-full sm:w-auto">
-        Send Message
+      <button type="submit" id="cf-submit" class="btn-primary font-mono font-semibold px-8 py-4 rounded-full mt-6 w-full sm:w-auto">
+        Send Message &rarr;
       </button>
     </form>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="border-t border-[var(--line)] py-10 px-6">
-  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style="color:var(--muted)">
-    <span>© 2026 Hearty Kreation. All rights reserved.</span>
-    <div class="flex gap-6">
-      <a href="/privacy.html" class="hover:text-[var(--ink)]">Privacy Policy</a>
-      <a href="/terms.html" class="hover:text-[var(--ink)]">Terms</a>
-      <a href="mailto:info@heartykreation.com" class="hover:text-[var(--ink)]">info@heartykreation.com</a>
+<footer class="border-t border-[var(--line)] pt-10 pb-14 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+    <span class="text-sm font-mono" style="color:var(--muted)">&copy; 2026 Hearty Kreation. All rights reserved.</span>
+
+    <div class="flex items-center gap-5">
+      <a href="https://facebook.com/heartykreation" target="_blank" rel="noopener noreferrer" aria-label="Hearty Kreation on Facebook" class="social-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12.06C22 6.53 17.52 2.04 12 2.04S2 6.53 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94Z"/></svg>
+      </a>
+      <a href="https://instagram.com/heartykreation" target="_blank" rel="noopener noreferrer" aria-label="Hearty Kreation on Instagram" class="social-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.97.24 2.43.4a4.9 4.9 0 0 1 1.77 1.15 4.9 4.9 0 0 1 1.15 1.77c.16.46.35 1.26.4 2.43.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.97-.4 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.46.16-1.26.35-2.43.4-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.97-.24-2.43-.4a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.16-.46-.35-1.26-.4-2.43C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.24-1.97.4-2.43a4.9 4.9 0 0 1 1.15-1.77A4.9 4.9 0 0 1 5.55 1.8c.46-.16 1.26-.35 2.43-.4C9.25 1.34 9.63 1.33 12 1.33Zm0 1.84c-3.15 0-3.5.01-4.74.07-.96.04-1.48.2-1.83.34-.46.18-.79.4-1.14.75-.35.35-.57.68-.75 1.14-.14.35-.3.87-.34 1.83-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.04.96.2 1.48.34 1.83.18.46.4.79.75 1.14.35.35.68.57 1.14.75.35.14.87.3 1.83.34 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.96-.04 1.48-.2 1.83-.34.46-.18.79-.4 1.14-.75.35-.35.57-.68.75-1.14.14-.35.3-.87.34-1.83.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.04-.96-.2-1.48-.34-1.83a3.06 3.06 0 0 0-.75-1.14 3.06 3.06 0 0 0-1.14-.75c-.35-.14-.87-.3-1.83-.34-1.24-.06-1.59-.07-4.74-.07Zm0 3.13a4.87 4.87 0 1 1 0 9.74 4.87 4.87 0 0 1 0-9.74Zm0 1.84a3.03 3.03 0 1 0 0 6.06 3.03 3.03 0 0 0 0-6.06Zm5.06-2.02a1.14 1.14 0 1 1 0 2.28 1.14 1.14 0 0 1 0-2.28Z"/></svg>
+      </a>
+      <span aria-label="Hearty Kreation on YouTube, coming soon" class="social-icon social-icon-disabled" title="Coming soon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.51 3.5 12 3.5 12 3.5s-7.51 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.49 20.5 12 20.5 12 20.5s7.51 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81ZM9.6 15.6V8.4l6.42 3.6-6.42 3.6Z"/></svg>
+        <span class="social-icon-badge font-mono">Soon</span>
+      </span>
+    </div>
+
+    <div class="footer-links flex gap-6 text-sm font-mono" style="color:var(--muted)">
+      <a href="/privacy.html" class="hover:text-[var(--acid)]">Privacy Policy</a>
+      <a href="/terms.html" class="hover:text-[var(--acid)]">Terms</a>
+      <a href="mailto:info@heartykreation.com" class="hover:text-[var(--acid)]">info@heartykreation.com</a>
     </div>
   </div>
 </footer>
 
 <script>
 (function () {
+  var bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  function updateProgress() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+})();
+</script>
+
+<script>
+(function () {
+  var targets = document.querySelectorAll('.sr, .sr-scale, .sr-left');
+  if (!targets.length) return;
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) {
+    targets.forEach(function (el) { el.classList.add('sr-in'); });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('sr-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+  targets.forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function () {
+  var canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
+  var ctx = canvas.getContext('2d');
+  var section = canvas.closest('section');
+  var particles = [];
+  var pointer = { x: null, y: null };
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var width, height;
+
+  var glow = document.getElementById('hero-cursor-glow');
+  var orbA = document.getElementById('hero-orb-a');
+  var orbB = document.getElementById('hero-orb-b');
+  var grid = document.getElementById('hero-grid');
+  var glowTarget = { x: 0, y: 0 };
+  var glowCurrent = { x: 0, y: 0 };
+
+  function resize() {
+    width = section.offsetWidth;
+    height = section.offsetHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var count = Math.max(24, Math.min(60, Math.floor((width * height) / 22000)));
+    particles = [];
+    for (var i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        r: Math.random() * 1.6 + 0.6
+      });
+    }
+  }
+
+  function step() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      if (pointer.x !== null) {
+        var dx = p.x - pointer.x;
+        var dy = p.y - pointer.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 140) {
+          var force = (140 - dist) / 140;
+          p.x += (dx / (dist || 1)) * force * 1.2;
+          p.y += (dy / (dist || 1)) * force * 1.2;
+        }
+      }
+    }
+
+    for (var a = 0; a < particles.length; a++) {
+      for (var b = a + 1; b < particles.length; b++) {
+        var pa = particles[a], pb = particles[b];
+        var ddx = pa.x - pb.x, ddy = pa.y - pb.y;
+        var d = Math.sqrt(ddx * ddx + ddy * ddy);
+        if (d < 130) {
+          ctx.strokeStyle = 'rgba(216,255,62,' + ((1 - d / 130) * 0.22) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(pa.x, pa.y);
+          ctx.lineTo(pb.x, pb.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    for (var j = 0; j < particles.length; j++) {
+      var pt = particles[j];
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(244,241,234,0.6)';
+      ctx.fill();
+    }
+
+    if (glow) {
+      glowCurrent.x += (glowTarget.x - glowCurrent.x) * 0.12;
+      glowCurrent.y += (glowTarget.y - glowCurrent.y) * 0.12;
+      glow.style.transform = 'translate(' + (glowCurrent.x - 240) + 'px, ' + (glowCurrent.y - 240) + 'px)';
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  function setPointer(x, y) {
+    pointer.x = x;
+    pointer.y = y;
+    glowTarget.x = x;
+    glowTarget.y = y;
+    if (glow) glow.classList.add('is-active');
+
+    var nx = (x / width) - 0.5;
+    var ny = (y / height) - 0.5;
+    if (orbA) {
+      orbA.style.setProperty('--px', (nx * -30) + 'px');
+      orbA.style.setProperty('--py', (ny * -20) + 'px');
+    }
+    if (orbB) {
+      orbB.style.setProperty('--px', (nx * 24) + 'px');
+      orbB.style.setProperty('--py', (ny * 18) + 'px');
+    }
+    if (grid) {
+      grid.style.transform = 'translate(' + (nx * -14) + 'px, ' + (ny * -14) + 'px)';
+    }
+  }
+
+  function clearPointer() {
+    pointer.x = null;
+    pointer.y = null;
+    if (glow) glow.classList.remove('is-active');
+    if (orbA) { orbA.style.setProperty('--px', '0px'); orbA.style.setProperty('--py', '0px'); }
+    if (orbB) { orbB.style.setProperty('--px', '0px'); orbB.style.setProperty('--py', '0px'); }
+    if (grid) grid.style.transform = 'translate(0px, 0px)';
+  }
+
+  section.addEventListener('mousemove', function (e) {
+    var rect = section.getBoundingClientRect();
+    setPointer(e.clientX - rect.left, e.clientY - rect.top);
+  });
+  section.addEventListener('mouseleave', clearPointer);
+
+  window.addEventListener('resize', resize);
+  resize();
+  requestAnimationFrame(step);
+})();
+</script>
+
+<script>
+(function () {
   var form = document.getElementById('contact-form');
   var status = document.getElementById('cf-status');
   var submitBtn = document.getElementById('cf-submit');
+  if (!form) return;
 
   function showStatus(message, isError) {
     status.textContent = message;
     status.classList.remove('hidden');
-    status.style.color = isError ? 'var(--clay)' : 'var(--ocean)';
+    status.style.color = isError ? 'var(--clay)' : 'var(--acid)';
   }
 
   form.addEventListener('submit', function (e) {
@@ -436,17 +1027,17 @@
       .then(function (result) {
         if (result.ok && result.body.ok) {
           form.reset();
-          showStatus("Thanks — your message is on its way. We'll be in touch soon.", false);
+          showStatus("Thanks, your message is on its way. We'll be in touch soon.", false);
         } else {
           showStatus((result.body && result.body.error) || 'Something went wrong. Please try again.', true);
         }
       })
       .catch(function () {
-        showStatus('Network error — please try again in a moment.', true);
+        showStatus('Network error, please try again in a moment.', true);
       })
       .finally(function () {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Message';
+        submitBtn.textContent = 'Send Message →';
       });
   });
 })();
