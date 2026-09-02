@@ -6,6 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hearty Kreation: Professional Digital Presence for Businesses, Organizations & Individuals</title>
 <meta name="description" content="Hearty Kreation creates professional digital presences through custom website design, development, custom web applications, and digital presence solutions for businesses, organizations, and individuals.">
+<link rel="canonical" href="https://heartykreation.com/">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hearty Kreation">
+<meta property="og:title" content="Hearty Kreation: Build a presence that doesn't blend in.">
+<meta property="og:description" content="Custom websites and custom web applications designed around your identity, audience, and goals. Businesses, organizations, and individuals.">
+<meta property="og:url" content="https://heartykreation.com/">
+<meta property="og:image" content="https://heartykreation.com/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hearty Kreation: Build a presence that doesn't blend in.">
+<meta name="twitter:description" content="Custom websites and custom web applications designed around your identity, audience, and goals.">
+<meta name="twitter:image" content="https://heartykreation.com/images/og-image.png">
+<script>document.documentElement.classList.add('js');</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -30,6 +45,55 @@
   }
   .font-display { font-family: 'Fraunces', serif; }
   .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--acid);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* MOBILE MENU */
+  .menu-btn {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--panel);
+  }
+  .menu-btn span {
+    display: block;
+    height: 1.5px;
+    background: var(--ink);
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .menu-open .menu-btn span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .menu-open .menu-btn span:nth-child(2) { opacity: 0; }
+  .menu-open .menu-btn span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    border-top: 1px solid var(--line);
+    background: rgba(11,11,12,0.96);
+  }
+  .menu-open .mobile-menu { display: block; }
+  @media (min-width: 768px) {
+    .menu-btn, .mobile-menu, .menu-open .mobile-menu { display: none; }
+  }
+  .mobile-menu a {
+    display: block;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .mobile-menu a:hover { color: var(--acid); }
+  .mobile-menu a:last-child { border-bottom: 0; }
 
   .eyebrow {
     font-family: 'JetBrains Mono', monospace;
@@ -104,6 +168,194 @@
     line-height: 0.95;
     letter-spacing: -0.02em;
   }
+  @media (min-width: 1024px) {
+    .hero-title { font-size: clamp(3.5rem, 5.6vw, 5.75rem); }
+  }
+
+  /* HERO OS MOCK */
+  .os-stage {
+    height: 520px;
+    perspective: 1200px;
+  }
+  .os-card {
+    position: absolute;
+    --px: 0px;
+    --py: 0px;
+    background: linear-gradient(160deg, rgba(23,23,26,0.92), rgba(13,13,15,0.92));
+    border: 1px solid rgba(216,255,62,0.16);
+    border-radius: 18px;
+    box-shadow:
+      0 30px 60px -30px rgba(0,0,0,0.8),
+      0 0 0 1px rgba(255,255,255,0.02) inset,
+      0 0 80px -40px rgba(216,255,62,0.35);
+    backdrop-filter: blur(10px);
+    color: var(--ink);
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    will-change: transform;
+  }
+  .os-card-main {
+    width: 340px;
+    right: 24px;
+    top: 0;
+    padding: 20px 22px 22px;
+    animation: os-float-a 9s ease-in-out infinite;
+  }
+  .os-card-side {
+    width: 220px;
+    left: 0;
+    bottom: 24px;
+    padding: 18px 20px;
+    animation: os-float-b 11s ease-in-out infinite;
+  }
+  .os-card-note {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    right: 0;
+    bottom: 0;
+    padding: 14px 18px;
+    border-color: rgba(216,255,62,0.35);
+    animation: os-float-c 8s ease-in-out infinite;
+  }
+  @keyframes os-float-a {
+    0%, 100% { transform: translate(var(--px), var(--py)) rotate(-1deg); }
+    50% { transform: translate(var(--px), calc(var(--py) - 10px)) rotate(-1deg); }
+  }
+  @keyframes os-float-b {
+    0%, 100% { transform: translate(var(--px), var(--py)) rotate(2deg); }
+    50% { transform: translate(var(--px), calc(var(--py) + 12px)) rotate(2deg); }
+  }
+  @keyframes os-float-c {
+    0%, 100% { transform: translate(var(--px), var(--py)); }
+    50% { transform: translate(calc(var(--px) - 8px), calc(var(--py) - 8px)); }
+  }
+
+  .os-card-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+  .os-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 12px rgba(216,255,62,0.8); }
+  .os-pill {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #0B0B0C;
+    background: var(--acid);
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+  .os-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin-bottom: 6px;
+  }
+  .os-metric {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.35rem;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .os-metric-value { color: var(--acid); font-size: 1rem; font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+  .os-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 64px;
+    margin-bottom: 18px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  .os-bars i {
+    flex: 1;
+    display: block;
+    height: var(--h);
+    border-radius: 4px 4px 2px 2px;
+    background: linear-gradient(180deg, var(--acid), rgba(216,255,62,0.25));
+    opacity: 0.85;
+    transform-origin: bottom;
+    animation: os-bar-in 1.2s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  .os-bars i:nth-child(1) { animation-delay: 0.8s; }
+  .os-bars i:nth-child(2) { animation-delay: 0.9s; }
+  .os-bars i:nth-child(3) { animation-delay: 1.0s; }
+  .os-bars i:nth-child(4) { animation-delay: 1.1s; }
+  .os-bars i:nth-child(5) { animation-delay: 1.2s; }
+  .os-bars i:nth-child(6) { animation-delay: 1.3s; }
+  .os-bars i:nth-child(7) { animation-delay: 1.4s; opacity: 1; }
+  @keyframes os-bar-in { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+  .os-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+  .os-progress {
+    flex: 0 0 120px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .os-progress b {
+    display: block;
+    height: 100%;
+    width: var(--w);
+    border-radius: inherit;
+    background: var(--acid);
+    animation: os-prog 1.4s cubic-bezier(0.16,1,0.3,1) 1.2s both;
+  }
+  @keyframes os-prog { from { width: 0; } }
+
+  .os-task {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: var(--ink);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .os-task:last-child { border-bottom: 0; }
+  .os-check {
+    width: 14px; height: 14px;
+    border-radius: 4px;
+    border: 1px solid var(--muted-2);
+    flex: none;
+  }
+  .os-check.on {
+    background: var(--acid);
+    border-color: var(--acid);
+    box-shadow: 0 0 10px rgba(216,255,62,0.6);
+  }
+  .os-note-icon {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--acid);
+    color: #0B0B0C;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex: none;
+  }
+  .os-note-title { font-size: 0.82rem; font-weight: 600; }
+  .os-note-sub { font-size: 0.64rem; color: var(--muted-2); margin-top: 2px; }
 
   .num-tag {
     font-family: 'JetBrains Mono', monospace;
@@ -242,30 +494,16 @@
     to { opacity: 1; transform: translateY(0); filter: blur(0); }
   }
 
-  /* SCROLL-REVEAL SYSTEM */
-  .sr {
-    opacity: 0;
-    transform: translateY(28px);
+  /* SCROLL-REVEAL SYSTEM
+     Hidden states only apply when JS is running (html.js), so crawlers,
+     no-JS visitors, and any script failure still see full content. */
+  .sr, .sr-scale, .sr-left {
     transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
     transition-delay: var(--sr-delay, 0s);
   }
-  .sr.sr-in { opacity: 1; transform: translateY(0); }
-
-  .sr-scale {
-    opacity: 0;
-    transform: scale(0.94) translateY(16px);
-    transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
-    transition-delay: var(--sr-delay, 0s);
-  }
-  .sr-scale.sr-in { opacity: 1; transform: scale(1) translateY(0); }
-
-  .sr-left {
-    opacity: 0;
-    transform: translateX(-24px);
-    transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
-    transition-delay: var(--sr-delay, 0s);
-  }
-  .sr-left.sr-in { opacity: 1; transform: translateX(0); }
+  html.js .sr:not(.sr-in) { opacity: 0; transform: translateY(28px); }
+  html.js .sr-scale:not(.sr-in) { opacity: 0; transform: scale(0.94) translateY(16px); }
+  html.js .sr-left:not(.sr-in) { opacity: 0; transform: translateX(-24px); }
 
   /* subtle continuous drift on section eyebrows for a "live system" feel */
   .eyebrow-pulse::before {
@@ -300,6 +538,18 @@
     transition-delay: calc(var(--sr-delay, 0s) + 0.15s);
   }
   .sr-in.process-step::before { width: 100%; }
+
+  /* footer wordmark */
+  .wordmark {
+    font-size: clamp(3.2rem, 11vw, 9rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    transition: color 0.3s ease;
+  }
+  .wordmark:hover { color: var(--acid); }
+  .wordmark-link { color: var(--muted); transition: color 0.2s ease; }
+  .wordmark-link:hover { color: var(--acid); }
 
   /* footer text-link underline sweep */
   footer .footer-links a {
@@ -354,6 +604,86 @@
     white-space: nowrap;
   }
 
+  /* WHY: stat tiles */
+  .stat-tile {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 26px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .stat-tile::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(216,255,62,0.16), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .stat-tile:hover { border-color: var(--acid); transform: translateY(-4px); }
+  .stat-tile:hover::before { opacity: 1; }
+  .stat-value {
+    font-weight: 600;
+    font-size: 2.6rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--acid);
+    margin-bottom: 18px;
+  }
+
+  /* RECENT BUILDS */
+  .build-card { position: relative; }
+  .build-index {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    z-index: 2;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    color: #0B0B0C;
+    background: var(--acid);
+    padding: 4px 9px;
+    border-radius: 999px;
+  }
+  .logo-well {
+    height: 176px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(ellipse 80% 70% at 50% 40%, #FFFFFF 0%, #F4F1EA 60%, #E8E3D6 100%);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .logo-well::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(11,11,12,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(11,11,12,0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, black 100%);
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, black 100%);
+    pointer-events: none;
+  }
+  .logo-well img {
+    max-height: 84px;
+    max-width: 68%;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .build-card:hover .logo-well img { transform: scale(1.06); }
+
   /* CUSTOM WEB APPS section */
   .webapp-glow {
     position: absolute;
@@ -404,7 +734,7 @@
   @media (prefers-reduced-motion: reduce) {
     .stroke-text { animation: none; }
     .webapp-glow { animation: none !important; }
-    .hero-grid, .hero-orb, .reveal, .eyebrow-pulse::before { animation: none !important; }
+    .hero-grid, .hero-orb, .reveal, .eyebrow-pulse::before, .os-card, .os-bars i, .os-progress b { animation: none !important; }
     .reveal { opacity: 1; filter: none; transform: none; }
     .hero-cursor-glow { display: none !important; }
     .sr, .sr-scale, .sr-left { opacity: 1 !important; transform: none !important; transition: none !important; }
@@ -416,7 +746,7 @@
 <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-[var(--acid)] z-[70]" style="width:0%"></div>
 
 <!-- NAV -->
-<nav class="fixed top-0 w-full z-50 backdrop-blur bg-[#0B0B0C]/85 border-b border-[var(--line)]">
+<nav id="site-nav" class="fixed top-0 w-full z-50 backdrop-blur bg-[#0B0B0C]/85 border-b border-[var(--line)]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
     <a href="/" class="font-display font-semibold text-base sm:text-lg tracking-tight whitespace-nowrap flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-[var(--acid)]"></span>
@@ -430,7 +760,20 @@
       <a href="#about" class="hover:text-[var(--acid)] transition">About</a>
       <a href="#contact" class="hover:text-[var(--acid)] transition">Contact</a>
     </div>
-    <a href="#contact" class="btn-primary font-mono font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 rounded-full whitespace-nowrap">Start a Project &rarr;</a>
+    <div class="flex items-center gap-2">
+      <a href="#contact" class="btn-primary font-mono font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 rounded-full whitespace-nowrap"><span class="hidden sm:inline">Start a Project &rarr;</span><span class="sm:hidden">Start &rarr;</span></a>
+      <button type="button" id="menu-toggle" class="menu-btn md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="mobile-menu md:hidden px-4 sm:px-6 pb-2">
+    <a href="/">Home</a>
+    <a href="#services">Services</a>
+    <a href="#web-apps">Web Apps</a>
+    <a href="#builds">Builds</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
   </div>
 </nav>
 
@@ -441,20 +784,63 @@
   <div class="hero-grid" id="hero-grid" aria-hidden="true"></div>
   <div class="hero-orb hero-orb-a" id="hero-orb-a" aria-hidden="true"></div>
   <div class="hero-orb hero-orb-b" id="hero-orb-b" aria-hidden="true"></div>
-  <div class="max-w-7xl mx-auto relative z-10">
-    <div class="eyebrow mb-6 reveal" style="animation-delay:0.05s">// Digital Presence Studio</div>
-    <h1 class="font-display font-semibold hero-title mb-8">
-      <span class="reveal block" style="animation-delay:0.15s">Build a</span>
-      <span class="reveal block" style="animation-delay:0.28s"><span class="italic">presence</span> that</span>
-      <span class="reveal block" style="animation-delay:0.41s"><span class="stroke-text">doesn&#8217;t blend in.</span></span>
-    </h1>
-    <div class="grid md:grid-cols-2 gap-8 items-end reveal" style="animation-delay:0.56s">
-      <p class="text-lg max-w-md" style="color:var(--muted)">
-        Custom websites designed around your identity, audience, and goals, built to be seen, not scrolled past.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 md:justify-end">
-        <a href="#contact" class="btn-primary font-mono font-semibold px-8 py-4 rounded-full text-center">Start Your Project</a>
-        <a href="#builds" class="btn-outline font-mono font-semibold px-8 py-4 rounded-full text-center">View Recent Builds</a>
+  <div class="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-12 gap-12 items-center">
+    <div class="lg:col-span-7">
+      <div class="eyebrow mb-6 reveal" style="animation-delay:0.05s">// Digital Presence Studio</div>
+      <h1 class="font-display font-semibold hero-title mb-8">
+        <span class="reveal block" style="animation-delay:0.15s">Build a</span>
+        <span class="reveal block" style="animation-delay:0.28s"><span class="italic">presence</span> that</span>
+        <span class="reveal block" style="animation-delay:0.41s"><span class="stroke-text">doesn&#8217;t blend in.</span></span>
+      </h1>
+      <div class="reveal" style="animation-delay:0.56s">
+        <p class="text-lg max-w-md mb-8" style="color:var(--muted)">
+          Custom websites and custom web apps designed around your identity, audience, and goals, built to be seen, not scrolled past.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#contact" class="btn-primary font-mono font-semibold px-8 py-4 rounded-full text-center">Start Your Project</a>
+          <a href="#builds" class="btn-outline font-mono font-semibold px-8 py-4 rounded-full text-center">View Recent Builds</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal operating system mock: decorative, illustrative values only -->
+    <div class="hidden lg:block lg:col-span-5 relative os-stage reveal" style="animation-delay:0.5s" aria-hidden="true">
+      <div class="os-card os-card-main" data-depth="18">
+        <div class="os-card-head">
+          <span class="os-dot"></span>
+          <span class="font-mono">yourbusiness.os</span>
+          <span class="os-pill">Live</span>
+        </div>
+        <div class="os-label">This week</div>
+        <div class="os-metric">Bookings <span class="os-metric-value">+32%</span></div>
+        <div class="os-bars">
+          <i style="--h:38%"></i><i style="--h:56%"></i><i style="--h:44%"></i><i style="--h:70%"></i>
+          <i style="--h:62%"></i><i style="--h:88%"></i><i style="--h:100%"></i>
+        </div>
+        <div class="os-row">
+          <span>Client portal</span><span class="os-progress"><b style="--w:82%"></b></span>
+        </div>
+        <div class="os-row">
+          <span>Onboarding</span><span class="os-progress"><b style="--w:64%"></b></span>
+        </div>
+        <div class="os-row">
+          <span>Content queue</span><span class="os-progress"><b style="--w:91%"></b></span>
+        </div>
+      </div>
+
+      <div class="os-card os-card-side" data-depth="34">
+        <div class="os-label">Next up</div>
+        <div class="os-task"><span class="os-check"></span>Send proposal</div>
+        <div class="os-task"><span class="os-check on"></span>Approve design</div>
+        <div class="os-task"><span class="os-check"></span>Publish update</div>
+      </div>
+
+      <div class="os-card os-card-note" data-depth="50">
+        <div class="os-note-icon">&#10003;</div>
+        <div>
+          <div class="os-note-title">New client onboarded</div>
+          <div class="os-note-sub font-mono">no manual back-and-forth</div>
+        </div>
       </div>
     </div>
   </div>
@@ -599,26 +985,33 @@
 <!-- WHY -->
 <section id="about" class="py-24 px-6 border-b border-[var(--line)] bg-[var(--panel)]">
   <div class="max-w-7xl mx-auto">
-    <div class="eyebrow eyebrow-pulse mb-4 sr">03 / Why Hearty Kreation</div>
-    <h2 class="font-display font-semibold text-4xl md:text-5xl mb-14 sr" style="--sr-delay:0.08s">A partner,<br>not just a vendor.</h2>
-    <div class="grid md:grid-cols-4 gap-8">
-      <div class="sr" style="--sr-delay:0s">
-        <div class="text-3xl mb-4 text-[var(--acid)] font-display">01</div>
-        <h3 class="font-display font-semibold text-lg mb-2">Strategy</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--muted)">We start with what your site actually needs to do, not just how it should look.</p>
+    <div class="grid lg:grid-cols-12 gap-10 mb-14 items-end">
+      <div class="lg:col-span-7">
+        <div class="eyebrow eyebrow-pulse mb-4 sr">03 / Why Hearty Kreation</div>
+        <h2 class="font-display font-semibold text-4xl md:text-5xl sr" style="--sr-delay:0.08s">A partner,<br>not just a vendor.</h2>
       </div>
-      <div class="sr" style="--sr-delay:0.1s">
-        <div class="text-3xl mb-4 text-[var(--acid)] font-display">02</div>
-        <h3 class="font-display font-semibold text-lg mb-2">Design Quality</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--muted)">Every build is custom, considered, and built to feel premium, not templated.</p>
-      </div>
-      <div class="sr" style="--sr-delay:0.2s">
-        <div class="text-3xl mb-4 text-[var(--acid)] font-display">03</div>
+      <p class="lg:col-span-5 text-base leading-relaxed sr" style="--sr-delay:0.16s; color:var(--muted)">
+        No account managers, no templates, no disappearing after launch. You work with the person who designs and builds your site, and you own the result outright.
+      </p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="stat-tile sr-scale" style="--sr-delay:0s">
+        <div class="stat-value font-display">1:1</div>
         <h3 class="font-display font-semibold text-lg mb-2">Personal Partnership</h3>
         <p class="text-sm leading-relaxed" style="color:var(--muted)">You work directly with the person building your site, not a rotating account team.</p>
       </div>
-      <div class="sr" style="--sr-delay:0.3s">
-        <div class="text-3xl mb-4 text-[var(--acid)] font-display">04</div>
+      <div class="stat-tile sr-scale" style="--sr-delay:0.1s">
+        <div class="stat-value font-display">100%</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Yours Outright</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">Every build is custom, considered, and fully owned by you the day it launches.</p>
+      </div>
+      <div class="stat-tile sr-scale" style="--sr-delay:0.2s">
+        <div class="stat-value font-display">Day 1</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Strategy First</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted)">We start with what your site actually needs to do, not just how it should look.</p>
+      </div>
+      <div class="stat-tile sr-scale" style="--sr-delay:0.3s">
+        <div class="stat-value font-display">Post-launch</div>
         <h3 class="font-display font-semibold text-lg mb-2">Long-Term Support</h3>
         <p class="text-sm leading-relaxed" style="color:var(--muted)">We're here after launch, not just until the invoice is paid.</p>
       </div>
@@ -633,12 +1026,14 @@
     <h2 class="font-display font-semibold text-4xl md:text-5xl mb-14 sr" style="--sr-delay:0.08s">Real clients,<br>real digital presences.</h2>
 
     <div class="grid md:grid-cols-3 gap-6">
-      <div class="card rounded-2xl overflow-hidden sr-scale" style="--sr-delay:0s">
-        <div class="h-36 bg-white flex items-center justify-center border-b border-[var(--line)]">
-          <img src="images/blees-precision-logo.avif" alt="Blees Precision logo" class="max-h-20 max-w-[70%] object-contain">
+      <div class="card build-card rounded-3xl overflow-hidden sr-scale" style="--sr-delay:0s">
+        <div class="build-index font-mono">01</div>
+        <div class="logo-well">
+          <img src="images/blees-precision-logo.avif" alt="Blees Precision logo">
         </div>
-        <div class="p-6">
-          <h3 class="font-display font-semibold mb-4 text-lg">Blees Precision</h3>
+        <div class="p-7">
+          <div class="font-mono text-[0.62rem] uppercase tracking-[0.14em] mb-2" style="color:var(--muted-2)">Case study</div>
+          <h3 class="font-display font-semibold mb-5 text-2xl">Blees Precision</h3>
           <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Challenge</p>
           <p class="text-sm mb-3" style="color:var(--muted)">A self-defense studio needed a professional online presence and a simpler way to onboard new clients.</p>
           <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Solution</p>
@@ -648,12 +1043,14 @@
         </div>
       </div>
 
-      <div class="card rounded-2xl overflow-hidden sr-scale" style="--sr-delay:0.12s">
-        <div class="h-36 bg-white flex items-center justify-center border-b border-[var(--line)]">
-          <img src="images/fou-movement-logo.avif" alt="FOU Movement logo" class="max-h-20 max-w-[70%] object-contain">
+      <div class="card build-card rounded-3xl overflow-hidden sr-scale" style="--sr-delay:0.12s">
+        <div class="build-index font-mono">02</div>
+        <div class="logo-well">
+          <img src="images/fou-movement-logo.avif" alt="FOU Movement logo">
         </div>
-        <div class="p-6">
-          <h3 class="font-display font-semibold mb-4 text-lg">FOU Movement</h3>
+        <div class="p-7">
+          <div class="font-mono text-[0.62rem] uppercase tracking-[0.14em] mb-2" style="color:var(--muted-2)">Case study</div>
+          <h3 class="font-display font-semibold mb-5 text-2xl">FOU Movement</h3>
           <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Challenge</p>
           <p class="text-sm mb-3" style="color:var(--muted)">Needed a brand site that matched the energy of the brand, plus a repeatable way to manage content.</p>
           <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Solution</p>
@@ -663,12 +1060,14 @@
         </div>
       </div>
 
-      <div class="card rounded-2xl overflow-hidden sr-scale" style="--sr-delay:0.24s">
-        <div class="h-36 bg-white flex items-center justify-center border-b border-[var(--line)]">
-          <img src="images/paradise-valley-north-logo.png" alt="Paradise Valley North Productions logo" class="max-h-20 max-w-[70%] object-contain">
+      <div class="card build-card rounded-3xl overflow-hidden sr-scale" style="--sr-delay:0.24s">
+        <div class="build-index font-mono">03</div>
+        <div class="logo-well">
+          <img src="images/paradise-valley-north-logo.png" alt="Paradise Valley North Productions logo">
         </div>
-        <div class="p-6">
-          <h3 class="font-display font-semibold mb-4 text-lg">Paradise Valley North Productions</h3>
+        <div class="p-7">
+          <div class="font-mono text-[0.62rem] uppercase tracking-[0.14em] mb-2" style="color:var(--muted-2)">Case study</div>
+          <h3 class="font-display font-semibold mb-5 text-2xl">Paradise Valley North Productions</h3>
           <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Challenge</p>
           <p class="text-sm mb-3" style="color:var(--muted)">An existing website no longer reflected the business and needed a full rebuild.</p>
           <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Solution</p>
@@ -772,8 +1171,15 @@
 </section>
 
 <!-- FOOTER -->
-<footer class="border-t border-[var(--line)] pt-10 pb-14 px-6">
-  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+<footer class="border-t border-[var(--line)] pt-20 pb-14 px-6 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8 sr">
+    <div>
+      <div class="eyebrow eyebrow-pulse mb-5">Ready when you are</div>
+      <a href="#contact" class="wordmark font-display font-semibold block">Let&#8217;s build.</a>
+    </div>
+    <a href="mailto:info@heartykreation.com" class="wordmark-link font-mono text-sm md:text-base md:mb-4">info@heartykreation.com &rarr;</a>
+  </div>
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-[var(--line)]">
     <span class="text-sm font-mono" style="color:var(--muted)">&copy; 2026 Hearty Kreation. All rights reserved.</span>
 
     <div class="flex items-center gap-5">
@@ -796,6 +1202,30 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function () {
+  var nav = document.getElementById('site-nav');
+  var btn = document.getElementById('menu-toggle');
+  var menu = document.getElementById('mobile-menu');
+  if (!nav || !btn || !menu) return;
+
+  function setOpen(open) {
+    nav.classList.toggle('menu-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  btn.addEventListener('click', function () {
+    setOpen(!nav.classList.contains('menu-open'));
+  });
+  menu.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') setOpen(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') setOpen(false);
+  });
+})();
+</script>
 
 <script>
 (function () {
@@ -824,16 +1254,50 @@
     return;
   }
 
+  var pending = Array.prototype.slice.call(targets);
+
+  function reveal(el) {
+    el.classList.add('sr-in');
+    var i = pending.indexOf(el);
+    if (i > -1) pending.splice(i, 1);
+  }
+
   var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
-        entry.target.classList.add('sr-in');
+        reveal(entry.target);
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
 
-  targets.forEach(function (el) { observer.observe(el); });
+  pending.forEach(function (el) { observer.observe(el); });
+
+  // Fallback: a plain geometry check that does not depend on the observer
+  // firing. Reveals anything already within (or above) the viewport.
+  var ticking = false;
+  function sweep() {
+    ticking = false;
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    for (var i = pending.length - 1; i >= 0; i--) {
+      var rect = pending[i].getBoundingClientRect();
+      if (rect.top < vh - 40 && rect.bottom > 0) reveal(pending[i]);
+    }
+  }
+  function scheduleSweep() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(sweep);
+  }
+
+  window.addEventListener('scroll', scheduleSweep, { passive: true });
+  window.addEventListener('resize', scheduleSweep);
+  window.addEventListener('load', scheduleSweep);
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) scheduleSweep();
+  });
+  setTimeout(scheduleSweep, 300);
+  setTimeout(scheduleSweep, 1500);
 })();
 </script>
 
@@ -856,6 +1320,7 @@
   var orbA = document.getElementById('hero-orb-a');
   var orbB = document.getElementById('hero-orb-b');
   var grid = document.getElementById('hero-grid');
+  var osCards = Array.prototype.slice.call(section.querySelectorAll('.os-card[data-depth]'));
   var glowTarget = { x: 0, y: 0 };
   var glowCurrent = { x: 0, y: 0 };
 
@@ -957,6 +1422,11 @@
     if (grid) {
       grid.style.transform = 'translate(' + (nx * -14) + 'px, ' + (ny * -14) + 'px)';
     }
+    for (var c = 0; c < osCards.length; c++) {
+      var depth = parseFloat(osCards[c].getAttribute('data-depth')) || 20;
+      osCards[c].style.setProperty('--px', (nx * -depth) + 'px');
+      osCards[c].style.setProperty('--py', (ny * -depth * 0.7) + 'px');
+    }
   }
 
   function clearPointer() {
@@ -966,6 +1436,10 @@
     if (orbA) { orbA.style.setProperty('--px', '0px'); orbA.style.setProperty('--py', '0px'); }
     if (orbB) { orbB.style.setProperty('--px', '0px'); orbB.style.setProperty('--py', '0px'); }
     if (grid) grid.style.transform = 'translate(0px, 0px)';
+    for (var c = 0; c < osCards.length; c++) {
+      osCards[c].style.setProperty('--px', '0px');
+      osCards[c].style.setProperty('--py', '0px');
+    }
   }
 
   section.addEventListener('mousemove', function (e) {
