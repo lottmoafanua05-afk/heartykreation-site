@@ -652,37 +652,75 @@
     border-radius: 999px;
   }
   .logo-well {
-    height: 176px;
+    --brand: var(--acid);
+    --brand-2: var(--brand);
+    height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background:
-      radial-gradient(ellipse 80% 70% at 50% 40%, #FFFFFF 0%, #F4F1EA 60%, #E8E3D6 100%);
-    border-bottom: 1px solid var(--line);
     position: relative;
     overflow: hidden;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 55%, color-mix(in srgb, var(--brand) 22%, transparent), transparent 70%),
+      linear-gradient(180deg, #17171A 0%, #0E0E10 100%);
+    border-bottom: 1px solid var(--line);
   }
-  .logo-well::after {
+  .logo-well::before {
     content: '';
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(11,11,12,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(11,11,12,0.05) 1px, transparent 1px);
-    background-size: 24px 24px;
-    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, black 100%);
-    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, black 100%);
+      linear-gradient(rgba(244,241,234,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244,241,234,0.045) 1px, transparent 1px);
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 0%, transparent 80%);
+    mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 0%, transparent 80%);
     pointer-events: none;
   }
+  .logo-well::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--brand) 35%, transparent);
+    box-shadow: 0 0 0 18px color-mix(in srgb, var(--brand) 6%, transparent), 0 0 60px color-mix(in srgb, var(--brand-2) 25%, transparent) inset;
+    pointer-events: none;
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
+    opacity: 0.8;
+  }
+  .build-card:hover .logo-well::after { transform: scale(1.12); opacity: 1; }
   .logo-well img {
-    max-height: 84px;
-    max-width: 68%;
+    max-height: 132px;
+    max-width: 66%;
     object-fit: contain;
     position: relative;
     z-index: 1;
-    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    filter: drop-shadow(0 14px 24px rgba(0,0,0,0.6)) drop-shadow(0 0 22px color-mix(in srgb, var(--brand) 45%, transparent));
+    animation: logo-hover 6s ease-in-out infinite;
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), filter 0.4s ease;
   }
-  .build-card:hover .logo-well img { transform: scale(1.06); }
+  @keyframes logo-hover {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50% { transform: translateY(-7px) rotate(1deg); }
+  }
+  .build-card:hover .logo-well img {
+    animation-play-state: paused;
+    transform: translateY(-6px) scale(1.06);
+    filter: drop-shadow(0 22px 30px rgba(0,0,0,0.7)) drop-shadow(0 0 34px color-mix(in srgb, var(--brand) 70%, transparent));
+  }
+  .build-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .build-tags span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 9px;
+  }
+  @media (prefers-reduced-motion: reduce) { .logo-well img { animation: none; } }
 
   /* CUSTOM WEB APPS section */
   .webapp-glow {
@@ -1028,12 +1066,13 @@
     <div class="grid md:grid-cols-3 gap-6">
       <div class="card build-card rounded-3xl overflow-hidden sr-scale" style="--sr-delay:0s">
         <div class="build-index font-mono">01</div>
-        <div class="logo-well">
+        <div class="logo-well" style="--brand:#D42B2B; --brand-2:#9AA3AD">
           <img src="images/blees-precision-logo.avif" alt="Blees Precision logo">
         </div>
         <div class="p-7">
           <div class="font-mono text-[0.62rem] uppercase tracking-[0.14em] mb-2" style="color:var(--muted-2)">Case study</div>
-          <h3 class="font-display font-semibold mb-5 text-2xl">Blees Precision</h3>
+          <h3 class="font-display font-semibold mb-3 text-2xl">Blees Precision</h3>
+          <div class="build-tags"><span>Website</span><span>Client onboarding</span></div>
           <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Challenge</p>
           <p class="text-sm mb-3" style="color:var(--muted)">A self-defense studio needed a professional online presence and a simpler way to onboard new clients.</p>
           <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Solution</p>
@@ -1045,12 +1084,13 @@
 
       <div class="card build-card rounded-3xl overflow-hidden sr-scale" style="--sr-delay:0.12s">
         <div class="build-index font-mono">02</div>
-        <div class="logo-well">
+        <div class="logo-well" style="--brand:#C8102E; --brand-2:#2B4FA8">
           <img src="images/fou-movement-logo.avif" alt="FOU Movement logo">
         </div>
         <div class="p-7">
           <div class="font-mono text-[0.62rem] uppercase tracking-[0.14em] mb-2" style="color:var(--muted-2)">Case study</div>
-          <h3 class="font-display font-semibold mb-5 text-2xl">FOU Movement</h3>
+          <h3 class="font-display font-semibold mb-3 text-2xl">FOU Movement</h3>
+          <div class="build-tags"><span>Brand site</span><span>Content workflow</span></div>
           <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Challenge</p>
           <p class="text-sm mb-3" style="color:var(--muted)">Needed a brand site that matched the energy of the brand, plus a repeatable way to manage content.</p>
           <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Solution</p>
@@ -1062,12 +1102,13 @@
 
       <div class="card build-card rounded-3xl overflow-hidden sr-scale" style="--sr-delay:0.24s">
         <div class="build-index font-mono">03</div>
-        <div class="logo-well">
-          <img src="images/paradise-valley-north-logo.png" alt="Paradise Valley North Productions logo">
+        <div class="logo-well" style="--brand:#E8A33D; --brand-2:#B8651C">
+          <img src="images/paradise-valley-north-logo.png" alt="Paradise Valley North Productions logo" style="max-height:172px">
         </div>
         <div class="p-7">
           <div class="font-mono text-[0.62rem] uppercase tracking-[0.14em] mb-2" style="color:var(--muted-2)">Case study</div>
-          <h3 class="font-display font-semibold mb-5 text-2xl">Paradise Valley North Productions</h3>
+          <h3 class="font-display font-semibold mb-3 text-2xl">Paradise Valley North Productions</h3>
+          <div class="build-tags"><span>Full rebuild</span><span>Delivery workflow</span></div>
           <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Challenge</p>
           <p class="text-sm mb-3" style="color:var(--muted)">An existing website no longer reflected the business and needed a full rebuild.</p>
           <p class="font-mono text-[0.68rem] uppercase tracking-wider mb-1 text-[var(--acid)]">Solution</p>
