@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /drafts/
+Disallow: /templates/_engine/
+
+Sitemap: https://heartykreation.com/sitemap.xml
