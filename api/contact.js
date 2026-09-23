@@ -17,6 +17,8 @@ const PROJECT_TYPES = [
   'SEO & Marketing',
   'Website Maintenance',
   'Custom Web App / Platform',
+  'Artist / Label Website',
+  'EPK or Fan Platform',
   'Other',
 ];
 
