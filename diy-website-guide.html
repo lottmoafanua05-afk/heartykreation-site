@@ -95,6 +95,12 @@
   .guide a:hover { color: #EFFFA8; }
   .guide strong { color: var(--ink); font-weight: 600; }
 
+  /* Buttons inside the guide body must not inherit the link color or underline */
+  .guide a.btn-primary { color: #0B0B0C; text-decoration: none; }
+  .guide a.btn-primary:hover { color: #0B0B0C; }
+  .guide a.btn-outline { color: var(--ink); text-decoration: none; }
+  .guide a.btn-outline:hover { color: var(--acid); }
+
   .step-num {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.72rem;
