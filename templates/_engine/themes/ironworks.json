@@ -1,0 +1,50 @@
+{
+  "name": "Ironworks",
+  "tagline": "Blunt, sturdy, built to be called.",
+  "suits": "Trades, contractors, roofing, HVAC, auto, landscaping",
+  "colors": {
+    "bg": "#F3F4F2",
+    "surface": "#FFFFFF",
+    "ink": "#15181B",
+    "muted": "#5A6169",
+    "brand": "#0F4C81",
+    "brand_ink": "#FFFFFF",
+    "accent": "#E8A317",
+    "line": "#D9DCD9",
+    "shadow": "rgba(15,76,129,0.35)"
+  },
+  "fonts": {
+    "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&display=swap",
+    "display": "'Archivo', system-ui, sans-serif",
+    "body": "'Inter', system-ui, sans-serif",
+    "ui": "'Archivo', system-ui, sans-serif",
+    "display_weight": 800,
+    "display_tracking": "-0.02em"
+  },
+  "layout": {
+    "h1_size": "3.9rem",
+    "radius": "8px",
+    "btn_radius": "6px",
+    "section_pad": "80px",
+    "hero_pad": "92px",
+    "hero_bg": "#15181B",
+    "hero_fx": "background:repeating-linear-gradient(135deg, rgba(232,163,23,0.10) 0 14px, transparent 14px 40px)",
+    "hero_align": "",
+    "hero_h1_extra": "color:#FFFFFF",
+    "hero_lead_extra": "color:#C3C9CF",
+    "hero_meta_extra": "color:#9AA3AB",
+    "nav_bg": "rgba(243,244,242,0.92)",
+    "about_bg": "var(--surface)",
+    "contact_bg": "#15181B",
+    "footer_bg": "var(--surface)",
+    "about_side": "checklist",
+    "hero_eyebrow_color": "#E8A317",
+    "hero_ghost_color": "#FFFFFF",
+    "hero_ghost_border": "rgba(255,255,255,0.38)",
+    "contact_ink": "#FFFFFF",
+    "contact_muted": "#9AA3AB",
+    "contact_line": "rgba(255,255,255,0.16)",
+    "contact_link": "#8CC0F0",
+    "contact_eyebrow_color": "#E8A317"
+  }
+}

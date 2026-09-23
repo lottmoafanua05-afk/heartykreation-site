@@ -1,0 +1,59 @@
+{
+  "slug": "ironworks",
+  "theme": "ironworks",
+  "demo": true,
+  "business_name": "Granite Peak Roofing",
+  "title": "Granite Peak Roofing: Roof Repair and Replacement in Reno, NV",
+  "meta_description": "Licensed roofers serving Reno, Sparks, and the Truckee Meadows. Free inspections, storm damage repair, and full replacements with a written warranty.",
+  "site_url": "https://heartykreation.com/templates/ironworks",
+  "schema_type": "RoofingContractor",
+  "hero_eyebrow": "Licensed and insured · NV #000000",
+  "headline": "Your roof has one job. We make sure it does it.",
+  "subhead": "Repairs, replacements, and storm damage work across Reno, Sparks, and the Truckee Meadows. Free inspection, written estimate, no pressure.",
+  "cta_label": "Get a free inspection",
+  "secondary_cta_label": "What we handle",
+  "hero_meta": ["Same week inspections", "Written 10 year workmanship warranty", "Insurance claims welcome"],
+  "services_eyebrow": "What we handle",
+  "services_heading": "Roofing work, start to finish.",
+  "services_intro": "Residential and light commercial. If it keeps water out of your building, we work on it.",
+  "services": [
+    { "name": "Roof repair", "description": "Leaks, missing shingles, flashing, and the spot that always drips.", "price": "" },
+    { "name": "Full replacement", "description": "Tear off, deck inspection, new underlayment, and cleanup that leaves the yard clean.", "price": "" },
+    { "name": "Storm damage", "description": "Emergency tarping and documentation your insurance adjuster will accept.", "price": "" },
+    { "name": "Inspections", "description": "Free written inspection with photos, whether you buy from us or not.", "price": "" },
+    { "name": "Gutters", "description": "Seamless gutters and guards installed with the roof or on their own.", "price": "" },
+    { "name": "Maintenance plans", "description": "A yearly look before winter so small problems stay small.", "price": "" }
+  ],
+  "about_eyebrow": "Who shows up",
+  "about_heading": "The owner is on the roof.",
+  "about_body": [
+    "No sales team, no subcontracted crews you have never met. The person who quotes your job is on site while it is done.",
+    "We work in the high desert, which means sun, wind, and snow load in the same year. What holds up here is not what holds up in a catalog."
+  ],
+  "promises_heading": "How the job runs",
+  "promises": [
+    "Free inspection with photos, inside 5 days",
+    "Written estimate, line by line, no verbal quotes",
+    "Materials confirmed before the tear off",
+    "Magnet sweep of the yard before we leave",
+    "Ten year workmanship warranty in writing"
+  ],
+  "stats": [
+    { "value": "18 yrs", "label": "In business" },
+    { "value": "1,400+", "label": "Roofs completed" },
+    { "value": "10 yr", "label": "Workmanship warranty" }
+  ],
+  "service_area": "Reno, Sparks, Carson City, and the Truckee Meadows",
+  "hours": ["Mon to Fri: 7am to 6pm", "Sat: 8am to 2pm", "Emergency service: 24/7"],
+  "proof_heading": "What homeowners said.",
+  "reviews": [
+    { "text": "Found the leak in ten minutes after two other companies told me I needed a whole new roof.", "who": "Bill H., Sparks" },
+    { "text": "Tore off and replaced in two days, and you could not tell they had been in the yard.", "who": "Ana P., northwest Reno" },
+    { "text": "Handled the insurance paperwork better than my own agent did.", "who": "Greg T., Sun Valley" }
+  ],
+  "contact_heading": "Get on the schedule.",
+  "phone": "(775) 555-0188",
+  "email": "office@granitepeakroofing.example",
+  "social": { "Facebook": "https://facebook.com", "Google": "https://google.com" },
+  "form_button": "Request my inspection"
+}

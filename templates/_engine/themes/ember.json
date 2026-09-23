@@ -1,0 +1,39 @@
+{
+  "name": "Ember",
+  "tagline": "Warm, dark, appetite-forward.",
+  "suits": "Food trucks, restaurants, bars, catering, nightlife",
+  "colors": {
+    "bg": "#14100E",
+    "surface": "#1C1714",
+    "ink": "#F8F2EC",
+    "muted": "#B3A69B",
+    "brand": "#FF6A2B",
+    "brand_ink": "#17100B",
+    "accent": "#FFC44D",
+    "line": "#2E2621",
+    "shadow": "rgba(255,106,43,0.45)"
+  },
+  "fonts": {
+    "url": "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap",
+    "display": "'Bricolage Grotesque', system-ui, sans-serif",
+    "body": "'Inter', system-ui, sans-serif",
+    "ui": "'Space Grotesk', ui-monospace, monospace",
+    "display_weight": 800,
+    "display_tracking": "-0.03em"
+  },
+  "layout": {
+    "h1_size": "4.4rem",
+    "radius": "16px",
+    "btn_radius": "999px",
+    "section_pad": "92px",
+    "hero_pad": "112px",
+    "hero_bg": "#14100E",
+    "hero_fx": "background:radial-gradient(circle at 78% 18%, rgba(255,106,43,0.22), transparent 55%), radial-gradient(circle at 12% 84%, rgba(255,196,77,0.12), transparent 50%)",
+    "hero_align": "",
+    "nav_bg": "rgba(20,16,14,0.88)",
+    "about_bg": "var(--surface)",
+    "contact_bg": "var(--surface)",
+    "footer_bg": "var(--bg)",
+    "about_side": "hours_card"
+  }
+}

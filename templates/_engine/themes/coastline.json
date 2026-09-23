@@ -1,0 +1,43 @@
+{
+  "name": "Coastline",
+  "tagline": "Calm, editorial, unhurried.",
+  "suits": "Salons, spas, studios, wellness, clinics, professional services",
+  "colors": {
+    "bg": "#FBF8F3",
+    "surface": "#FFFFFF",
+    "ink": "#1E2A2D",
+    "muted": "#6C7B80",
+    "brand": "#2F6F6B",
+    "brand_ink": "#FFFFFF",
+    "accent": "#C98362",
+    "line": "#E7DFD4",
+    "shadow": "rgba(47,111,107,0.3)"
+  },
+  "fonts": {
+    "url": "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap",
+    "display": "'Instrument Serif', Georgia, serif",
+    "body": "'DM Sans', system-ui, sans-serif",
+    "ui": "'DM Sans', system-ui, sans-serif",
+    "display_weight": 400,
+    "display_tracking": "-0.015em"
+  },
+  "layout": {
+    "h1_size": "4.6rem",
+    "radius": "22px",
+    "btn_radius": "999px",
+    "section_pad": "96px",
+    "hero_pad": "116px",
+    "hero_bg": "#FBF8F3",
+    "hero_fx": "background:radial-gradient(ellipse at 70% 10%, rgba(201,131,98,0.16), transparent 60%), radial-gradient(ellipse at 10% 90%, rgba(47,111,107,0.10), transparent 55%)",
+    "hero_align": "text-align:center;",
+    "hero_h1_extra": "margin-left:auto;margin-right:auto;",
+    "hero_lead_extra": "margin-left:auto;margin-right:auto;",
+    "hero_actions_extra": "justify-content:center;",
+    "hero_meta_extra": "justify-content:center;",
+    "nav_bg": "rgba(251,248,243,0.9)",
+    "about_bg": "var(--surface)",
+    "contact_bg": "var(--surface)",
+    "footer_bg": "var(--bg)",
+    "about_side": "quote"
+  }
+}

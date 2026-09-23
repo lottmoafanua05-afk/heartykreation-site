@@ -1,0 +1,53 @@
+{
+  "slug": "ember",
+  "theme": "ember",
+  "demo": true,
+  "business_name": "Ash Ember Kitchen",
+  "title": "Ash Ember Kitchen: Wood Fired Street Food in Sparks, NV",
+  "meta_description": "Wood fired tacos, bowls, and catering from a family run truck in Sparks, Nevada. Find us tonight or book us for your event.",
+  "site_url": "https://heartykreation.com/templates/ember",
+  "schema_type": "Restaurant",
+  "services_nav_label": "Menu",
+  "hero_eyebrow": "Sparks, Nevada · Open tonight",
+  "headline": "Cooked over real fire, served out a window.",
+  "subhead": "A family run truck slinging wood fired tacos, rice bowls, and late night plates. Find us parked around Sparks, or book the truck for your own party.",
+  "cta_label": "Call to order",
+  "cta_href": "#contact",
+  "secondary_cta_label": "See the menu",
+  "hero_meta": ["Open Wed to Sun, 5pm to 11pm", "Catering 20 to 300 guests", "Cash and card"],
+  "services_eyebrow": "Off the fire",
+  "services_heading": "The short menu, done right.",
+  "services_intro": "Five things, made the same way every night. When the fire is out, we are out.",
+  "services": [
+    { "name": "Wood fired tacos", "description": "Three to an order, handmade tortillas, charred over mesquite.", "price": "From $12" },
+    { "name": "Fire bowls", "description": "Rice, beans, grilled protein, salsa roja, and whatever came in fresh.", "price": "From $14" },
+    { "name": "Late plates", "description": "Bigger portions for after the shift or after the show.", "price": "From $17" },
+    { "name": "Family packs", "description": "Feeds four to six, ready in twenty minutes when you call ahead.", "price": "$48" },
+    { "name": "Event catering", "description": "We park, we cook, your guests eat all night. Twenty to three hundred people.", "price": "Quoted" },
+    { "name": "Private buyouts", "description": "The whole truck for your block party, wedding, or work event.", "price": "Quoted" }
+  ],
+  "about_eyebrow": "Who is cooking",
+  "about_heading": "One truck, one family, one fire.",
+  "about_body": [
+    "We started with a borrowed grill at a farmers market and a recipe that came off a grandmother's stove. Six years later the same family is still on the line.",
+    "Everything is cooked to order over mesquite. That is slower than a fryer and it is the whole point."
+  ],
+  "stats": [
+    { "value": "6 yrs", "label": "On the road" },
+    { "value": "4.9", "label": "Google rating" },
+    { "value": "300", "label": "Largest event" }
+  ],
+  "hours": ["Wed: 5pm to 11pm", "Thu: 5pm to 11pm", "Fri: 5pm to 1am", "Sat: 12pm to 1am", "Sun: 12pm to 9pm"],
+  "proof_heading": "Regulars say it better.",
+  "reviews": [
+    { "text": "Best tacos in Sparks, and it is not close. The char on the meat is unreal.", "who": "Marisol D., regular since 2022" },
+    { "text": "They catered our wedding for a hundred and twenty people and every single guest asked about them.", "who": "Trent and Kayla W." },
+    { "text": "I work nights and this is the only place worth stopping for at midnight.", "who": "Danny R." }
+  ],
+  "contact_heading": "Find us, or bring us to you.",
+  "phone": "(775) 555-0142",
+  "email": "hello@ashemberkitchen.example",
+  "address": "Victorian Ave, Sparks, NV",
+  "social": { "Instagram": "https://instagram.com", "Facebook": "https://facebook.com" },
+  "form_button": "Ask about catering"
+}

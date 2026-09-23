@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Templates: Hearty Kreation</title>
+<meta name="description" content="The Hearty Kreation template catalog. Pick a style, we build your site from it and have it live within 24 hours. New templates added every month.">
+<link rel="canonical" href="https://heartykreation.com/templates">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hearty Kreation">
+<meta property="og:title" content="Website templates, built for you in 24 hours">
+<meta property="og:description" content="Pick a style from the catalog. We build your site from it, connect your domain, and hand it over. New templates every month.">
+<meta property="og:url" content="https://heartykreation.com/templates">
+<meta property="og:image" content="https://heartykreation.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #F4F1EA; --bg: #0B0B0C; --panel: #131315; --panel-2: #17171A;
+    --line: #26262A; --acid: #D8FF3E; --clay: #FF6A3D; --muted: #9A968E; --muted-2: #6B6862;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  .font-display { font-family: 'Fraunces', serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--acid); outline-offset: 3px; border-radius: 6px; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acid); font-weight: 500; }
+  .noise { background-image: radial-gradient(circle at 20% 10%, rgba(216,255,62,0.07), transparent 40%), radial-gradient(circle at 85% 30%, rgba(255,106,61,0.08), transparent 40%); }
+  .card { background: var(--panel); border: 1px solid var(--line); transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease; }
+  .card:hover { border-color: var(--acid); transform: translateY(-4px); background: var(--panel-2); }
+  .btn-primary { background: var(--acid); color: #0B0B0C; font-weight: 700; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(216,255,62,0.4); }
+  .btn-outline { border: 1px solid var(--line); color: var(--ink); transition: border-color 0.2s ease, color 0.2s ease; }
+  .btn-outline:hover { border-color: var(--acid); color: var(--acid); }
+  .shot { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--panel-2); }
+  .shot img { width: 100%; height: auto; display: block; }
+  .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; display: inline-block; }
+  footer .footer-links a:hover { color: var(--acid); }
+</style>
+</head>
+<body>
+
+<nav class="fixed top-0 w-full z-50 backdrop-blur bg-[#0B0B0C]/85 border-b border-[var(--line)]">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+    <a href="/" class="font-display font-semibold text-base sm:text-lg tracking-tight whitespace-nowrap flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-[var(--acid)]"></span>
+      HEARTY KREATION
+    </a>
+    <div class="flex items-center gap-4">
+      <a href="/diy-website-guide" class="hidden sm:inline text-sm font-mono hover:text-[var(--acid)] transition" style="color:var(--muted)">Free Guide</a>
+      <a href="/#contact" class="btn-primary font-mono font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 rounded-full whitespace-nowrap">Get started &rarr;</a>
+    </div>
+  </div>
+</nav>
+
+<section class="noise pt-36 pb-16 px-6 border-b border-[var(--line)]">
+  <div class="max-w-4xl mx-auto text-center">
+    <div class="eyebrow mb-4">The catalog</div>
+    <h1 class="font-display font-semibold text-4xl md:text-5xl leading-tight mb-5">Pick a style. We build the site.</h1>
+    <p class="text-lg mb-6" style="color:var(--muted)">Every template below is a real, working page you can click through. Tell us which one fits, answer a few questions about your business, and we build your version and connect your domain.</p>
+    <div class="flex flex-wrap justify-center gap-3 text-sm font-mono" style="color:var(--muted-2)">
+      <span class="tag">From $75</span>
+      <span class="tag">Live in 24 hours</span>
+      <span class="tag">New templates monthly</span>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 px-6">
+  <div class="max-w-6xl mx-auto grid gap-10">
+
+    <article class="grid lg:grid-cols-2 gap-8 items-center">
+      <a href="/templates/ember" class="shot block"><img src="/templates/previews/ember.jpg" alt="Ember template preview: a dark, warm single page site for a wood fired food truck" loading="lazy" width="1000" height="625"></a>
+      <div>
+        <div class="eyebrow mb-3">01 &middot; Ember</div>
+        <h2 class="font-display font-semibold text-3xl mb-3">Warm, dark, appetite forward.</h2>
+        <p class="mb-5" style="color:var(--muted)">Heat in the background, big type, and the phone number never more than a thumb away. Built for businesses people decide on while they are hungry.</p>
+        <p class="text-sm mb-6" style="color:var(--muted-2)"><strong style="color:var(--ink)">Suits:</strong> food trucks, restaurants, bars, catering, nightlife</p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/templates/ember" class="btn-primary font-mono font-semibold px-6 py-3 rounded-full">View live demo &rarr;</a>
+          <a href="/#contact" class="btn-outline font-mono font-semibold px-6 py-3 rounded-full">Build mine in this style</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="grid lg:grid-cols-2 gap-8 items-center">
+      <a href="/templates/ironworks" class="shot block lg:order-2"><img src="/templates/previews/ironworks.jpg" alt="Ironworks template preview: a high contrast single page site for a roofing contractor" loading="lazy" width="1000" height="625"></a>
+      <div class="lg:order-1">
+        <div class="eyebrow mb-3">02 &middot; Ironworks</div>
+        <h2 class="font-display font-semibold text-3xl mb-3">Blunt, sturdy, built to be called.</h2>
+        <p class="mb-5" style="color:var(--muted)">Licenses, warranties, and a quote button on every screen. For trades where the customer is deciding whether to trust you, fast.</p>
+        <p class="text-sm mb-6" style="color:var(--muted-2)"><strong style="color:var(--ink)">Suits:</strong> trades, contractors, roofing, HVAC, auto, landscaping</p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/templates/ironworks" class="btn-primary font-mono font-semibold px-6 py-3 rounded-full">View live demo &rarr;</a>
+          <a href="/#contact" class="btn-outline font-mono font-semibold px-6 py-3 rounded-full">Build mine in this style</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="grid lg:grid-cols-2 gap-8 items-center">
+      <a href="/templates/coastline" class="shot block"><img src="/templates/previews/coastline.jpg" alt="Coastline template preview: a light, editorial single page site for a wellness studio" loading="lazy" width="1000" height="625"></a>
+      <div>
+        <div class="eyebrow mb-3">03 &middot; Coastline</div>
+        <h2 class="font-display font-semibold text-3xl mb-3">Calm, editorial, unhurried.</h2>
+        <p class="mb-5" style="color:var(--muted)">Space, serif type, and prices shown plainly. For places people book rather than call, where the feeling of the room is the product.</p>
+        <p class="text-sm mb-6" style="color:var(--muted-2)"><strong style="color:var(--ink)">Suits:</strong> salons, spas, studios, wellness, clinics, professional services</p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/templates/coastline" class="btn-primary font-mono font-semibold px-6 py-3 rounded-full">View live demo &rarr;</a>
+          <a href="/#contact" class="btn-outline font-mono font-semibold px-6 py-3 rounded-full">Build mine in this style</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="py-16 px-6 border-t border-[var(--line)]">
+  <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-6 text-center">
+    <div class="card rounded-2xl p-7">
+      <div class="eyebrow mb-3">Coming next</div>
+      <h3 class="font-display font-semibold text-xl mb-2">Marquee</h3>
+      <p class="text-sm" style="color:var(--muted)">One page EPK for artists: bio, music, tour dates, booking.</p>
+    </div>
+    <div class="card rounded-2xl p-7">
+      <div class="eyebrow mb-3">Coming next</div>
+      <h3 class="font-display font-semibold text-xl mb-2">Backstage</h3>
+      <p class="text-sm" style="color:var(--muted)">Full artist site with music, tour, merch, and press pages.</p>
+    </div>
+    <div class="card rounded-2xl p-7">
+      <div class="eyebrow mb-3">Every month</div>
+      <h3 class="font-display font-semibold text-xl mb-2">New arrivals</h3>
+      <p class="text-sm" style="color:var(--muted)">Two to three new templates a month, so nothing here goes stale.</p>
+    </div>
+  </div>
+</section>
+
+<section class="noise py-20 px-6 border-t border-[var(--line)]">
+  <div class="max-w-2xl mx-auto text-center">
+    <div class="eyebrow mb-3">How it works</div>
+    <h2 class="font-display font-semibold text-3xl mb-5">Three steps, one day.</h2>
+    <p class="mb-8" style="color:var(--muted)">Pick a template, answer a short form about your business, and we build your page and connect the domain. Live within 24 hours of your domain connecting, with revisions included.</p>
+    <a href="/#contact" class="btn-primary font-mono font-semibold px-8 py-4 rounded-full inline-block">Start my site &rarr;</a>
+    <p class="text-xs mt-5" style="color:var(--muted-2)">Prefer to build it yourself? <a href="/diy-website-guide" style="color:var(--muted); text-decoration:underline">Take the free guide instead.</a></p>
+  </div>
+</section>
+
+<footer class="border-t border-[var(--line)] pt-16 pb-12 px-6">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+    <span class="text-sm font-mono" style="color:var(--muted)">&copy; 2026 Hearty Kreation. All rights reserved.</span>
+    <div class="footer-links flex flex-wrap justify-center gap-6 text-sm font-mono" style="color:var(--muted)">
+      <a href="/">Home</a>
+      <a href="/diy-website-guide">Free Guide</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="mailto:info@heartykreation.com">info@heartykreation.com</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

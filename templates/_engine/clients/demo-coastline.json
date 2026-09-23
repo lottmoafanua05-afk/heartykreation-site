@@ -1,0 +1,52 @@
+{
+  "slug": "coastline",
+  "theme": "coastline",
+  "demo": true,
+  "business_name": "Tide Thyme Wellness",
+  "title": "Tide Thyme Wellness: Massage and Recovery Studio in Sparks, NV",
+  "meta_description": "A small massage and recovery studio in Sparks, Nevada. Deep tissue, prenatal, and sports recovery by appointment, seven days a week.",
+  "site_url": "https://heartykreation.com/templates/coastline",
+  "schema_type": "HealthAndBeautyBusiness",
+  "services_nav_label": "Treatments",
+  "hero_eyebrow": "By appointment · Sparks, Nevada",
+  "headline": "An hour that gives you the week back.",
+  "subhead": "A two room studio, no upsells, no rushing. Massage and recovery work booked online and kept on time.",
+  "cta_label": "Book a session",
+  "secondary_cta_label": "See treatments",
+  "hero_meta": ["Open 7 days", "Same day openings most weeks", "Gift cards available"],
+  "services_eyebrow": "Treatments",
+  "services_heading": "Booked by the hour, not the package.",
+  "services_intro": "Every session is one on one. Nothing here requires a membership.",
+  "services": [
+    { "name": "Deep tissue", "description": "Slow, firm work for the knots that come back every month.", "price": "$95 / 60 min" },
+    { "name": "Sports recovery", "description": "For training weeks and race weeks, with stretching built in.", "price": "$110 / 60 min" },
+    { "name": "Prenatal", "description": "Side lying and fully supported, from the second trimester on.", "price": "$100 / 60 min" },
+    { "name": "Swedish", "description": "Lighter pressure, full body, the one to book when you are just worn down.", "price": "$85 / 60 min" },
+    { "name": "Cupping add on", "description": "Added to any session for shoulders, low back, or calves.", "price": "+$20" },
+    { "name": "90 minute session", "description": "Any treatment, with the time to actually finish the work.", "price": "From $130" }
+  ],
+  "about_eyebrow": "Who you will see",
+  "about_heading": "Two therapists, one room each.",
+  "about_body": [
+    "We left bigger spas to build something quieter. No front desk script, no membership pitch at the end of your hour.",
+    "Licensed in Nevada, twelve years between us, and the same two people every time you come in."
+  ],
+  "stats": [
+    { "value": "12 yrs", "label": "Combined practice" },
+    { "value": "4.9", "label": "Average rating" },
+    { "value": "7 days", "label": "Open weekly" }
+  ],
+  "hours": ["Mon to Fri: 9am to 7pm", "Sat: 9am to 5pm", "Sun: 11am to 4pm"],
+  "proof_heading": "From the intake notes.",
+  "reviews": [
+    { "text": "First place that listened to where it actually hurt instead of following a routine.", "who": "Rachel K." },
+    { "text": "I have a desk job and a bad shoulder. Monthly here has done more than a year of stretching.", "who": "Devin A." },
+    { "text": "Calm, clean, and they start on time, which I cannot say for anywhere else I have been.", "who": "Priya S." }
+  ],
+  "contact_heading": "Find a time that works.",
+  "phone": "(775) 555-0164",
+  "email": "hello@tidethyme.example",
+  "address": "Pyramid Way, Sparks, NV",
+  "social": { "Instagram": "https://instagram.com" },
+  "form_button": "Request a booking"
+}
