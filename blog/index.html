@@ -3,149 +3,89 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog — Hearty Kreation</title>
+<title>Blog: Hearty Kreation</title>
+<meta name="description" content="Notes on website systems, workflow design, and client delivery from Hearty Kreation in Sparks, Nevada.">
+<link rel="canonical" href="https://heartykreation.com/blog/">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hearty Kreation">
+<meta property="og:title" content="Blog: Hearty Kreation">
+<meta property="og:description" content="Notes on website systems, workflow design, and client delivery from Hearty Kreation in Sparks, Nevada.">
+<meta property="og:url" content="https://heartykreation.com/blog/">
+<meta property="og:image" content="https://heartykreation.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0a0d0c;
-    --panel: #0f1413;
-    --signal: #f2b84b;
-    --signal-dim: #f2b84b33;
-    --amber: #f2b84b;
-    --line: #1c2422;
+    --ink: #F4F1EA; --bg: #0B0B0C; --panel: #131315; --panel-2: #17171A;
+    --line: #26262A; --acid: #D8FF3E; --clay: #FF6A3D; --muted: #9A968E; --muted-2: #6B6862;
   }
-  body {
-    background: var(--ink);
-    font-family: 'Inter', sans-serif;
-  }
-  .font-display { font-family: 'Space Grotesk', sans-serif; }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  .font-display { font-family: 'Fraunces', serif; }
   .font-mono { font-family: 'JetBrains Mono', monospace; }
-
-  .glow-text {
-    text-shadow: 0 0 24px var(--signal-dim);
-  }
-
-  .circuit-divider {
-    position: relative;
-    height: 1px;
-    background: var(--line);
-  }
-  .circuit-divider::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: -2px;
-    width: 6px;
-    height: 5px;
-    background: var(--signal);
-    box-shadow: 0 0 12px var(--signal);
-    transform: translateX(-50%);
-  }
-
-  .sys-card {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  }
-  .sys-card:hover {
-    border-color: var(--signal);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 40px -12px var(--signal-dim);
-  }
-
-  .tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    color: var(--signal);
-    border: 1px solid var(--signal-dim);
-    background: rgba(242,184,75,0.06);
-  }
-
-  .btn-signal {
-    background: var(--signal);
-    color: #04140d;
-  }
-  .btn-signal:hover {
-    box-shadow: 0 0 30px var(--signal-dim);
-  }
-  .btn-outline {
-    border: 1px solid var(--line);
-    color: #e4e4e7;
-  }
-  .btn-outline:hover {
-    border-color: var(--signal);
-    color: var(--signal);
-  }
-
-  .grid-bg {
-    background-image:
-      linear-gradient(rgba(242,184,75,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(242,184,75,0.05) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--acid); outline-offset: 3px; border-radius: 6px; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acid); font-weight: 500; }
+  .card { background: var(--panel); border: 1px solid var(--line); transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease; }
+  .card:hover { border-color: var(--acid); transform: translateY(-4px); background: var(--panel-2); }
+  .btn-primary { background: var(--acid); color: #0B0B0C; font-weight: 700; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(216,255,62,0.4); }
+  .noise { background-image: radial-gradient(circle at 20% 10%, rgba(216,255,62,0.07), transparent 40%), radial-gradient(circle at 85% 30%, rgba(255,106,61,0.08), transparent 40%); }
+  .post h2 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.5rem; margin-top: 2.4rem; margin-bottom: 0.8rem; }
+  .post p { color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+  .post a { color: var(--acid); text-decoration: underline; text-underline-offset: 2px; }
+  footer .footer-links a:hover { color: var(--acid); }
 </style>
 </head>
-<body class="text-zinc-100">
+<body>
 
-<!-- NAV -->
-<nav class="fixed top-0 w-full z-50 backdrop-blur bg-black/60 border-b border-[var(--line)]">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="/" class="font-display font-bold text-lg tracking-tight">
-      HEARTY<span style="color:var(--signal)">KREATION</span>
+<nav class="fixed top-0 w-full z-50 backdrop-blur bg-[#0B0B0C]/85 border-b border-[var(--line)]">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+    <a href="/" class="font-display font-semibold text-base sm:text-lg tracking-tight whitespace-nowrap flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-[var(--acid)]"></span>
+      HEARTY KREATION
     </a>
-    <div class="hidden md:flex items-center gap-8 text-sm text-zinc-400">
-      <a href="/#what-you-get" class="hover:text-white transition">What You Get</a>
-      <a href="/#how-it-works" class="hover:text-white transition">How It Works</a>
-      <a href="/#builds" class="hover:text-white transition">Recent Builds</a>
-      <a href="/blog/" class="text-white transition">Blog</a>
+    <div class="hidden md:flex items-center gap-7 text-sm font-mono" style="color:var(--muted)">
+      <a href="/" class="hover:text-[var(--acid)] transition">Home</a>
+      <a href="/#services" class="hover:text-[var(--acid)] transition">Services</a>
+      <a href="/templates" class="hover:text-[var(--acid)] transition">Templates</a>
+      <a href="/diy-website-guide" class="hover:text-[var(--acid)] transition">Free Guide</a>
+      <a href="/#contact" class="hover:text-[var(--acid)] transition">Contact</a>
     </div>
-    <a href="/#start" class="btn-signal font-display font-semibold text-sm px-4 py-2 rounded-md">Get Started</a>
+    <a href="/#contact" class="btn-primary font-mono font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 rounded-full whitespace-nowrap">Start a Project &rarr;</a>
   </div>
 </nav>
 
-<!-- HEADER -->
-<section class="grid-bg pt-40 pb-20 px-6 relative overflow-hidden">
-  <div class="max-w-4xl mx-auto text-center relative z-10">
-    <div class="tag inline-block px-3 py-1 rounded-full mb-6">[ BLOG ]</div>
-    <h1 class="font-display font-bold text-5xl md:text-6xl leading-tight mb-6">
-      Notes from the <span class="glow-text" style="color:var(--signal)">build</span>.
-    </h1>
-    <p class="text-zinc-400 text-lg max-w-2xl mx-auto">
-      Thoughts on websites, workflows, and systems for small businesses that want to run without depending on chaos.
-    </p>
+<section class="noise pt-36 pb-14 px-6 border-b border-[var(--line)]">
+  <div class="max-w-3xl mx-auto">
+    <div class="eyebrow mb-4">Notes from the work</div>
+    <h1 class="font-display font-semibold text-4xl md:text-5xl leading-tight mb-4">The Hearty Kreation blog.</h1>
+    <p class="text-lg" style="color:var(--muted)">Systems we build, problems small businesses actually run into, and what we learn shipping the work. No filler.</p>
   </div>
 </section>
 
-<div class="circuit-divider max-w-6xl mx-auto"></div>
-
-<!-- POST LIST -->
-<section class="py-20 px-6">
-  <div class="max-w-4xl mx-auto space-y-6">
-
-    <!-- NEW-POSTS-INSERT-HERE: automated and manual posts both go directly below this line, newest first -->
-
-    <a href="/blog/welcome-to-the-blog.html" class="sys-card rounded-xl p-8 block">
-      <div class="tag inline-block px-2 py-1 rounded mb-4 font-mono">JULY 2026</div>
+<section class="py-16 px-6">
+  <div class="max-w-3xl mx-auto grid gap-5">
+    <a href="/blog/welcome-to-the-blog.html" class="card rounded-2xl p-7 block">
+      <div class="font-mono text-xs uppercase tracking-wider mb-3" style="color:var(--muted-2)">July 2026</div>
       <h2 class="font-display font-semibold text-2xl mb-2">Welcome to the Hearty Kreation blog</h2>
-      <p class="text-zinc-400 text-sm leading-relaxed">
-        Why we're writing this, and what to expect: notes on systems, workflows, and building things that last.
-      </p>
+      <p class="text-sm" style="color:var(--muted)">What this space is for, and what we will be writing about.</p>
     </a>
-
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="border-t border-[var(--line)] py-10 px-6">
-  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
-    <span class="font-mono">© 2026 Hearty Kreation. All rights reserved.</span>
-    <div class="flex gap-6">
-      <a href="/privacy.html" class="hover:text-zinc-300">Privacy Policy</a>
-      <a href="/terms.html" class="hover:text-zinc-300">Terms</a>
-      <a href="mailto:info@heartykreation.com" class="hover:text-zinc-300">info@heartykreation.com</a>
+<footer class="border-t border-[var(--line)] pt-16 pb-12 px-6">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+    <span class="text-sm font-mono" style="color:var(--muted)">&copy; 2026 Hearty Kreation. All rights reserved.</span>
+    <div class="footer-links flex flex-wrap justify-center gap-6 text-sm font-mono" style="color:var(--muted)">
+      <a href="/" class="hover:text-[var(--acid)]">Home</a>
+      <a href="/templates" class="hover:text-[var(--acid)]">Templates</a>
+      <a href="/diy-website-guide" class="hover:text-[var(--acid)]">Free Guide</a>
+      <a href="/privacy.html" class="hover:text-[var(--acid)]">Privacy Policy</a>
+      <a href="/terms.html" class="hover:text-[var(--acid)]">Terms</a>
+      <a href="mailto:info@heartykreation.com" class="hover:text-[var(--acid)]">info@heartykreation.com</a>
     </div>
   </div>
 </footer>
