@@ -35,6 +35,14 @@
 //   INTAKE_ALERT_SMS_EMAIL - fallback only when Telegram is not set: carrier
 //                          email-to-text address, e.g. 7755550100@vtext.com.
 
+// Reads an env var regardless of capitalization. Vercel treats names as case
+// sensitive, and some keys were saved as e.g. Notion_Token / Telegram_bot_token.
+function env(name) {
+  if (process.env[name]) return process.env[name];
+  const hit = Object.keys(process.env).find((k) => k.toLowerCase() === name.toLowerCase());
+  return hit ? process.env[hit] : undefined;
+}
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const URL_RE = /^https?:\/\/\S+\.\S+/i;
 const TEMPLATES = { ember: 'Ember', ironworks: 'Ironworks', coastline: 'Coastline', unsure: 'Not sure yet' };
@@ -298,8 +306,8 @@ function richText(value) {
 // Returns { ok: true, url } / { ok: false } / null when Notion is not configured. Never throws.
 async function saveToNotion(rec) {
   // Vercel has this saved as Notion_Token; env names are case sensitive, so accept both.
-  const token = process.env.NOTION_TOKEN || process.env.Notion_Token;
-  const db = process.env.NOTION_INTAKE_DB_ID;
+  const token = env('NOTION_TOKEN');
+  const db = env('NOTION_INTAKE_DB_ID');
   if (!token || !db) return { ok: false, error: `not configured (token ${token ? 'set' : 'missing'}, database id ${db ? 'set' : 'missing'})` };
   const props = {
     Business: { title: richText(rec.name) },
@@ -344,9 +352,11 @@ async function saveToNotion(rec) {
 // (TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID). Fallback, only when Telegram is not
 // configured: carrier email-to-text via Resend (INTAKE_ALERT_SMS_EMAIL).
 // Never throws; returns true when an alert went out.
+let lastTelegramError = '';
 async function sendTelegram(text) {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
+  lastTelegramError = '';
+  const token = env('TELEGRAM_BOT_TOKEN');
+  const chatId = env('TELEGRAM_CHAT_ID');
   if (!token || !chatId) return null;
   try {
     const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
@@ -355,7 +365,9 @@ async function sendTelegram(text) {
       body: JSON.stringify({ chat_id: chatId, text: text.slice(0, 4000), disable_web_page_preview: true }),
     });
     if (!res.ok) {
-      console.error('Telegram alert failed:', res.status, await res.text());
+      const detail = await res.text();
+      console.error('Telegram alert failed:', res.status, detail);
+      try { lastTelegramError = `${res.status}: ${JSON.parse(detail).description || detail}`; } catch (e) { lastTelegramError = `${res.status}`; }
       return false;
     }
     return true;
@@ -366,7 +378,7 @@ async function sendTelegram(text) {
 }
 
 async function sendEmailToText(body) {
-  const to = process.env.INTAKE_ALERT_SMS_EMAIL;
+  const to = env('INTAKE_ALERT_SMS_EMAIL');
   const key = process.env.RESEND_API_KEY;
   if (!to || !key) return null;
   const from = process.env.CONTACT_FROM_EMAIL || 'Hearty Kreation <info@heartykreation.com>';
@@ -389,10 +401,10 @@ async function sendEmailToText(body) {
 
 async function textAlert(body) {
   const tg = await sendTelegram(body);
-  if (tg !== null) return tg;
+  if (tg !== null) return tg ? 'Telegram alert sent' : `Telegram alert FAILED: ${lastTelegramError || 'network error'} (check the bot token, and that you pressed Start on the bot)`;
   const sms = await sendEmailToText(body);
-  if (sms === null) console.warn('No intake alert channel configured (Telegram or email-to-text).');
-  return !!sms;
+  if (sms === null) return 'No alert channel configured (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID missing)';
+  return sms ? 'Text alert sent (email to text)' : 'Text alert FAILED';
 }
 
 function alertText(kindLabel, name, extra, owner, email, phone, notionUrl) {
@@ -533,7 +545,7 @@ async function handleGeneric(kind, body, res) {
     name, kind, template: '', owner: v.owner_name + (v.role ? ' (' + v.role + ')' : ''), email: v.owner_email, phone: v.owner_phone,
     budget: v.budget, timeline: v.timeline || v.deadline || '', domain: v.domain || '', summary: summaryLine, rows: genericRows(spec, v),
   });
-  const sms = textAlert(alertText(spec.label, name, v.budget, v.owner_name, v.owner_email, v.owner_phone, notion && notion.url));
+  const sms = await textAlert(alertText(spec.label, name, v.budget, v.owner_name, v.owner_email, v.owner_phone, notion && notion.url));
   const toEmail = process.env.CONTACT_TO_EMAIL || 'info@heartykreation.com';
   const fromEmail = process.env.CONTACT_FROM_EMAIL || 'Hearty Kreation <info@heartykreation.com>';
   const summary = genericSummary(spec, v);
@@ -547,6 +559,7 @@ async function handleGeneric(kind, body, res) {
       ${summary}
       <p style="margin-top:20px;color:#555">Full answers attached as ${escapeHtml(slug)}-${kind}.json.</p>
       ${notionLine(notion)}
+      <p style="color:${/FAILED|No alert/.test(sms) ? '#b00' : '#555'}">${escapeHtml(sms)}</p>
     </div>`;
   const clientHtml = `
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#1a1a1a">
@@ -580,7 +593,6 @@ async function handleGeneric(kind, body, res) {
       return;
     }
     if (!clientRes.ok) console.error('Resend API error (client copy):', clientRes.status, await clientRes.text());
-    await sms;
     res.status(200).json({ ok: true, slug });
   } catch (err) {
     console.error('Intake send failed:', err);
@@ -634,7 +646,7 @@ module.exports = async (req, res) => {
     name: v.business_name, kind: 'website', template: TEMPLATES[v.template], owner: v.owner_name, email: v.owner_email, phone: v.owner_phone,
     budget: '', timeline: '', domain: v.domain || DOMAIN_STATUS[v.domain_status], summary: `${v.business_type}, ${v.location}. ${v.elevator}`, rows: websiteRows(v),
   });
-  const sms = textAlert(alertText('Website', v.business_name, TEMPLATES[v.template], v.owner_name, v.owner_email, v.owner_phone, notion && notion.url));
+  const sms = await textAlert(alertText('Website', v.business_name, TEMPLATES[v.template], v.owner_name, v.owner_email, v.owner_phone, notion && notion.url));
   const toEmail = process.env.CONTACT_TO_EMAIL || 'info@heartykreation.com';
   const fromEmail = process.env.CONTACT_FROM_EMAIL || 'Hearty Kreation <info@heartykreation.com>';
   const summary = summaryHtml(v);
@@ -646,6 +658,7 @@ module.exports = async (req, res) => {
       ${summary}
       <p style="margin-top:20px"><strong>Build file:</strong> ${escapeHtml(client.slug)}.json is attached. Drop it in templates/_engine/clients/, write the fields listed in <code>_todo</code>, remove <code>draft</code>, <code>_todo</code> and <code>_intake</code>, then run <code>python3 render.py clients/${escapeHtml(client.slug)}.json</code>.</p>
       ${notionLine(notion)}
+      <p style="color:${/FAILED|No alert/.test(sms) ? '#b00' : '#555'}">${escapeHtml(sms)}</p>
     </div>`;
 
   const clientHtml = `
@@ -696,7 +709,6 @@ module.exports = async (req, res) => {
     }
     if (!clientRes.ok) console.error('Resend API error (client copy):', clientRes.status, await clientRes.text());
 
-    await sms;
     res.status(200).json({ ok: true, slug: client.slug });
   } catch (err) {
     console.error('Intake send failed:', err);
