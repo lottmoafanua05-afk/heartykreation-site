@@ -13,7 +13,7 @@
 // Sends two emails via Resend:
 //   1. To HK: the readable intake plus the draft client JSON as an attachment.
 //   2. To the client: a confirmation with a copy of their answers.
-// Optionally stores the order in Notion.
+// Every intake (all three kinds) is also saved to Notion and texted to HK.
 // No npm dependencies, built-in fetch only.
 //
 // Required env vars (set in Vercel project settings):
@@ -21,10 +21,17 @@
 // Optional:
 //   CONTACT_TO_EMAIL     - inbox that receives intakes (default info@heartykreation.com)
 //   CONTACT_FROM_EMAIL   - verified Resend sender (default info@heartykreation.com)
-//   NOTION_TOKEN         - Notion internal integration secret (shared with /api/subscribe)
-//   NOTION_INTAKE_DB_ID  - database with properties: Business (title), Email (email),
-//                          Template (select: template name, or Web app / Artist),
-//                          Status (select), Domain (rich text)
+//   NOTION_TOKEN         - Notion internal integration secret (shared with /api/subscribe).
+//                          The integration must be added to the intake database's Connections.
+//   NOTION_INTAKE_DB_ID  - "HK Intakes: Website, Web App, Artist" in Business HQ,
+//                          9fc2ff8285434f05ba981a809ed9fd42. Properties: Business (title),
+//                          Kind, Template, Status (selects), Owner, Budget, Timeline, Domain,
+//                          Summary (text), Email, Phone, Received (created time).
+//                          Full answers go in the page body.
+//   TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM_NUMBER
+//                        - same Twilio account as the daily blog approval texts
+//   INTAKE_ALERT_TO      - number to text on each intake, E.164 (+17755550100).
+//                          Defaults to TWILIO_TO_NUMBER.
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const URL_RE = /^https?:\/\/\S+\.\S+/i;
@@ -275,36 +282,113 @@ function summaryHtml(v) {
   `;
 }
 
-async function saveToNotion(v, slug, typeLabel) {
+const KIND_LABELS = { website: 'Website', webapp: 'Web app', artist: 'Artist' };
+
+// Notion rich text objects hold at most 2000 characters each.
+function richText(value) {
+  const text = String(value == null ? '' : value);
+  const out = [];
+  for (let i = 0; i < text.length && out.length < 50; i += 1900) out.push({ type: 'text', text: { content: text.slice(i, i + 1900) } });
+  return out;
+}
+
+// rec: { name, kind, template, owner, email, phone, budget, timeline, domain, summary, rows: [[label, value]] }
+// Returns { ok: true, url } / { ok: false } / null when Notion is not configured. Never throws.
+async function saveToNotion(rec) {
   const token = process.env.NOTION_TOKEN;
   const db = process.env.NOTION_INTAKE_DB_ID;
   if (!token || !db) return null;
+  const props = {
+    Business: { title: richText(rec.name) },
+    Kind: { select: { name: KIND_LABELS[rec.kind] || 'Website' } },
+    Status: { select: { name: 'New' } },
+    Owner: { rich_text: richText(rec.owner) },
+    Email: { email: rec.email || null },
+    Budget: { rich_text: richText(rec.budget) },
+    Timeline: { rich_text: richText(rec.timeline) },
+    Domain: { rich_text: richText(rec.domain) },
+    Summary: { rich_text: richText(rec.summary) },
+  };
+  if (rec.template) props.Template = { select: { name: rec.template } };
+  if (rec.phone) props.Phone = { phone_number: rec.phone };
+  const children = [];
+  rec.rows.filter(([, val]) => val).slice(0, 90).forEach(([label, val]) => {
+    children.push({ object: 'block', type: 'heading_3', heading_3: { rich_text: richText(label) } });
+    children.push({ object: 'block', type: 'paragraph', paragraph: { rich_text: richText(val) } });
+  });
   try {
     const res = await fetch('https://api.notion.com/v1/pages', {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}`, 'Notion-Version': '2022-06-28', 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        parent: { database_id: db },
-        properties: {
-          Business: { title: [{ text: { content: v.business_name } }] },
-          Email: { email: v.owner_email },
-          Template: { select: { name: typeLabel || TEMPLATES[v.template] } },
-          Status: { select: { name: 'Intake received' } },
-          Domain: { rich_text: [{ text: { content: v.domain || DOMAIN_STATUS[v.domain_status] || '' } }] },
-        },
-      }),
+      body: JSON.stringify({ parent: { database_id: db }, properties: props, children: children.slice(0, 100) }),
     });
     if (!res.ok) {
       console.error('Notion API error:', res.status, await res.text());
+      return { ok: false };
+    }
+    const page = await res.json().catch(() => ({}));
+    return { ok: true, url: page.url || '' };
+  } catch (err) {
+    console.error('Notion write failed:', err);
+    return { ok: false };
+  }
+}
+
+// Texts HK about a new intake through Twilio. Never throws; returns true when sent.
+async function textAlert(body) {
+  const sid = process.env.TWILIO_ACCOUNT_SID;
+  const auth = process.env.TWILIO_AUTH_TOKEN;
+  const from = process.env.TWILIO_FROM_NUMBER;
+  const to = process.env.INTAKE_ALERT_TO || process.env.TWILIO_TO_NUMBER;
+  if (!sid || !auth || !from || !to) {
+    console.warn('Twilio is not fully configured; no intake text sent.');
+    return false;
+  }
+  try {
+    const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
+      method: 'POST',
+      headers: {
+        Authorization: 'Basic ' + Buffer.from(`${sid}:${auth}`).toString('base64'),
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({ To: to, From: from, Body: body.slice(0, 600) }).toString(),
+    });
+    if (!res.ok) {
+      console.error('Twilio API error:', res.status, await res.text());
       return false;
     }
     return true;
   } catch (err) {
-    console.error('Notion write failed:', err);
+    console.error('Twilio send failed:', err);
     return false;
   }
 }
 
+function alertText(kindLabel, name, extra, owner, email, phone, notionUrl) {
+  return [
+    `New HK ${kindLabel.toLowerCase()} intake: ${name}${extra ? ' (' + extra + ')' : ''}`,
+    `From ${owner}, ${email}${phone ? ', ' + phone : ''}`,
+    notionUrl ? notionUrl : 'Details in your email.',
+  ].join('\n');
+}
+
+function notionLine(notion) {
+  if (notion === null) return '';
+  return `<p style="color:#555">Saved to Notion: ${notion.ok ? (notion.url ? `<a href="${escapeHtml(notion.url)}">open the page</a>` : 'yes') : 'no, check the Vercel logs'}</p>`;
+}
+
+function websiteRows(v) {
+  return [
+    ['Template', TEMPLATES[v.template]], ['Brand colors', v.brand_colors], ['Type of business', v.business_type], ['Area', v.location],
+    ['What they do', v.elevator], ['What is different', v.different], ['Headline idea', v.headline],
+    ['Services', v.services.map((x) => `${x.name}${x.price ? ' (' + x.price + ')' : ''}${x.description ? ': ' + x.description : ''}`).join('\n')],
+    ['Main action', v.cta_action + (v.cta_link ? ': ' + v.cta_link : '')], ['About', v.about], ['Numbers', v.stats.join('\n')],
+    ['Reviews', v.reviews.map((r) => `"${r.text}" ${r.who}`).join('\n')], ['Reviews link', v.reviews_link],
+    ['Public phone', v.public_phone], ['Public email', v.public_email], ['Address', v.address], ['Hours', v.hours],
+    ['Social', [v.instagram, v.facebook, v.tiktok, v.other_social].filter(Boolean).join('\n')],
+    ['Domain', DOMAIN_STATUS[v.domain_status] + (v.domain ? ': ' + v.domain : '')], ['Logo and photos', v.assets_link], ['Notes', v.notes],
+  ];
+}
 
 /* ---------- web app and artist intakes ---------- */
 const SPECS = {
@@ -387,6 +471,15 @@ function genericSummary(spec, v) {
   return `<table style="border-collapse:collapse;font-size:14px">${rows}</table>`;
 }
 
+function genericRows(spec, v) {
+  return spec.fields.map(([k, label, , type]) => {
+    let val = v[k];
+    if (type === 'list') val = val.join(', ');
+    if (type === 'shows') val = val.map((r) => [r.date, r.city, r.venue, r.tickets].filter(Boolean).join(' / ')).join('\n');
+    return [label, val];
+  });
+}
+
 async function handleGeneric(kind, body, res) {
   const spec = SPECS[kind];
   const v = cleanGeneric(spec, body);
@@ -403,10 +496,12 @@ async function handleGeneric(kind, body, res) {
   }
   const name = v[spec.nameKey];
   const slug = slugify(name);
+  const summaryLine = kind === 'webapp' ? [v.app_type, (v.problem || '').slice(0, 300)].filter(Boolean).join(': ') : [v.act_type, v.genre, v.needs.join(', ')].filter(Boolean).join(' / ');
   const notion = await saveToNotion({
-    business_name: name, owner_email: v.owner_email, template: kind,
-    domain: v.domain || '', domain_status: v.domain_status || 'unsure',
-  }, slug, spec.label);
+    name, kind, template: '', owner: v.owner_name + (v.role ? ' (' + v.role + ')' : ''), email: v.owner_email, phone: v.owner_phone,
+    budget: v.budget, timeline: v.timeline || v.deadline || '', domain: v.domain || '', summary: summaryLine, rows: genericRows(spec, v),
+  });
+  const sms = textAlert(alertText(spec.label, name, v.budget, v.owner_name, v.owner_email, v.owner_phone, notion && notion.url));
   const toEmail = process.env.CONTACT_TO_EMAIL || 'info@heartykreation.com';
   const fromEmail = process.env.CONTACT_FROM_EMAIL || 'Hearty Kreation <info@heartykreation.com>';
   const summary = genericSummary(spec, v);
@@ -419,7 +514,7 @@ async function handleGeneric(kind, body, res) {
       <p style="margin:0 0 16px;color:#555">From ${escapeHtml(v.owner_name)} &lt;${escapeHtml(v.owner_email)}&gt;${v.owner_phone ? ', ' + escapeHtml(v.owner_phone) : ''}</p>
       ${summary}
       <p style="margin-top:20px;color:#555">Full answers attached as ${escapeHtml(slug)}-${kind}.json.</p>
-      ${notion === null ? '' : `<p style="color:#555">Saved to Notion: ${notion ? 'yes' : 'no, check the logs'}</p>`}
+      ${notionLine(notion)}
     </div>`;
   const clientHtml = `
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#1a1a1a">
@@ -453,6 +548,7 @@ async function handleGeneric(kind, body, res) {
       return;
     }
     if (!clientRes.ok) console.error('Resend API error (client copy):', clientRes.status, await clientRes.text());
+    await sms;
     res.status(200).json({ ok: true, slug });
   } catch (err) {
     console.error('Intake send failed:', err);
@@ -502,7 +598,11 @@ module.exports = async (req, res) => {
   }
 
   const client = buildClient(v);
-  const notion = await saveToNotion(v, client.slug);
+  const notion = await saveToNotion({
+    name: v.business_name, kind: 'website', template: TEMPLATES[v.template], owner: v.owner_name, email: v.owner_email, phone: v.owner_phone,
+    budget: '', timeline: '', domain: v.domain || DOMAIN_STATUS[v.domain_status], summary: `${v.business_type}, ${v.location}. ${v.elevator}`, rows: websiteRows(v),
+  });
+  const sms = textAlert(alertText('Website', v.business_name, TEMPLATES[v.template], v.owner_name, v.owner_email, v.owner_phone, notion && notion.url));
   const toEmail = process.env.CONTACT_TO_EMAIL || 'info@heartykreation.com';
   const fromEmail = process.env.CONTACT_FROM_EMAIL || 'Hearty Kreation <info@heartykreation.com>';
   const summary = summaryHtml(v);
@@ -513,7 +613,7 @@ module.exports = async (req, res) => {
       <p style="margin:0 0 16px;color:#555">From ${escapeHtml(v.owner_name)} &lt;${escapeHtml(v.owner_email)}&gt;${v.owner_phone ? ', ' + escapeHtml(v.owner_phone) : ''}</p>
       ${summary}
       <p style="margin-top:20px"><strong>Build file:</strong> ${escapeHtml(client.slug)}.json is attached. Drop it in templates/_engine/clients/, write the fields listed in <code>_todo</code>, remove <code>draft</code>, <code>_todo</code> and <code>_intake</code>, then run <code>python3 render.py clients/${escapeHtml(client.slug)}.json</code>.</p>
-      ${notion === null ? '' : `<p style="color:#555">Saved to Notion: ${notion ? 'yes' : 'no, check the logs'}</p>`}
+      ${notionLine(notion)}
     </div>`;
 
   const clientHtml = `
@@ -564,6 +664,7 @@ module.exports = async (req, res) => {
     }
     if (!clientRes.ok) console.error('Resend API error (client copy):', clientRes.status, await clientRes.text());
 
+    await sms;
     res.status(200).json({ ok: true, slug: client.slug });
   } catch (err) {
     console.error('Intake send failed:', err);
