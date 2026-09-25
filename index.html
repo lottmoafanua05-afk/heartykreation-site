@@ -778,6 +778,27 @@
     .hero-cursor-glow { display: none !important; }
     .sr, .sr-scale, .sr-left { opacity: 1 !important; transform: none !important; transition: none !important; }
   }
+
+  /* MOBILE TIGHTENING (phones only; desktop unchanged) */
+  @media (max-width: 767px) {
+    section.py-24 { padding-top: 64px; padding-bottom: 64px; }
+    section.py-28 { padding-top: 72px; padding-bottom: 72px; }
+    section .mb-14 { margin-bottom: 32px; }
+    section .card.p-8 { padding: 22px 20px; }
+    .service-row { grid-template-columns: 2.25rem 1fr; gap: 4px 10px; padding-top: 16px; padding-bottom: 16px; align-items: baseline; }
+    .service-row > :nth-child(3) { grid-column: 2; }
+    .service-row .service-arrow { display: none; }
+    .webapp-feature { padding: 16px 18px; }
+    .hk-m-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .hk-m-2 .stat-tile { padding: 18px 16px; }
+    .hk-m-2 .stat-value { font-size: 1.7rem; margin-bottom: 10px; }
+    .hk-m-2 .stat-tile h3 { font-size: 0.95rem; margin-bottom: 0; }
+    .hk-m-2 .stat-tile p { display: none; }
+    .hk-m-2 .process-step .text-5xl { font-size: 2rem; line-height: 1; margin-bottom: 8px; }
+    .hk-m-2 .process-step h3 { font-size: 1rem; }
+    .hk-m-2 .process-step p { font-size: 0.8rem; }
+    .logo-well { height: 150px; }
+  }
 </style>
 </head>
 <body>
@@ -1131,7 +1152,7 @@
         No account managers, no templates, no disappearing after launch. You work with the person who designs and builds your site, and you own the result outright.
       </p>
     </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 hk-m-2">
       <div class="stat-tile sr-scale" style="--sr-delay:0s">
         <div class="stat-value font-display">1:1</div>
         <h3 class="font-display font-semibold text-lg mb-2">Personal Partnership</h3>
@@ -1225,7 +1246,7 @@
   <div class="max-w-7xl mx-auto">
     <div class="eyebrow eyebrow-pulse mb-4 sr">05 / Process</div>
     <h2 class="font-display font-semibold text-4xl md:text-5xl mb-14 sr" style="--sr-delay:0.08s">A clear path from first<br>conversation to launch.</h2>
-    <div class="grid md:grid-cols-4 gap-8">
+    <div class="grid md:grid-cols-4 gap-8 hk-m-2">
       <div class="process-step pt-6 sr" style="--sr-delay:0s">
         <div class="font-display font-semibold text-5xl mb-4">01</div>
         <h3 class="font-display font-semibold text-lg mb-2">Discover</h3>
