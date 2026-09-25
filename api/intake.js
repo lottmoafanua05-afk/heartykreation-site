@@ -14,7 +14,7 @@
 //   1. To HK: the readable intake plus the draft client JSON as an attachment.
 //   2. To the client: a confirmation with a copy of their answers.
 // Every intake (all three kinds) is also saved to Notion and texted to HK
-// (email to the carrier's text gateway; Lott chose not to use Twilio).
+// via Telegram (Lott chose Telegram over Twilio and carrier email-to-text).
 // No npm dependencies, built-in fetch only.
 //
 // Required env vars (set in Vercel project settings):
@@ -29,9 +29,11 @@
 //                          Kind, Template, Status (selects), Owner, Budget, Timeline, Domain,
 //                          Summary (text), Email, Phone, Received (created time).
 //                          Full answers go in the page body.
-//   INTAKE_ALERT_SMS_EMAIL - carrier email-to-text address for Lott's phone, e.g.
-//                          7755550100@vtext.com (Verizon) or @tmomail.net (T-Mobile).
-//                          Comma separate to text more than one phone.
+//   TELEGRAM_BOT_TOKEN   - HK's Telegram bot token from @BotFather (intake alerts)
+//   TELEGRAM_CHAT_ID     - Lott's Telegram chat id (from @userinfobot); the bot
+//                          can only message him after he has sent it /start.
+//   INTAKE_ALERT_SMS_EMAIL - fallback only when Telegram is not set: carrier
+//                          email-to-text address, e.g. 7755550100@vtext.com.
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const URL_RE = /^https?:\/\/\S+\.\S+/i;
@@ -338,22 +340,40 @@ async function saveToNotion(rec) {
   }
 }
 
-// Texts HK about a new intake by emailing the phone carrier's email-to-text
-// address (for example 7755550100@vtext.com on Verizon, @tmomail.net on
-// T-Mobile) through Resend. No Twilio. Never throws; returns true when sent.
-async function textAlert(body) {
-  const to = process.env.INTAKE_ALERT_SMS_EMAIL;
-  const key = process.env.RESEND_API_KEY;
-  if (!to || !key) {
-    console.warn('INTAKE_ALERT_SMS_EMAIL is not set; no intake text sent.');
+// Alerts HK about a new intake. Primary: a Telegram message from HK's bot
+// (TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID). Fallback, only when Telegram is not
+// configured: carrier email-to-text via Resend (INTAKE_ALERT_SMS_EMAIL).
+// Never throws; returns true when an alert went out.
+async function sendTelegram(text) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+  if (!token || !chatId) return null;
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chatId, text: text.slice(0, 4000), disable_web_page_preview: true }),
+    });
+    if (!res.ok) {
+      console.error('Telegram alert failed:', res.status, await res.text());
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error('Telegram alert failed:', err);
     return false;
   }
+}
+
+async function sendEmailToText(body) {
+  const to = process.env.INTAKE_ALERT_SMS_EMAIL;
+  const key = process.env.RESEND_API_KEY;
+  if (!to || !key) return null;
   const from = process.env.CONTACT_FROM_EMAIL || 'Hearty Kreation <info@heartykreation.com>';
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-      // Carrier gateways turn the plain text body into the text message; keep it short.
       body: JSON.stringify({ from, to: to.split(',').map((x) => x.trim()).filter(Boolean), subject: 'HK intake', text: body.slice(0, 300) }),
     });
     if (!res.ok) {
@@ -365,6 +385,14 @@ async function textAlert(body) {
     console.error('Intake text (email to SMS) failed:', err);
     return false;
   }
+}
+
+async function textAlert(body) {
+  const tg = await sendTelegram(body);
+  if (tg !== null) return tg;
+  const sms = await sendEmailToText(body);
+  if (sms === null) console.warn('No intake alert channel configured (Telegram or email-to-text).');
+  return !!sms;
 }
 
 function alertText(kindLabel, name, extra, owner, email, phone, notionUrl) {
