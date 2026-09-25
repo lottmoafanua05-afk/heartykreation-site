@@ -26,3 +26,15 @@
 .hk-mobile .hk-group{padding-top:14px;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acid)}
 .hk-mobile a{display:block;padding:11px 0;border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--muted)}
 .hk-mobile a:hover{color:var(--acid)}
+
+/* Shared site footer (bottom bar), written by scripts/sync-nav.py */
+.hk-foot{display:flex;flex-direction:column;align-items:center;gap:18px;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--muted)}
+@media(min-width:768px){.hk-foot{flex-direction:row;justify-content:space-between}}
+.hk-foot-brand{display:flex;align-items:center;gap:10px}
+.hk-foot-brand i{width:7px;height:7px;border-radius:50%;background:var(--acid)}
+.hk-foot-links{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 22px}
+.hk-foot a{color:var(--muted);transition:color .2s}
+.hk-foot a:hover{color:var(--acid)}
+.hk-soc{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);transition:color .2s,border-color .2s}
+.hk-soc:hover{border-color:var(--acid)}
+.hk-soc svg{width:15px;height:15px}
