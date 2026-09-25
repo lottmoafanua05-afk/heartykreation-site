@@ -201,7 +201,14 @@ function buildClient(v) {
     address: v.address,
     social,
     form_button: 'Send',
+    // The site's lead form must reach the client, not HK. FormSubmit emails the
+    // address once to activate; forward that to the client or confirm it with them.
+    form_endpoint: 'https://formsubmit.co/ajax/' + (v.public_email || v.owner_email),
   };
+  if (theme === 'ironworks') {
+    client.promises_heading = '';
+    client.promises = [];
+  }
 
   client._todo = [
     !theme && 'theme: client chose "Not sure yet"; recommend one of ember, ironworks, coastline',
@@ -210,6 +217,8 @@ function buildClient(v) {
     'about_heading', 'proof_heading', 'contact_heading',
     !client.about_body.length && 'about_body',
     client.services.some((s) => !s.description) && 'services[].description for services left blank',
+    theme === 'ironworks' && 'promises_heading and 3 to 4 promises (Ironworks checklist card)',
+    'form_endpoint: confirm the lead form address with the client (FormSubmit sends a one time activation email)',
     !client.reviews.length && (v.reviews_link ? 'reviews: pull from reviews_link with client OK' : 'reviews: none provided, ask the client'),
   ].filter(Boolean);
 

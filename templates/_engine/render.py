@@ -124,9 +124,46 @@ def schema_block(client):
     return json.dumps(data)
 
 
+# Copy the writer must supply before a client build. The intake leaves these
+# empty on purpose; building with them blank would ship a half written page.
+REQUIRED_COPY = [
+    "business_name", "title", "meta_description", "headline", "subhead", "cta_label",
+    "services_heading", "about_heading", "contact_heading", "services", "hero_meta",
+]
+
+
+HK_FORM_DEFAULT = "https://formsubmit.co/ajax/info@heartykreation.com"
+
+
+def check_client(client, theme):
+    """Refuse drafts straight from the intake until the copy is written."""
+    if client.get("demo"):
+        return
+    problems = []
+    endpoint = client.get("form_endpoint", "")
+    if not endpoint or endpoint == HK_FORM_DEFAULT:
+        problems.append("form_endpoint is missing or points at Hearty Kreation; the site's leads must go to the client")
+    if theme.get("layout", {}).get("about_side") == "checklist" and not client.get("promises"):
+        problems.append("this theme shows a checklist card: add promises_heading and 3 to 4 promises")
+    if client.get("draft") or client.get("_todo"):
+        problems.append("still marked draft or has a _todo list (write the copy, then delete draft, _todo and _intake)")
+    if not client.get("theme"):
+        problems.append("no theme chosen")
+    empty = [k for k in REQUIRED_COPY if not client.get(k)]
+    if empty:
+        problems.append("empty copy fields: " + ", ".join(empty))
+    if client.get("reviews") and client.get("proof_heading", "") == "":
+        problems.append("reviews present but proof_heading is empty")
+    if problems:
+        raise SystemExit("Client file not ready, refusing to build:\n  - " + "\n  - ".join(problems))
+
+
 def build(client_path, out_path=None):
     client = load(client_path)
+    if not client.get("demo") and not client.get("theme"):
+        raise SystemExit("Client file not ready, refusing to build:\n  - no theme chosen")
     theme = load(os.path.join(HERE, "themes", client["theme"] + ".json"))
+    check_client(client, theme)
     c, f, lay = theme["colors"], theme["fonts"], theme["layout"]
 
     name = esc(client["business_name"])
@@ -208,7 +245,7 @@ def build(client_path, out_path=None):
         "contact_info": contact_info(client),
         "social_links": social_links(client),
         "form_button": esc(client.get("form_button", "Send message")),
-        "form_endpoint": client.get("form_endpoint", "https://formsubmit.co/ajax/info@heartykreation.com"),
+        "form_endpoint": client.get("form_endpoint", HK_FORM_DEFAULT),
     }
 
     with open(os.path.join(HERE, "base.html"), "r", encoding="utf-8") as fh:
@@ -220,11 +257,12 @@ def build(client_path, out_path=None):
     leftovers = re.findall(r"\{\{([a-z_]+)\}\}", page)
     if leftovers:
         raise SystemExit("Unfilled placeholders, refusing to write: " + ", ".join(sorted(set(leftovers))))
-    if not demo and "demo-ribbon" in page:
+    # Look for the ribbon element itself; the .demo-ribbon CSS rule is always in base.html.
+    if not demo and '<div class="demo-ribbon"' in page:
         raise SystemExit("Demo ribbon markup present in a client build, refusing to write.")
 
     out = out_path or os.path.join(HERE, "..", client["slug"], "index.html")
-    os.makedirs(os.path.dirname(out), exist_ok=True)
+    os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
     with open(out, "w", encoding="utf-8") as fh:
         fh.write(page)
     print("wrote", os.path.relpath(out, HERE), f"({len(page)} bytes, theme: {theme['name']})")
