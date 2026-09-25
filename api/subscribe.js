@@ -53,7 +53,8 @@ function parseJsonBody(req) {
 // Stores the lead in Notion. Never throws: a Notion outage must not stop the
 // visitor getting the guide they asked for.
 async function saveToNotion(values) {
-  const token = process.env.NOTION_TOKEN;
+  // Vercel has this saved as Notion_Token; env names are case sensitive, so accept both.
+  const token = process.env.NOTION_TOKEN || process.env.Notion_Token;
   const databaseId = process.env.NOTION_LEADS_DB_ID;
   if (!token || !databaseId) {
     console.warn('Notion is not configured; lead saved to email only:', values.email);

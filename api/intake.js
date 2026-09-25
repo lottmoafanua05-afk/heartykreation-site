@@ -295,7 +295,8 @@ function richText(value) {
 // rec: { name, kind, template, owner, email, phone, budget, timeline, domain, summary, rows: [[label, value]] }
 // Returns { ok: true, url } / { ok: false } / null when Notion is not configured. Never throws.
 async function saveToNotion(rec) {
-  const token = process.env.NOTION_TOKEN;
+  // Vercel has this saved as Notion_Token; env names are case sensitive, so accept both.
+  const token = process.env.NOTION_TOKEN || process.env.Notion_Token;
   const db = process.env.NOTION_INTAKE_DB_ID;
   if (!token || !db) return null;
   const props = {
