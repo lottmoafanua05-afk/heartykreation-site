@@ -47,22 +47,54 @@
 </head>
 <body>
 
-<nav class="fixed top-0 w-full z-50 backdrop-blur bg-[#0B0B0C]/85 border-b border-[var(--line)]">
+<link rel="stylesheet" href="/css/nav.css">
+<nav id="site-nav" class="fixed top-0 w-full z-50 backdrop-blur bg-[#0B0B0C]/85 border-b border-[var(--line)]">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
     <a href="/" class="font-display font-semibold text-base sm:text-lg tracking-tight whitespace-nowrap flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-[var(--acid)]"></span>
       HEARTY KREATION
     </a>
-    <div class="hidden md:flex items-center gap-7 text-sm font-mono" style="color:var(--muted)">
-      <a href="/" class="hover:text-[var(--acid)] transition">Home</a>
-      <a href="/#services" class="hover:text-[var(--acid)] transition">Services</a>
-      <a href="/templates" class="hover:text-[var(--acid)] transition">Templates</a>
-      <a href="/diy-website-guide" class="hover:text-[var(--acid)] transition">Free Guide</a>
-      <a href="/#contact" class="hover:text-[var(--acid)] transition">Contact</a>
+    <div class="hk-links">
+      <div class="hk-dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Services <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5l3 3 3-3"/></svg></button>
+        <div class="hk-panel">
+          <a href="/templates">Websites<small>Landing pages from $75</small></a>
+          <a href="/#web-apps">Web Apps<small>Custom tools and dashboards</small></a>
+          <a href="/#artists">Artists &amp; Labels<small>Sites for music acts</small></a>
+          <a href="/#services">All services</a>
+        </div>
+      </div>
+      <a href="/#builds">Work</a>
+      <div class="hk-dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Resources <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5l3 3 3-3"/></svg></button>
+        <div class="hk-panel">
+          <a href="/blog/">Blog<small>Notes from the work</small></a>
+          <a href="/diy-website-guide">Free DIY Guide<small>Build your own site</small></a>
+        </div>
+      </div>
+      <a href="/#about">About</a>
     </div>
-    <a href="/#contact" class="btn-primary font-mono font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 rounded-full whitespace-nowrap">Start a Project &rarr;</a>
+    <div class="flex items-center gap-2">
+      <a href="/#contact" class="btn-primary font-mono font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 rounded-full whitespace-nowrap">Start a Project &rarr;</a>
+      <button type="button" class="hk-burger" aria-label="Open menu" aria-expanded="false" aria-controls="hk-mobile"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div id="hk-mobile" class="hk-mobile">
+    <a href="/">Home</a>
+    <div class="hk-group">Services</div>
+    <a href="/templates">Websites from $75</a>
+    <a href="/#web-apps">Web Apps</a>
+    <a href="/#artists">Artists &amp; Labels</a>
+    <div class="hk-group">Company</div>
+    <a href="/#builds">Work</a>
+    <a href="/#about">About</a>
+    <a href="/#contact">Contact</a>
+    <div class="hk-group">Resources</div>
+    <a href="/blog/">Blog</a>
+    <a href="/diy-website-guide">Free DIY Guide</a>
   </div>
 </nav>
+<script src="/js/nav.js" defer></script>
 
 <article class="pt-36 pb-16 px-6">
   <div class="max-w-2xl mx-auto post">

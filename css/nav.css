@@ -1,0 +1,28 @@
+/* Shared site nav (all pages). Edit links in each page's <nav id="site-nav">; run scripts/sync-nav.py to copy changes. */
+.hk-links{display:none;align-items:center;gap:1.75rem;font-family:'JetBrains Mono',monospace;font-size:.875rem;color:var(--muted)}
+@media(min-width:768px){.hk-links{display:flex}}
+.hk-links>a,.hk-dd>button{color:inherit;background:none;border:0;padding:0;font:inherit;cursor:pointer;transition:color .2s}
+.hk-links>a:hover,.hk-dd>button:hover,.hk-dd.open>button{color:var(--acid)}
+.hk-dd{position:relative}
+.hk-dd>button{display:inline-flex;align-items:center;gap:.35rem}
+.hk-dd>button svg{width:10px;height:10px;transition:transform .2s}
+.hk-dd.open>button svg{transform:rotate(180deg)}
+.hk-panel{display:none;position:absolute;top:calc(100% + 14px);left:-14px;min-width:230px;padding:8px;background:#131315;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.hk-panel::before{content:"";position:absolute;left:0;right:0;top:-16px;height:16px}
+.hk-dd.open .hk-panel{display:block}
+@media(hover:hover) and (min-width:768px){.hk-dd:hover .hk-panel{display:block}}
+.hk-panel a{display:block;padding:10px 12px;border-radius:9px;color:var(--ink)}
+.hk-panel a small{display:block;margin-top:2px;font-size:.72rem;color:var(--muted)}
+.hk-panel a:hover{background:#1c1c1f;color:var(--acid)}
+.hk-burger{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:0 10px;border:1px solid var(--line);border-radius:999px;background:var(--panel,#131315)}
+.hk-burger span{display:block;height:1.5px;background:var(--ink);transition:transform .25s,opacity .2s}
+.menu-open .hk-burger span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.menu-open .hk-burger span:nth-child(2){opacity:0}
+.menu-open .hk-burger span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+@media(min-width:768px){.hk-burger{display:none}}
+.hk-mobile{display:none;border-top:1px solid var(--line);background:rgba(11,11,12,.97);padding:6px 1rem 14px}
+.menu-open .hk-mobile{display:block}
+@media(min-width:768px){.hk-mobile,.menu-open .hk-mobile{display:none}}
+.hk-mobile .hk-group{padding-top:14px;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acid)}
+.hk-mobile a{display:block;padding:11px 0;border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--muted)}
+.hk-mobile a:hover{color:var(--acid)}
