@@ -1,6 +1,9 @@
-// Lead magnet capture endpoint: POST /api/subscribe
-// Captures an email in exchange for the free DIY website guide PDF, stores the
-// lead in Notion, emails the download link via Resend, and notifies HK.
+// Email capture endpoint: POST /api/subscribe
+// Two uses, picked by `source`:
+//   - DIY guide (default): stores the lead in Notion, emails the guide PDF link
+//     via Resend, and notifies HK.
+//   - "Blog updates": stores the subscriber in Notion (Source = Blog updates),
+//     sends a short welcome email, and notifies HK.
 // No npm dependencies, built-in fetch only.
 //
 // Required env vars (set in Vercel project settings):
@@ -13,7 +16,7 @@
 //   GUIDE_DOWNLOAD_URL  - PDF location (default /downloads/hk-diy-website-guide.pdf)
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const SOURCES = ['DIY guide page', 'Website health audit', 'Contact form', 'Other'];
+const SOURCES = ['DIY guide page', 'Website health audit', 'Contact form', 'Blog updates', 'Other'];
 const SITE = 'https://heartykreation.com';
 const DEFAULT_PATH = '/downloads/hk-diy-website-guide.pdf';
 
@@ -119,6 +122,54 @@ module.exports = async (req, res) => {
 
   if (!email || email.length > 320 || !EMAIL_RE.test(email)) {
     res.status(422).json({ ok: false, error: 'Enter a valid email address.', fieldErrors: { email: 'Enter a valid email address.' } });
+    return;
+  }
+
+  if (source === 'Blog updates') {
+    const blogValues = { email, name, source };
+    const blogSaved = await saveToNotion(blogValues);
+    const key = process.env.RESEND_API_KEY;
+    if (!key) {
+      console.error('RESEND_API_KEY is not configured.');
+      res.status(200).json({ ok: true, emailed: false });
+      return;
+    }
+    const to = process.env.CONTACT_TO_EMAIL || 'info@heartykreation.com';
+    const from = process.env.CONTACT_FROM_EMAIL || 'Hearty Kreation <info@heartykreation.com>';
+    const post = String(body.post || '').trim().slice(0, 300);
+    const sendMail = (payload) =>
+      fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    const welcomeHtml = `
+      <div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#1a1a1a">
+        <p>Hi,</p>
+        <p>You are on the list. When a new post goes up on the Hearty Kreation blog, it will land here.</p>
+        <p>We write about the systems small businesses and creators actually need: websites you own, customer lists you control, and tools that save you time. No filler.</p>
+        <p><a href="${SITE}/blog/" style="display:inline-block;background:#D8FF3E;color:#0B0B0C;font-weight:bold;text-decoration:none;padding:12px 22px;border-radius:999px">Read the latest posts</a></p>
+        <p>If this was a mistake, just reply "unsubscribe" and I will take you off the list.</p>
+        <p>Lott<br>Hearty Kreation<br><a href="${SITE}" style="color:#4a4a4a">heartykreation.com</a></p>
+      </div>
+    `;
+    const notify = `
+      <h2>New blog subscriber</h2>
+      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+      ${post ? `<p><strong>Signed up on:</strong> ${escapeHtml(post)}</p>` : ''}
+      <p><strong>Saved to Notion:</strong> ${blogSaved ? 'yes' : 'no, check the logs'}</p>
+    `;
+    try {
+      const [welcomeRes] = await Promise.all([
+        sendMail({ from, to: [email], reply_to: to, subject: 'You are subscribed to the Hearty Kreation blog', html: welcomeHtml }),
+        sendMail({ from, to: [to], subject: `New blog subscriber: ${email}`, html: notify }),
+      ]);
+      if (!welcomeRes.ok) console.error('Resend API error:', welcomeRes.status, await welcomeRes.text());
+      res.status(200).json({ ok: true, emailed: welcomeRes.ok });
+    } catch (err) {
+      console.error('Blog subscribe send failed:', err);
+      res.status(200).json({ ok: true, emailed: false });
+    }
     return;
   }
 

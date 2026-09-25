@@ -69,8 +69,77 @@
     <p>Posts on website systems, workflow design, and client delivery, drawn from the projects we are actually doing. When something is worth sharing, it goes here.</p>
 
     <p>Have a question or a topic you would like us to cover? <a href="/#contact">Get in touch</a>.</p>
+    <!-- BLOG-SHARE -->
+    <div class="mt-10 pt-6" style="border-top:1px solid var(--line)">
+      <div class="eyebrow mb-3">Share this article</div>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" id="share-native" class="font-mono text-xs px-4 py-2 rounded-full" style="border:1px solid var(--line);color:var(--ink);text-decoration:none;background:var(--panel)" hidden>Share</button>
+        <button type="button" id="share-copy" class="font-mono text-xs px-4 py-2 rounded-full" style="border:1px solid var(--line);color:var(--ink);text-decoration:none;background:var(--panel)" data-url="https://heartykreation.com/blog/welcome-to-the-blog.html">Copy link</button>
+        <a class="font-mono text-xs px-4 py-2 rounded-full" style="border:1px solid var(--line);color:var(--ink);text-decoration:none;background:var(--panel)" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fheartykreation.com%2Fblog%2Fwelcome-to-the-blog.html" target="_blank" rel="noopener">Facebook</a>
+        <a class="font-mono text-xs px-4 py-2 rounded-full" style="border:1px solid var(--line);color:var(--ink);text-decoration:none;background:var(--panel)" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fheartykreation.com%2Fblog%2Fwelcome-to-the-blog.html&amp;text=Welcome%20to%20the%20Hearty%20Kreation%20blog" target="_blank" rel="noopener">X</a>
+        <a class="font-mono text-xs px-4 py-2 rounded-full" style="border:1px solid var(--line);color:var(--ink);text-decoration:none;background:var(--panel)" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fheartykreation.com%2Fblog%2Fwelcome-to-the-blog.html" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="font-mono text-xs px-4 py-2 rounded-full" style="border:1px solid var(--line);color:var(--ink);text-decoration:none;background:var(--panel)" href="mailto:?subject=Welcome%20to%20the%20Hearty%20Kreation%20blog&amp;body=https%3A%2F%2Fheartykreation.com%2Fblog%2Fwelcome-to-the-blog.html">Email</a>
+      </div>
+    </div>
+    <script>
+    (function () {
+      var copy = document.getElementById('share-copy'), nat = document.getElementById('share-native');
+      var url = copy.getAttribute('data-url'), title = document.querySelector('h1').textContent;
+      copy.addEventListener('click', function () {
+        var done = function () { copy.textContent = 'Link copied'; setTimeout(function () { copy.textContent = 'Copy link'; }, 2000); };
+        if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function () { prompt('Copy this link:', url); });
+        else prompt('Copy this link:', url);
+      });
+      if (navigator.share) { nat.hidden = false; nat.addEventListener('click', function () { navigator.share({ title: title, url: url }).catch(function () {}); }); }
+    })();
+    </script>
+    <!-- /BLOG-SHARE -->
   </div>
 </article>
+
+<!-- BLOG-SUBSCRIBE -->
+<section id="subscribe" class="px-6 pb-20">
+  <div class="max-w-2xl mx-auto rounded-2xl p-7 sm:p-9" style="background:var(--panel);border:1px solid var(--line)">
+    <div class="eyebrow mb-3">Blog updates</div>
+    <h2 class="font-display font-semibold text-2xl sm:text-3xl mb-2">Get new posts in your inbox</h2>
+    <p class="text-sm mb-5" style="color:var(--muted);line-height:1.7">Systems, websites, and ownership lessons for small businesses and creators. One email when a new post goes up. No spam, unsubscribe anytime.</p>
+    <form id="blog-sub-form" class="flex flex-col sm:flex-row gap-3" novalidate>
+      <label for="blog-sub-email" class="sr-only">Email address</label>
+      <input id="blog-sub-email" name="email" type="email" required maxlength="320" autocomplete="email" placeholder="you@yourbusiness.com" class="flex-1 rounded-full px-5 py-3 text-sm" style="background:var(--bg);border:1px solid var(--line);color:var(--ink)">
+      <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><input name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <button type="submit" id="blog-sub-btn" class="btn-primary font-mono font-semibold text-sm px-6 py-3 rounded-full whitespace-nowrap">Subscribe &rarr;</button>
+    </form>
+    <p id="blog-sub-status" class="text-sm mt-3" role="status" aria-live="polite" style="color:var(--muted);min-height:1.2em"></p>
+  </div>
+</section>
+<script>
+(function () {
+  var form = document.getElementById('blog-sub-form');
+  if (!form) return;
+  var btn = document.getElementById('blog-sub-btn');
+  var status = document.getElementById('blog-sub-status');
+  function show(msg, err) { status.textContent = msg; status.style.color = err ? 'var(--clay)' : 'var(--acid)'; }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = form.email.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { show('Enter a valid email address.', true); return; }
+    btn.disabled = true; btn.textContent = 'Subscribing...';
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, website: form.website.value, source: 'Blog updates', post: location.pathname })
+    })
+      .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, b: b }; }); })
+      .then(function (x) {
+        if (x.ok && x.b.ok) { form.reset(); show('You are subscribed. Check your inbox for a welcome email.', false); }
+        else { show((x.b && x.b.error) || 'Something went wrong. Please try again.', true); }
+      })
+      .catch(function () { show('Network error, please try again in a moment.', true); })
+      .finally(function () { btn.disabled = false; btn.innerHTML = 'Subscribe &rarr;'; });
+  });
+})();
+</script>
+<!-- /BLOG-SUBSCRIBE -->
 
 <footer class="border-t border-[var(--line)] pt-16 pb-12 px-6">
   <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
