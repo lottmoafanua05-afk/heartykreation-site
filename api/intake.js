@@ -298,7 +298,7 @@ async function saveToNotion(rec) {
   // Vercel has this saved as Notion_Token; env names are case sensitive, so accept both.
   const token = process.env.NOTION_TOKEN || process.env.Notion_Token;
   const db = process.env.NOTION_INTAKE_DB_ID;
-  if (!token || !db) return null;
+  if (!token || !db) return { ok: false, error: `not configured (token ${token ? 'set' : 'missing'}, database id ${db ? 'set' : 'missing'})` };
   const props = {
     Business: { title: richText(rec.name) },
     Kind: { select: { name: KIND_LABELS[rec.kind] || 'Website' } },
@@ -324,14 +324,17 @@ async function saveToNotion(rec) {
       body: JSON.stringify({ parent: { database_id: db }, properties: props, children: children.slice(0, 100) }),
     });
     if (!res.ok) {
-      console.error('Notion API error:', res.status, await res.text());
-      return { ok: false };
+      const detail = await res.text();
+      console.error('Notion API error:', res.status, detail);
+      let message = detail;
+      try { message = JSON.parse(detail).message || detail; } catch (e) {}
+      return { ok: false, error: `${res.status}: ${String(message).slice(0, 300)}` };
     }
     const page = await res.json().catch(() => ({}));
     return { ok: true, url: page.url || '' };
   } catch (err) {
     console.error('Notion write failed:', err);
-    return { ok: false };
+    return { ok: false, error: String(err && err.message || err).slice(0, 300) };
   }
 }
 
@@ -374,8 +377,9 @@ function alertText(kindLabel, name, extra, owner, email, phone, notionUrl) {
 }
 
 function notionLine(notion) {
-  if (notion === null) return '';
-  return `<p style="color:#555">Saved to Notion: ${notion.ok ? (notion.url ? `<a href="${escapeHtml(notion.url)}">open the page</a>` : 'yes') : 'no, check the Vercel logs'}</p>`;
+  if (!notion) return '';
+  if (notion.ok) return `<p style="color:#555">Saved to Notion: ${notion.url ? `<a href="${escapeHtml(notion.url)}">open the page</a>` : 'yes'}</p>`;
+  return `<p style="color:#b00">Not saved to Notion: ${escapeHtml(notion.error || 'unknown error')}</p>`;
 }
 
 function websiteRows(v) {
