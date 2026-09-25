@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start Your Website: Hearty Kreation</title>
+<meta name="description" content="Pick a template and tell us about your business. We write and build your single page website from your answers and have it live within 24 hours of your domain connecting.">
+<link rel="canonical" href="https://heartykreation.com/start">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hearty Kreation">
+<meta property="og:title" content="Start your website: Hearty Kreation">
+<meta property="og:description" content="Pick a style, answer a few questions, and we build your site from your answers.">
+<meta property="og:url" content="https://heartykreation.com/start">
+<meta property="og:image" content="https://heartykreation.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #F4F1EA; --bg: #0B0B0C; --panel: #131315; --panel-2: #17171A;
+    --line: #26262A; --acid: #D8FF3E; --clay: #FF6A3D; --muted: #9A968E; --muted-2: #6B6862;
+  }
+  * { box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  .font-display { font-family: 'Fraunces', serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid var(--acid); outline-offset: 3px; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acid); font-weight: 500; }
+  .noise { background-image: radial-gradient(circle at 20% 10%, rgba(216,255,62,0.07), transparent 40%), radial-gradient(circle at 85% 30%, rgba(255,106,61,0.08), transparent 40%); }
+  .btn-primary { background: var(--acid); color: #0B0B0C; font-weight: 700; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(216,255,62,0.4); }
+  .btn-primary:disabled { opacity: .6; transform: none; box-shadow: none; cursor: wait; }
+  .btn-outline { border: 1px solid var(--line); color: var(--ink); transition: border-color 0.2s ease, color 0.2s ease; }
+  .btn-outline:hover { border-color: var(--acid); color: var(--acid); }
+  .panel { background: var(--panel); border: 1px solid var(--line); }
+  label.f { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .hint { display: block; font-size: 0.8rem; color: var(--muted-2); font-weight: 400; margin-top: 0.15rem; }
+  .req { color: var(--clay); }
+  input[type=text], input[type=email], input[type=tel], input[type=url], textarea, select {
+    width: 100%; background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 12px;
+    padding: 0.75rem 0.9rem; font-size: 0.95rem; font-family: inherit;
+  }
+  textarea { min-height: 96px; resize: vertical; line-height: 1.55; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--acid); box-shadow: 0 0 0 4px rgba(216,255,62,0.12); }
+  input::placeholder, textarea::placeholder { color: var(--muted-2); }
+  .invalid { border-color: var(--clay) !important; }
+  .err { color: var(--clay); font-size: 0.8rem; margin-top: 0.35rem; min-height: 0; }
+  .field { margin-bottom: 1.25rem; }
+  .step { display: none; }
+  .step.active { display: block; }
+  .tpl { position: relative; display: block; cursor: pointer; }
+  .tpl input { position: absolute; opacity: 0; pointer-events: none; }
+  .tpl .box { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--panel-2); transition: border-color .2s ease, transform .2s ease; height: 100%; }
+  .tpl:hover .box { border-color: var(--muted-2); }
+  .tpl input:checked + .box { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid); }
+  .tpl input:focus-visible + .box { outline: 2px solid var(--acid); outline-offset: 3px; }
+  .tpl img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; border-bottom: 1px solid var(--line); }
+  .tpl .check { position: absolute; top: 10px; right: 10px; width: 26px; height: 26px; border-radius: 50%; background: var(--acid); color: #0B0B0C; display: none; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+  .tpl input:checked ~ .check { display: flex; }
+  .bar { height: 4px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; width: 0; background: var(--acid); transition: width .3s ease; }
+  .row-card { border: 1px solid var(--line); border-radius: 14px; padding: 1rem; background: var(--panel-2); margin-bottom: 0.9rem; }
+  .x { color: var(--muted-2); font-size: 0.8rem; }
+  .x:hover { color: var(--clay); }
+  .chip { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid var(--line); border-radius: 999px; padding: .55rem .95rem; cursor: pointer; font-size: .9rem; margin: 0 .4rem .5rem 0; }
+  .chip input { accent-color: #D8FF3E; }
+  .chip:has(input:checked) { border-color: var(--acid); color: var(--acid); }
+  footer .footer-links a:hover { color: var(--acid); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<nav class="fixed top-0 w-full z-50 backdrop-blur bg-[#0B0B0C]/85 border-b border-[var(--line)]">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+    <a href="/" class="font-display font-semibold text-base sm:text-lg tracking-tight whitespace-nowrap flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-[var(--acid)]"></span>
+      HEARTY KREATION
+    </a>
+    <div class="hidden md:flex items-center gap-7 text-sm font-mono" style="color:var(--muted)">
+      <a href="/" class="hover:text-[var(--acid)] transition">Home</a>
+      <a href="/templates" class="hover:text-[var(--acid)] transition">Templates</a>
+      <a href="/blog/" class="hover:text-[var(--acid)] transition">Blog</a>
+      <a href="/#contact" class="hover:text-[var(--acid)] transition">Contact</a>
+    </div>
+    <a href="/templates" class="btn-outline font-mono font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 rounded-full whitespace-nowrap">&larr; Templates</a>
+  </div>
+</nav>
+
+<section class="noise pt-32 pb-10 px-5 sm:px-6 border-b border-[var(--line)]">
+  <div class="max-w-3xl mx-auto">
+    <div class="eyebrow mb-4">Website intake</div>
+    <h1 class="font-display font-semibold text-4xl md:text-5xl leading-tight mb-4">Tell us about your business. We write and build the site.</h1>
+    <p class="text-lg" style="color:var(--muted)">Six short steps, about ten minutes. Your answers become the words on your website, so plain and specific beats polished. Skip anything you are unsure of and we will fill it in with you.</p>
+  </div>
+</section>
+
+<main class="py-12 px-5 sm:px-6">
+  <div class="max-w-3xl mx-auto">
+
+    <div class="mb-8" id="progress" aria-hidden="true">
+      <div class="flex justify-between font-mono text-xs mb-2" style="color:var(--muted)">
+        <span id="step-label">Step 1 of 6: Style</span><span id="step-pct">0%</span>
+      </div>
+      <div class="bar"><i id="bar"></i></div>
+    </div>
+
+    <form id="intake" data-kind="website" data-key="hk-intake-website" novalidate>
+      <!-- honeypot -->
+      <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Website <input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+
+      <!-- STEP 1: STYLE -->
+      <fieldset class="step active" data-title="Style">
+        <legend class="font-display font-semibold text-2xl sm:text-3xl mb-2">Pick your style</legend>
+        <p class="mb-6" style="color:var(--muted)">Your site is built from one of these. Colors can be matched to your brand. <a href="/templates" target="_blank" rel="noopener" style="color:var(--acid);text-decoration:underline">See the live demos</a>.</p>
+        <div class="grid sm:grid-cols-2 gap-4" id="tpl-grid">
+          <label class="tpl"><input type="radio" name="template" value="ember" required data-msg="Pick a style, or choose &quot;Not sure yet&quot;."><div class="box"><img src="/templates/previews/ember.jpg" alt="" loading="lazy" width="1000" height="625"><div class="p-4"><div class="font-display font-semibold text-lg">Ember</div><div class="text-sm" style="color:var(--muted)">Food trucks, restaurants, bars, catering</div></div></div><span class="check">&#10003;</span></label>
+          <label class="tpl"><input type="radio" name="template" value="ironworks"><div class="box"><img src="/templates/previews/ironworks.jpg" alt="" loading="lazy" width="1000" height="625"><div class="p-4"><div class="font-display font-semibold text-lg">Ironworks</div><div class="text-sm" style="color:var(--muted)">Trades, contractors, roofing, auto, landscaping</div></div></div><span class="check">&#10003;</span></label>
+          <label class="tpl"><input type="radio" name="template" value="coastline"><div class="box"><img src="/templates/previews/coastline.jpg" alt="" loading="lazy" width="1000" height="625"><div class="p-4"><div class="font-display font-semibold text-lg">Coastline</div><div class="text-sm" style="color:var(--muted)">Salons, spas, studios, wellness, professional services</div></div></div><span class="check">&#10003;</span></label>
+          <label class="tpl"><input type="radio" name="template" value="unsure"><div class="box flex flex-col justify-center p-6" style="min-height:100%"><div class="font-display font-semibold text-lg mb-1">Not sure yet</div><div class="text-sm" style="color:var(--muted)">Tell us about your business and we will recommend the best fit before we build.</div></div><span class="check">&#10003;</span></label>
+        </div>
+        <p class="err" data-err="template"></p>
+        <div class="field mt-6">
+          <label class="f" for="brand_colors">Brand colors <span class="hint">Optional. Hex codes, or plain words like "navy and gold". Leave blank to keep the template colors.</span></label>
+          <input id="brand_colors" name="brand_colors" type="text" maxlength="200" placeholder="e.g. black, gold, and white">
+        </div>
+      </fieldset>
+
+      <!-- STEP 2: BUSINESS -->
+      <fieldset class="step" data-title="Your business">
+        <legend class="font-display font-semibold text-2xl sm:text-3xl mb-6">Your business</legend>
+        <div class="field">
+          <label class="f" for="business_name">Business name <span class="req">*</span></label>
+          <input id="business_name" name="business_name" type="text" maxlength="120" required data-msg="Enter your business name." autocomplete="organization">
+          <p class="err" data-err="business_name"></p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-x-4">
+          <div class="field">
+            <label class="f" for="business_type">What kind of business? <span class="req">*</span></label>
+            <input id="business_type" name="business_type" type="text" maxlength="120" required data-msg="Tell us what kind of business it is." placeholder="e.g. Mobile auto detailing">
+            <p class="err" data-err="business_type"></p>
+          </div>
+          <div class="field">
+            <label class="f" for="location">City or service area <span class="req">*</span></label>
+            <input id="location" name="location" type="text" maxlength="160" required data-msg="Enter your city or service area." placeholder="e.g. Reno and Sparks, NV">
+            <p class="err" data-err="location"></p>
+          </div>
+        </div>
+        <div class="field">
+          <label class="f" for="elevator">In one or two sentences, what do you do and who is it for? <span class="req">*</span></label>
+          <textarea id="elevator" name="elevator" maxlength="600" required data-minlen="15" data-msg="A sentence or two here, please. This drives the whole page." placeholder="We detail cars at your home or office in Reno and Sparks. Most of our customers are busy parents and commuters who do not have time to sit at a car wash."></textarea>
+          <p class="err" data-err="elevator"></p>
+        </div>
+        <div class="field">
+          <label class="f" for="different">What makes you different from the other options nearby? <span class="hint">This becomes the headline. The more specific, the better.</span></label>
+          <textarea id="different" name="different" maxlength="800" placeholder="We come to you, we use waterless products so it works in any parking lot, and we text a before and after photo when we are done."></textarea>
+        </div>
+        <div class="field">
+          <label class="f" for="headline">Have a headline or slogan in mind? <span class="hint">Optional. Leave blank and we will write it.</span></label>
+          <input id="headline" name="headline" type="text" maxlength="140">
+        </div>
+      </fieldset>
+
+      <!-- STEP 3: SERVICES -->
+      <fieldset class="step" data-title="Services">
+        <legend class="font-display font-semibold text-2xl sm:text-3xl mb-2">What you sell</legend>
+        <p class="mb-6" style="color:var(--muted)">List up to six services, products, or packages. Short descriptions are fine. Prices are optional; leave them out if you quote per job.</p>
+        <div data-repeater="services" data-max="6" data-min-rows="3" data-label="Service" data-require="name" data-required data-msg="Add at least one service or product.">
+          <template>
+            <div class="grid sm:grid-cols-3 gap-3 mb-3">
+              <input class="sm:col-span-2" type="text" data-k="name" maxlength="80" aria-label="Service name" placeholder="Service name">
+              <input type="text" data-k="price" maxlength="40" aria-label="Price" placeholder="Price (optional)">
+            </div>
+            <input type="text" data-k="description" maxlength="220" aria-label="Short description" placeholder="One line on what is included">
+          </template>
+        </div>
+        <p class="err" data-err="services"></p>
+        <button type="button" data-add="services" class="btn-outline font-mono text-sm px-5 py-2.5 rounded-full">+ Add another</button>
+        <div class="field mt-8">
+          <span class="f">What should visitors do first? <span class="req">*</span></span>
+          <div id="cta-chips">
+            <label class="chip"><input type="radio" name="cta_action" value="Call us" checked> Call</label>
+            <label class="chip"><input type="radio" name="cta_action" value="Book online"> Book online</label>
+            <label class="chip"><input type="radio" name="cta_action" value="Get a quote"> Get a quote</label>
+            <label class="chip"><input type="radio" name="cta_action" value="Order now"> Order</label>
+            <label class="chip"><input type="radio" name="cta_action" value="Send a message"> Send a message</label>
+          </div>
+        </div>
+        <div class="field">
+          <label class="f" for="cta_link">Booking, ordering, or quote link <span class="hint">Optional. Square, Calendly, Vagaro, DoorDash, and so on.</span></label>
+          <input id="cta_link" name="cta_link" type="url" maxlength="500" placeholder="https://">
+          <p class="err" data-err="cta_link"></p>
+        </div>
+      </fieldset>
+
+      <!-- STEP 4: ABOUT + PROOF -->
+      <fieldset class="step" data-title="About and reviews">
+        <legend class="font-display font-semibold text-2xl sm:text-3xl mb-6">About you and proof</legend>
+        <div class="field">
+          <label class="f" for="about">Your story <span class="hint">Who runs it, how it started, why you do it. Two to five sentences.</span></label>
+          <textarea id="about" name="about" maxlength="1500" style="min-height:130px"></textarea>
+        </div>
+        <div class="field">
+          <span class="f">Quick numbers <span class="hint">Optional. Up to three, like "8 years in business", "4.9 on Google", "2,000 cars washed".</span></span>
+          <div class="grid sm:grid-cols-3 gap-3">
+            <input name="stat_1" type="text" maxlength="60" aria-label="Number one" placeholder="8 years in business">
+            <input name="stat_2" type="text" maxlength="60" aria-label="Number two" placeholder="4.9 on Google">
+            <input name="stat_3" type="text" maxlength="60" aria-label="Number three" placeholder="Licensed and insured">
+          </div>
+        </div>
+        <div class="field">
+          <span class="f">Customer reviews <span class="hint">Paste up to three real reviews with the customer's first name and last initial. Only reviews customers actually left.</span></span>
+          <div data-repeater="reviews" data-max="3" data-min-rows="3" data-fixed data-label="Review" data-require="text">
+            <template>
+              <textarea data-k="text" maxlength="500" aria-label="Review text" placeholder="What the customer said" style="min-height:70px" class="mb-3"></textarea>
+              <input type="text" data-k="who" maxlength="60" aria-label="Customer name" placeholder="First name and last initial">
+            </template>
+          </div>
+        </div>
+        <div class="field">
+          <label class="f" for="reviews_link">Or link to your reviews <span class="hint">Google, Yelp, or Facebook page. We can pull a few with your OK.</span></label>
+          <input id="reviews_link" name="reviews_link" type="url" maxlength="500" placeholder="https://">
+          <p class="err" data-err="reviews_link"></p>
+        </div>
+      </fieldset>
+
+      <!-- STEP 5: CONTACT INFO SHOWN ON SITE -->
+      <fieldset class="step" data-title="Contact details">
+        <legend class="font-display font-semibold text-2xl sm:text-3xl mb-2">How customers reach you</legend>
+        <p class="mb-6" style="color:var(--muted)">This is what shows on the website. Leave off anything you do not want public.</p>
+        <div class="grid sm:grid-cols-2 gap-x-4">
+          <div class="field">
+            <label class="f" for="public_phone">Business phone</label>
+            <input id="public_phone" name="public_phone" type="tel" maxlength="40" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label class="f" for="public_email">Business email</label>
+            <input id="public_email" name="public_email" type="email" maxlength="200">
+            <p class="err" data-err="public_email"></p>
+          </div>
+        </div>
+        <div class="field">
+          <label class="f" for="address">Address or service area line <span class="hint">e.g. "Pyramid Way, Sparks, NV" or "Serving all of Washoe County"</span></label>
+          <input id="address" name="address" type="text" maxlength="200">
+        </div>
+        <div class="field">
+          <label class="f" for="hours">Hours <span class="hint">One line per day or group of days.</span></label>
+          <textarea id="hours" name="hours" maxlength="500" placeholder="Mon to Fri: 8am to 6pm&#10;Sat: 9am to 2pm&#10;Sun: Closed"></textarea>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-x-4">
+          <div class="field"><label class="f" for="instagram">Instagram</label><input id="instagram" name="instagram" type="text" maxlength="200" placeholder="@yourbusiness"></div>
+          <div class="field"><label class="f" for="facebook">Facebook</label><input id="facebook" name="facebook" type="text" maxlength="200" placeholder="facebook.com/yourbusiness"></div>
+          <div class="field"><label class="f" for="tiktok">TikTok</label><input id="tiktok" name="tiktok" type="text" maxlength="200" placeholder="@yourbusiness"></div>
+          <div class="field"><label class="f" for="other_social">Other link</label><input id="other_social" name="other_social" type="text" maxlength="200" placeholder="Yelp, YouTube, Linktree"></div>
+        </div>
+      </fieldset>
+
+      <!-- STEP 6: PROJECT -->
+      <fieldset class="step" data-title="Domain and delivery">
+        <legend class="font-display font-semibold text-2xl sm:text-3xl mb-6">Domain, photos, and you</legend>
+        <div class="field">
+          <span class="f">Do you have a domain name? <span class="req">*</span></span>
+          <label class="chip"><input type="radio" name="domain_status" value="have" checked> Yes, I have one</label>
+          <label class="chip"><input type="radio" name="domain_status" value="need"> No, help me get one</label>
+          <label class="chip"><input type="radio" name="domain_status" value="unsure"> Not sure</label>
+        </div>
+        <div class="field">
+          <label class="f" for="domain">Domain name <span class="hint">The one you own, or the one you want. We register it in your name.</span></label>
+          <input id="domain" name="domain" type="text" maxlength="200" placeholder="yourbusiness.com">
+        </div>
+        <div class="field">
+          <label class="f" for="assets_link">Logo and photos <span class="hint">Share a Google Drive, Dropbox, or iCloud folder link. No photos yet? Leave blank and we will talk options.</span></label>
+          <input id="assets_link" name="assets_link" type="url" maxlength="500" placeholder="https://">
+          <p class="err" data-err="assets_link"></p>
+        </div>
+        <div class="field">
+          <label class="f" for="notes">Anything else? <span class="hint">Must-haves, things to avoid, sites you like, deadlines.</span></label>
+          <textarea id="notes" name="notes" maxlength="2000"></textarea>
+        </div>
+        <div class="panel rounded-2xl p-5 mb-6">
+          <div class="eyebrow mb-3">Your details, for the project</div>
+          <div class="grid sm:grid-cols-2 gap-x-4">
+            <div class="field"><label class="f" for="owner_name">Your name <span class="req">*</span></label><input id="owner_name" name="owner_name" type="text" maxlength="120" required data-msg="Enter your name." autocomplete="name"><p class="err" data-err="owner_name"></p></div>
+            <div class="field"><label class="f" for="owner_email">Your email <span class="req">*</span></label><input id="owner_email" name="owner_email" type="email" maxlength="200" required data-msg="Enter a valid email so we can send your copy." autocomplete="email"><p class="err" data-err="owner_email"></p></div>
+          </div>
+          <div class="field mb-2"><label class="f" for="owner_phone">Best phone to reach you <span class="hint">Optional. For quick questions during the build.</span></label><input id="owner_phone" name="owner_phone" type="tel" maxlength="40" autocomplete="tel"></div>
+        </div>
+        <label class="flex gap-3 items-start text-sm mb-2" style="color:var(--muted)">
+          <input type="checkbox" name="confirm" value="yes" required data-msg="Please confirm to send." style="accent-color:#D8FF3E;margin-top:3px;width:18px;height:18px;flex:none">
+          <span>The reviews and details I shared are real, and I have the right to use any logo and photos I linked. <span class="req">*</span></span>
+        </label>
+        <p class="err" data-err="confirm"></p>
+      </fieldset>
+
+      <div id="form-error" class="err text-sm mt-4" role="alert"></div>
+
+      <div class="flex items-center justify-between gap-3 mt-8 pt-6" style="border-top:1px solid var(--line)">
+        <button type="button" id="back" class="btn-outline font-mono font-semibold text-sm px-5 py-3 rounded-full" style="visibility:hidden">&larr; Back</button>
+        <button type="button" id="next" class="btn-primary font-mono font-semibold text-sm px-6 py-3 rounded-full">Next &rarr;</button>
+        <button type="submit" id="submit" class="btn-primary font-mono font-semibold text-sm px-6 py-3 rounded-full" hidden>Send my intake &rarr;</button>
+      </div>
+      <p class="text-xs mt-4 font-mono" style="color:var(--muted-2)">Your answers save in this browser as you go, so you can come back and finish later.</p>
+    </form>
+
+    <div id="done" class="panel rounded-2xl p-8 text-center" hidden tabindex="-1">
+      <div class="eyebrow mb-3">Intake received</div>
+      <h2 class="font-display font-semibold text-3xl mb-3">We have everything we need to start.</h2>
+      <p class="mb-2" style="color:var(--muted)">A copy of your answers is on its way to your inbox. We will write your copy, build a first version, and reach out if anything needs a quick answer.</p>
+      <p class="mb-6" style="color:var(--muted)">Questions in the meantime? <a href="mailto:info@heartykreation.com" style="color:var(--acid);text-decoration:underline">info@heartykreation.com</a></p>
+      <a href="/templates" class="btn-outline font-mono font-semibold px-6 py-3 rounded-full inline-block">Back to templates</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="border-t border-[var(--line)] pt-16 pb-12 px-6">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+    <span class="text-sm font-mono" style="color:var(--muted)">&copy; 2026 Hearty Kreation. All rights reserved.</span>
+    <div class="footer-links flex flex-wrap justify-center gap-6 text-sm font-mono" style="color:var(--muted)">
+      <a href="/" class="hover:text-[var(--acid)]">Home</a>
+      <a href="/templates" class="hover:text-[var(--acid)]">Templates</a>
+      <a href="/diy-website-guide" class="hover:text-[var(--acid)]">Free Guide</a>
+      <a href="/blog/" class="hover:text-[var(--acid)]">Blog</a>
+      <a href="/privacy.html" class="hover:text-[var(--acid)]">Privacy Policy</a>
+      <a href="/terms.html" class="hover:text-[var(--acid)]">Terms</a>
+      <a href="mailto:info@heartykreation.com" class="hover:text-[var(--acid)]">info@heartykreation.com</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/intake-form.js" defer></script>
+</body>
+</html>

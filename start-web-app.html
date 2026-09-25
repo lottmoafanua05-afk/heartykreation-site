@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start a Custom Web App: Hearty Kreation</title>
+<meta name="description" content="Tell us the problem, who uses it, and what it must do. We scope and price a custom web app built around how you work.">
+<link rel="canonical" href="https://heartykreation.com/start-web-app">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hearty Kreation">
+<meta property="og:title" content="Start a Custom Web App: Hearty Kreation">
+<meta property="og:description" content="Tell us the problem, who uses it, and what it must do. We scope and price a custom web app built around how you work.">
+<meta property="og:url" content="https://heartykreation.com/start-web-app">
+<meta property="og:image" content="https://heartykreation.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #F4F1EA; --bg: #0B0B0C; --panel: #131315; --panel-2: #17171A;
+    --line: #26262A; --acid: #D8FF3E; --clay: #FF6A3D; --muted: #9A968E; --muted-2: #6B6862;
+  }
+  * { box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  .font-display { font-family: 'Fraunces', serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid var(--acid); outline-offset: 3px; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acid); font-weight: 500; }
+  .noise { background-image: radial-gradient(circle at 20% 10%, rgba(216,255,62,0.07), transparent 40%), radial-gradient(circle at 85% 30%, rgba(255,106,61,0.08), transparent 40%); }
+  .btn-primary { background: var(--acid); color: #0B0B0C; font-weight: 700; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(216,255,62,0.4); }
+  .btn-primary:disabled { opacity: .6; transform: none; box-shadow: none; cursor: wait; }
+  .btn-outline { border: 1px solid var(--line); color: var(--ink); transition: border-color 0.2s ease, color 0.2s ease; }
+  .btn-outline:hover { border-color: var(--acid); color: var(--acid); }
+  .panel { background: var(--panel); border: 1px solid var(--line); }
+  label.f { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .hint { display: block; font-size: 0.8rem; color: var(--muted-2); font-weight: 400; margin-top: 0.15rem; }
+  .req { color: var(--clay); }
+  input[type=text], input[type=email], input[type=tel], input[type=url], textarea, select {
+    width: 100%; background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 12px;
+    padding: 0.75rem 0.9rem; font-size: 0.95rem; font-family: inherit;
+  }
+  textarea { min-height: 96px; resize: vertical; line-height: 1.55; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--acid); box-shadow: 0 0 0 4px rgba(216,255,62,0.12); }
+  input::placeholder, textarea::placeholder { color: var(--muted-2); }
+  .invalid { border-color: var(--clay) !important; }
+  .err { color: var(--clay); font-size: 0.8rem; margin-top: 0.35rem; min-height: 0; }
+  .field { margin-bottom: 1.25rem; }
+  .step { display: none; }
+  .step.active { display: block; }
+  .tpl { position: relative; display: block; cursor: pointer; }
+  .tpl input { position: absolute; opacity: 0; pointer-events: none; }
+  .tpl .box { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--panel-2); transition: border-color .2s ease, transform .2s ease; height: 100%; }
+  .tpl:hover .box { border-color: var(--muted-2); }
+  .tpl input:checked + .box { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid); }
+  .tpl input:focus-visible + .box { outline: 2px solid var(--acid); outline-offset: 3px; }
+  .tpl img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; border-bottom: 1px solid var(--line); }
+  .tpl .check { position: absolute; top: 10px; right: 10px; width: 26px; height: 26px; border-radius: 50%; background: var(--acid); color: #0B0B0C; display: none; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+  .tpl input:checked ~ .check { display: flex; }
+  .bar { height: 4px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; width: 0; background: var(--acid); transition: width .3s ease; }
+  .row-card { border: 1px solid var(--line); border-radius: 14px; padding: 1rem; background: var(--panel-2); margin-bottom: 0.9rem; }
+  .x { color: var(--muted-2); font-size: 0.8rem; }
+  .x:hover { color: var(--clay); }
+  .chip { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid var(--line); border-radius: 999px; padding: .55rem .95rem; cursor: pointer; font-size: .9rem; margin: 0 .4rem .5rem 0; }
+  .chip input { accent-color: #D8FF3E; }
+  .chip:has(input:checked) { border-color: var(--acid); color: var(--acid); }
+  footer .footer-links a:hover { color: var(--acid); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<nav class="fixed top-0 w-full z-50 backdrop-blur bg-[#0B0B0C]/85 border-b border-[var(--line)]">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+    <a href="/" class="font-display font-semibold text-base sm:text-lg tracking-tight whitespace-nowrap flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-[var(--acid)]"></span>
+      HEARTY KREATION
+    </a>
+    <div class="hidden md:flex items-center gap-7 text-sm font-mono" style="color:var(--muted)">
+      <a href="/" class="hover:text-[var(--acid)] transition">Home</a>
+      <a href="/templates" class="hover:text-[var(--acid)] transition">Templates</a>
+      <a href="/blog/" class="hover:text-[var(--acid)] transition">Blog</a>
+      <a href="/#contact" class="hover:text-[var(--acid)] transition">Contact</a>
+    </div>
+    <a href="/" class="btn-outline font-mono font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 rounded-full whitespace-nowrap">&larr; Home</a>
+  </div>
+</nav>
+
+<section class="noise pt-32 pb-10 px-5 sm:px-6 border-b border-[var(--line)]">
+  <div class="max-w-3xl mx-auto">
+    <div class="eyebrow mb-4">Web app intake</div>
+    <h1 class="font-display font-semibold text-4xl md:text-5xl leading-tight mb-4">Tell us how you work. We design the system around it.</h1>
+    <p class="text-lg" style="color:var(--muted)">Five short steps, about ten minutes. No technical knowledge needed; describe the problem and we will work out the build.</p>
+  </div>
+</section>
+
+<main class="py-12 px-5 sm:px-6">
+  <div class="max-w-3xl mx-auto">
+
+    <div class="mb-8" id="progress" aria-hidden="true">
+      <div class="flex justify-between font-mono text-xs mb-2" style="color:var(--muted)">
+        <span id="step-label">Step 1 of 5</span><span id="step-pct">0%</span>
+      </div>
+      <div class="bar"><i id="bar"></i></div>
+    </div>
+
+    <form id="intake" data-kind="webapp" data-key="hk-intake-webapp" novalidate>
+      <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Website <input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+
+      <fieldset class="step active" data-title="The idea">
+        <legend class="font-display font-semibold text-2xl sm:text-3xl mb-2">What are we building?</legend>
+        <p class="mb-6" style="color:var(--muted)">Plain words are perfect. You do not need to know the technical answer, just the problem.</p>
+        <div class="field">
+          <label class="f" for="project_name">Business or organization name <span class="req">*</span></label>
+          <input id="project_name" name="project_name" type="text" maxlength="120" required data-msg="Enter your business or organization name." autocomplete="organization">
+          <p class="err" data-err="project_name"></p>
+        </div><div class="field">
+          <span class="f">What is it closest to? <span class="req">*</span></span>
+          <div>
+            <label class="chip"><input type="radio" name="app_type" value="Client portal" required data-msg="Pick the closest one, or &quot;Not sure yet&quot;."> Client portal</label>
+            <label class="chip"><input type="radio" name="app_type" value="Internal dashboard"> Internal dashboard</label>
+            <label class="chip"><input type="radio" name="app_type" value="Booking and management tool"> Booking and management tool</label>
+            <label class="chip"><input type="radio" name="app_type" value="Custom platform or marketplace"> Custom platform or marketplace</label>
+            <label class="chip"><input type="radio" name="app_type" value="Not sure yet"> Not sure yet</label>
+          </div>
+          <p class="err" data-err="app_type"></p>
+        </div><div class="field">
+          <label class="f" for="problem">What problem should it solve, and how do you handle it today? <span class="req">*</span> <span class="hint">The more specific, the better the estimate.</span></label>
+          <textarea id="problem" name="problem" maxlength="2000" required data-msg="A few sentences here, please. This is what we scope from." data-minlen="20" placeholder="Right now we take bookings by text and track them in a spreadsheet. Clients double book, and I spend Sunday nights confirming appointments by hand."></textarea>
+          <p class="err" data-err="problem"></p>
+        </div><div class="field">
+          <label class="f" for="current_tools">What do you use now? <span class="hint">Spreadsheets, paper, apps, other software.</span></label>
+          <input id="current_tools" name="current_tools" type="text" maxlength="300" placeholder="Google Sheets, Square, a paper calendar">
+          <p class="err" data-err="current_tools"></p>
+        </div>
+      </fieldset>
+
+      <fieldset class="step" data-title="Users and features">
+        <legend class="font-display font-semibold text-2xl sm:text-3xl mb-6">Who uses it, and what must it do?</legend>
+        
+        <div class="field" data-require-group data-msg="Pick at least one.">
+          <span class="f">Who will use it? <span class="req">*</span> <span class="hint">Pick all that apply.</span></span>
+          <div>
+            <label class="chip"><input type="checkbox" name="users" value="Just me"> Just me</label>
+            <label class="chip"><input type="checkbox" name="users" value="My team"> My team</label>
+            <label class="chip"><input type="checkbox" name="users" value="My customers or clients"> My customers or clients</label>
+            <label class="chip"><input type="checkbox" name="users" value="The public"> The public</label>
+          </div>
+          <p class="err" data-err="users"></p>
+        </div><div class="field">
+          <label class="f" for="user_count">Roughly how many people will use it?</label>
+          <input id="user_count" name="user_count" type="text" maxlength="100" placeholder="e.g. 3 staff and about 200 clients">
+          <p class="err" data-err="user_count"></p>
+        </div><div class="field">
+          <span class="f">Features you think you need <span class="hint">Pick any that apply. We will confirm together.</span></span>
+          <div>
+            <label class="chip"><input type="checkbox" name="features" value="Logins and accounts"> Logins and accounts</label>
+            <label class="chip"><input type="checkbox" name="features" value="Scheduling or booking"> Scheduling or booking</label>
+            <label class="chip"><input type="checkbox" name="features" value="Payments or invoicing"> Payments or invoicing</label>
+            <label class="chip"><input type="checkbox" name="features" value="Client file sharing"> Client file sharing</label>
+            <label class="chip"><input type="checkbox" name="features" value="Forms and intake"> Forms and intake</label>
+            <label class="chip"><input type="checkbox" name="features" value="Dashboards and reports"> Dashboards and reports</label>
+            <label class="chip"><input type="checkbox" name="features" value="Email or text notifications"> Email or text notifications</label>
+            <label class="chip"><input type="checkbox" name="features" value="Orders or inventory"> Orders or inventory</label>
+            <label class="chip"><input type="checkbox" name="features" value="Messaging"> Messaging</label>
+            <label class="chip"><input type="checkbox" name="features" value="Connects to other apps"> Connects to other apps</label>
+          </div>
+          <p class="err" data-err="features"></p>
+        </div><div class="field">
+          <label class="f" for="must_haves">The three things it must do on day one <span class="req">*</span></label>
+          <textarea id="must_haves" name="must_haves" maxlength="1500" required data-msg="List at least one must have." data-minlen="10" placeholder="1. Clients book and pay a deposit
+2. I see the week at a glance
+3. Automatic text reminders"></textarea>
+          <p class="err" data-err="must_haves"></p>
+        </div><div class="field">
+          <label class="f" for="integrations">Apps it should connect to <span class="hint">Optional.</span></label>
+          <input id="integrations" name="integrations" type="text" maxlength="300" placeholder="QuickBooks, Stripe, Google Calendar">
+          <p class="err" data-err="integrations"></p>
+        </div>
+      </fieldset>
+
+      <fieldset class="step" data-title="Data and look">
+        <legend class="font-display font-semibold text-2xl sm:text-3xl mb-6">Data, devices, and look</legend>
+        
+        <div class="field">
+          <label class="f" for="data_desc">What information will it hold? <span class="hint">Customers, orders, files, schedules, and so on.</span></label>
+          <textarea id="data_desc" name="data_desc" maxlength="1000"></textarea>
+          <p class="err" data-err="data_desc"></p>
+        </div><div class="field">
+          <span class="f">Any sensitive information? <span class="req">*</span></span>
+          <div>
+            <label class="chip"><input type="radio" name="sensitive" value="No" required data-msg="Pick one, &quot;Not sure&quot; is fine."> No</label>
+            <label class="chip"><input type="radio" name="sensitive" value="Customer contact details"> Customer contact details</label>
+            <label class="chip"><input type="radio" name="sensitive" value="Payments"> Payments</label>
+            <label class="chip"><input type="radio" name="sensitive" value="Health, legal, or financial records"> Health, legal, or financial records</label>
+            <label class="chip"><input type="radio" name="sensitive" value="Not sure"> Not sure</label>
+          </div>
+          <p class="err" data-err="sensitive"></p>
+        </div><div class="field">
+          <span class="f">Where will people use it?</span>
+          <div>
+            <label class="chip"><input type="checkbox" name="devices" value="Desktop"> Desktop</label>
+            <label class="chip"><input type="checkbox" name="devices" value="Phone"> Phone</label>
+            <label class="chip"><input type="checkbox" name="devices" value="Tablet"> Tablet</label>
+          </div>
+          <p class="err" data-err="devices"></p>
+        </div><div class="field">
+          <label class="f" for="brand">Existing brand or website <span class="hint">Optional. A link or a description.</span></label>
+          <input id="brand" name="brand" type="text" maxlength="300" placeholder="https://">
+          <p class="err" data-err="brand"></p>
+        </div><div class="field">
+          <label class="f" for="examples">Apps or sites you like, and why <span class="hint">Optional.</span></label>
+          <textarea id="examples" name="examples" maxlength="1000"></textarea>
+          <p class="err" data-err="examples"></p>
+        </div>
+      </fieldset>
+
+      <fieldset class="step" data-title="Timeline and budget">
+        <legend class="font-display font-semibold text-2xl sm:text-3xl mb-2">Timeline and budget</legend>
+        <p class="mb-6" style="color:var(--muted)">This is not a commitment. It helps us suggest the right size of first version.</p>
+        <div class="field">
+          <span class="f">When do you need it? <span class="req">*</span></span>
+          <div>
+            <label class="chip"><input type="radio" name="timeline" value="As soon as possible" required data-msg="Pick a timeline."> As soon as possible</label>
+            <label class="chip"><input type="radio" name="timeline" value="Within 1 to 2 months"> Within 1 to 2 months</label>
+            <label class="chip"><input type="radio" name="timeline" value="Within 3 to 6 months"> Within 3 to 6 months</label>
+            <label class="chip"><input type="radio" name="timeline" value="Flexible"> Flexible</label>
+          </div>
+          <p class="err" data-err="timeline"></p>
+        </div><div class="field">
+          <span class="f">Budget range <span class="req">*</span></span>
+          <div>
+            <label class="chip"><input type="radio" name="budget" value="Under $1,500" required data-msg="Pick a range, &quot;Not sure yet&quot; is fine."> Under $1,500</label>
+            <label class="chip"><input type="radio" name="budget" value="$1,500 to $5,000"> $1,500 to $5,000</label>
+            <label class="chip"><input type="radio" name="budget" value="$5,000 to $15,000"> $5,000 to $15,000</label>
+            <label class="chip"><input type="radio" name="budget" value="$15,000 or more"> $15,000 or more</label>
+            <label class="chip"><input type="radio" name="budget" value="Not sure yet"> Not sure yet</label>
+          </div>
+          <p class="err" data-err="budget"></p>
+        </div><div class="field">
+          <span class="f">Open to launching a smaller first version? <span class="hint">Many projects start with the one feature that saves the most time.</span></span>
+          <div>
+            <label class="chip"><input type="radio" name="phasing" value="Yes" checked> Yes</label>
+            <label class="chip"><input type="radio" name="phasing" value="Maybe"> Maybe</label>
+            <label class="chip"><input type="radio" name="phasing" value="No, I need it all at once"> No, I need it all at once</label>
+          </div>
+          <p class="err" data-err="phasing"></p>
+        </div>
+      </fieldset>
+
+      <fieldset class="step" data-title="You">
+        <legend class="font-display font-semibold text-2xl sm:text-3xl mb-6">Almost done</legend>
+        
+        <div class="field">
+          <label class="f" for="notes">Anything else? <span class="hint">Deadlines, people involved, concerns.</span></label>
+          <textarea id="notes" name="notes" maxlength="2000"></textarea>
+          <p class="err" data-err="notes"></p>
+        </div><div class="panel rounded-2xl p-5 mb-6">
+          <div class="eyebrow mb-3">Your details</div>
+          <div class="grid sm:grid-cols-2 gap-x-4">
+            <div class="field">
+          <label class="f" for="owner_name">Your name <span class="req">*</span></label>
+          <input id="owner_name" name="owner_name" type="text" maxlength="120" required data-msg="Enter your name." autocomplete="name">
+          <p class="err" data-err="owner_name"></p>
+        </div>
+            <div class="field">
+          <label class="f" for="owner_email">Your email <span class="req">*</span></label>
+          <input id="owner_email" name="owner_email" type="email" maxlength="200" required data-msg="Enter a valid email so we can reply." autocomplete="email">
+          <p class="err" data-err="owner_email"></p>
+        </div>
+          </div>
+          <div class="field">
+          <label class="f" for="owner_phone">Best phone to reach you <span class="hint">Optional.</span></label>
+          <input id="owner_phone" name="owner_phone" type="tel" maxlength="40" autocomplete="tel">
+          <p class="err" data-err="owner_phone"></p>
+        </div>
+          
+        </div>
+        <label class="flex gap-3 items-start text-sm mb-2" style="color:var(--muted)">
+          <input type="checkbox" name="confirm" value="yes" required data-msg="Please confirm to send." style="accent-color:#D8FF3E;margin-top:3px;width:18px;height:18px;flex:none">
+          <span>I understand this intake is a starting point, not a quote. Hearty Kreation will follow up with questions, a scope, and a price. <span class="req">*</span></span>
+        </label>
+        <p class="err" data-err="confirm"></p>
+      </fieldset>
+
+      <div id="form-error" class="err text-sm mt-4" role="alert"></div>
+
+      <div class="flex items-center justify-between gap-3 mt-8 pt-6" style="border-top:1px solid var(--line)">
+        <button type="button" id="back" class="btn-outline font-mono font-semibold text-sm px-5 py-3 rounded-full" style="visibility:hidden">&larr; Back</button>
+        <button type="button" id="next" class="btn-primary font-mono font-semibold text-sm px-6 py-3 rounded-full">Next &rarr;</button>
+        <button type="submit" id="submit" class="btn-primary font-mono font-semibold text-sm px-6 py-3 rounded-full" hidden>Send my web app intake &rarr;</button>
+      </div>
+      <p class="text-xs mt-4 font-mono" style="color:var(--muted-2)">Your answers save in this browser as you go, so you can come back and finish later.</p>
+    </form>
+
+    <div id="done" class="panel rounded-2xl p-8 text-center" hidden tabindex="-1">
+      <div class="eyebrow mb-3">Intake received</div>
+      <h2 class="font-display font-semibold text-3xl mb-3">We have what we need to start scoping.</h2>
+      <p class="mb-2" style="color:var(--muted)">A copy of your answers is on its way to your inbox. We will review it, follow up with any questions, and come back with a scope and price for a first version.</p>
+      <p class="mb-6" style="color:var(--muted)">Questions in the meantime? <a href="mailto:info@heartykreation.com" style="color:var(--acid);text-decoration:underline">info@heartykreation.com</a></p>
+      <a href="/" class="btn-outline font-mono font-semibold px-6 py-3 rounded-full inline-block">Back to home</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="border-t border-[var(--line)] pt-16 pb-12 px-6">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+    <span class="text-sm font-mono" style="color:var(--muted)">&copy; 2026 Hearty Kreation. All rights reserved.</span>
+    <div class="footer-links flex flex-wrap justify-center gap-6 text-sm font-mono" style="color:var(--muted)">
+      <a href="/" class="hover:text-[var(--acid)]">Home</a>
+      <a href="/templates" class="hover:text-[var(--acid)]">Templates</a>
+      <a href="/diy-website-guide" class="hover:text-[var(--acid)]">Free Guide</a>
+      <a href="/blog/" class="hover:text-[var(--acid)]">Blog</a>
+      <a href="/privacy.html" class="hover:text-[var(--acid)]">Privacy Policy</a>
+      <a href="/terms.html" class="hover:text-[var(--acid)]">Terms</a>
+      <a href="mailto:info@heartykreation.com" class="hover:text-[var(--acid)]">info@heartykreation.com</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/intake-form.js" defer></script>
+</body>
+</html>
