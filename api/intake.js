@@ -13,7 +13,8 @@
 // Sends two emails via Resend:
 //   1. To HK: the readable intake plus the draft client JSON as an attachment.
 //   2. To the client: a confirmation with a copy of their answers.
-// Every intake (all three kinds) is also saved to Notion and texted to HK.
+// Every intake (all three kinds) is also saved to Notion and texted to HK
+// (email to the carrier's text gateway; Lott chose not to use Twilio).
 // No npm dependencies, built-in fetch only.
 //
 // Required env vars (set in Vercel project settings):
@@ -28,10 +29,9 @@
 //                          Kind, Template, Status (selects), Owner, Budget, Timeline, Domain,
 //                          Summary (text), Email, Phone, Received (created time).
 //                          Full answers go in the page body.
-//   TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM_NUMBER
-//                        - same Twilio account as the daily blog approval texts
-//   INTAKE_ALERT_TO      - number to text on each intake, E.164 (+17755550100).
-//                          Defaults to TWILIO_TO_NUMBER.
+//   INTAKE_ALERT_SMS_EMAIL - carrier email-to-text address for Lott's phone, e.g.
+//                          7755550100@vtext.com (Verizon) or @tmomail.net (T-Mobile).
+//                          Comma separate to text more than one phone.
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const URL_RE = /^https?:\/\/\S+\.\S+/i;
@@ -338,32 +338,31 @@ async function saveToNotion(rec) {
   }
 }
 
-// Texts HK about a new intake through Twilio. Never throws; returns true when sent.
+// Texts HK about a new intake by emailing the phone carrier's email-to-text
+// address (for example 7755550100@vtext.com on Verizon, @tmomail.net on
+// T-Mobile) through Resend. No Twilio. Never throws; returns true when sent.
 async function textAlert(body) {
-  const sid = process.env.TWILIO_ACCOUNT_SID;
-  const auth = process.env.TWILIO_AUTH_TOKEN;
-  const from = process.env.TWILIO_FROM_NUMBER;
-  const to = process.env.INTAKE_ALERT_TO || process.env.TWILIO_TO_NUMBER;
-  if (!sid || !auth || !from || !to) {
-    console.warn('Twilio is not fully configured; no intake text sent.');
+  const to = process.env.INTAKE_ALERT_SMS_EMAIL;
+  const key = process.env.RESEND_API_KEY;
+  if (!to || !key) {
+    console.warn('INTAKE_ALERT_SMS_EMAIL is not set; no intake text sent.');
     return false;
   }
+  const from = process.env.CONTACT_FROM_EMAIL || 'Hearty Kreation <info@heartykreation.com>';
   try {
-    const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
+    const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
-      headers: {
-        Authorization: 'Basic ' + Buffer.from(`${sid}:${auth}`).toString('base64'),
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({ To: to, From: from, Body: body.slice(0, 600) }).toString(),
+      headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+      // Carrier gateways turn the plain text body into the text message; keep it short.
+      body: JSON.stringify({ from, to: to.split(',').map((x) => x.trim()).filter(Boolean), subject: 'HK intake', text: body.slice(0, 300) }),
     });
     if (!res.ok) {
-      console.error('Twilio API error:', res.status, await res.text());
+      console.error('Intake text (email to SMS) failed:', res.status, await res.text());
       return false;
     }
     return true;
   } catch (err) {
-    console.error('Twilio send failed:', err);
+    console.error('Intake text (email to SMS) failed:', err);
     return false;
   }
 }
